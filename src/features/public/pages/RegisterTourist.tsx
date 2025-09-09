@@ -1,6 +1,7 @@
 import { useForm } from '@tanstack/react-form';
 import type { AnyFieldApi } from '@tanstack/react-form';
 import { useState } from 'react';
+import { registerTourist } from '../../../services/registerTourist';
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -21,20 +22,32 @@ export default function TouristRegister() {
     defaultValues: {
       name: '',
       email: '',
-      password: '',
+      contrasena: '', // <-- usa "contrasena" en vez de "password"
       gender: '',
       photo: null as File | null,
       acceptTerms: false,
     },
     onSubmit: async ({ value }) => {
-      // Handle registration logic here
-      console.log(value);
+      let fotoPerfil = '';
+      if (value.photo) {
+        fotoPerfil = photoPreview || '';
+      }
+      await registerTourist({
+        nombreCompleto: value.name,
+        email: value.email,
+        contrasena: value.contrasena,
+        genero: value.gender,
+        fotoPerfil,
+        idRol: 1, // Turista
+        telefono: '', // Puedes agregar campo si lo necesitas
+        descripcion: '',
+      });
+      // Puedes redirigir o mostrar mensaje de éxito aquí
     },
   });
 
-  const handlePhotoChange = (file: File | null, field: any) => {
+  const handlePhotoChange = (file: File | null, field: AnyFieldApi) => {
     field.handleChange(file);
-    
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -206,22 +219,22 @@ export default function TouristRegister() {
                 />
               </div>
 
-              {/* Password Field */}
+              {/* Contraseña Field */}
               <div>
                 <form.Field
-                  name="password"
+                  name="contrasena"
                   validators={{
                     onChange: ({ value }) =>
                       !value
-                        ? 'Password is required'
+                        ? 'La contraseña es obligatoria'
                         : value.length < 8
-                        ? 'Password must be at least 8 characters'
+                        ? 'La contraseña debe tener al menos 8 caracteres'
                         : undefined,
                   }}
                   children={(field) => (
                     <>
                       <label htmlFor={field.name} className="block text-white font-medium mb-2 text-sm">
-                        Password
+                        Contraseña
                       </label>
                       <div className="relative">
                         <input
@@ -229,7 +242,7 @@ export default function TouristRegister() {
                           name={field.name}
                           type={showPassword ? "text" : "password"}
                           className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 pr-10 text-white placeholder-[#B3B3B3] focus:outline-none focus:border-[#20B2AA] focus:ring-1 focus:ring-[#20B2AA]/20 transition-all duration-200 text-sm"
-                          placeholder="Enter your password"
+                          placeholder="Ingresa tu contraseña"
                           value={field.state.value}
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}

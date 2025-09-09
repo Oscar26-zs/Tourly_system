@@ -1,13 +1,8 @@
 import './App.css'
-import TouristRegister from './features/tourist-view/Register'
+import Router from './app/router/Router'
 
 function App() {
-
-  return (
-    <>
-      <TouristRegister />
-    </>
-  )
+  return <Router />
 }
 
 export default App

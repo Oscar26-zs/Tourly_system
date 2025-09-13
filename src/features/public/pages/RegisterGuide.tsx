@@ -488,10 +488,10 @@ export default function GuideRegister() {
                             onBlur={field.handleBlur}
                             onChange={(e) => field.handleChange(e.target.value)}
                           >
-                            <option value="" className="bg-[#1E1E1E] text-[#B3B3B3]">Selecciona género</option>
-                            <option value="Masculino" className="bg-[#1E1E1E] text-white">Masculino</option>
-                            <option value="Femenino" className="bg-[#1E1E1E] text-white">Femenino</option>
-                            <option value="Otro" className="bg-[#1E1E1E] text-white">Otro</option>
+                            <option value="" className="bg-[#1E1E1E] text-[#B3B3B3]">Choose gender</option>
+                            <option value="Masculino" className="bg-[#1E1E1E] text-white">Male</option>
+                            <option value="Femenino" className="bg-[#1E1E1E] text-white">Female</option>
+                            <option value="Otro" className="bg-[#1E1E1E] text-white">Other</option>
                           </select>
                           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                             <svg className="w-4 h-4 text-[#B3B3B3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -528,7 +528,7 @@ export default function GuideRegister() {
                             name={field.name}
                             type={showPassword ? "text" : "password"}
                             className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 pr-10 text-white placeholder-[#B3B3B3] focus:outline-none focus:border-[#20B2AA] focus:ring-1 focus:ring-[#20B2AA]/20 transition-all duration-200 text-sm"
-                            placeholder={googleUserData ? "Crea una contraseña para futuros accesos" : "Ingresa tu contraseña"}
+                            placeholder={googleUserData ? "Create a password for future logins" : "Enter your password"}
                             value={field.state.value}
                             onBlur={field.handleBlur}
                             onChange={(e) => field.handleChange(e.target.value)}
@@ -576,7 +576,7 @@ export default function GuideRegister() {
                           id={field.name}
                           name={field.name}
                           className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-white placeholder-[#B3B3B3] focus:outline-none focus:border-[#20B2AA] focus:ring-1 focus:ring-[#20B2AA]/20 transition-all duration-200 text-sm resize-none"
-                          placeholder="Cuéntanos sobre tu experiencia como guía turístico..."
+                          placeholder="Tell us a bit about yourself and your experience as a tour guide (max 200 characters)"
                           value={field.state.value}
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}

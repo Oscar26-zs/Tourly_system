@@ -1,8 +1,6 @@
 import { useForm } from '@tanstack/react-form';
 import type { AnyFieldApi } from '@tanstack/react-form';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { registerGuide, registerGuideWithGoogle, completeGoogleGuideRegistration } from '../../../services/registerGuide';
+import { useRegisterGuide } from '../hooks/useRegisterGuide';
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -15,124 +13,43 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
   );
 }
 
-export default function GuideRegister() {
-  const [currentPhase, setCurrentPhase] = useState(1);
-  const [showPassword, setShowPassword] = useState(false);
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [googleUserData, setGoogleUserData] = useState<any>(null);
-  const navigate = useNavigate();
-
+export default function RegisterGuide() {
   const form = useForm({
     defaultValues: {
-      // Fase 1
-      nombreCompleto: '',
+      fullName: '',
       email: '',
       photo: null as File | null,
-      
-      // Fase 2
-      contraseña: '',
-      telefono: '',
-      genero: '',
-      descripcion: '',
+      password: '',
+      phone: '',
+      gender: '',
+      description: '',
       acceptTerms: false,
     },
     onSubmit: async ({ value }) => {
-      try {
-        setError('');
-        let fotoPerfil = '';
-        if (value.photo) {
-          fotoPerfil = photoPreview || '';
-        } else if (googleUserData?.photoURL) {
-          fotoPerfil = googleUserData.photoURL;
-        }
-
-        if (googleUserData) {
-          // Registro con Google: solo actualizar Firestore
-          await completeGoogleGuideRegistration(googleUserData.uid, {
-            nombreCompleto: value.nombreCompleto,
-            email: value.email,
-            contrasena: value.contraseña,
-            telefono: value.telefono,
-            genero: value.genero,
-            fotoPerfil,
-            descripcion: value.descripcion,
-            idRol: 2
-          });
-        } else {
-          // Registro manual: crear usuario en Auth y Firestore
-          await registerGuide({
-            nombreCompleto: value.nombreCompleto,
-            email: value.email,
-            contrasena: value.contraseña,
-            telefono: value.telefono,
-            genero: value.genero,
-            fotoPerfil,
-            descripcion: value.descripcion,
-            idRol: 2,
-            password: value.contraseña
-          });
-        }
-        navigate('/guide-only');
-      } catch (error: any) {
-        setError(error.message || 'Error al crear la cuenta');
-      }
+      await registerGuideLogic.handleSubmit(value);
     },
   });
 
-  const handleGoogleRegister = async () => {
-    try {
-      setError('');
-      setIsGoogleLoading(true);
-      const result = await registerGuideWithGoogle();
-      
-      if (result.user) {
-        // Llenar automáticamente los datos de Google
-        setGoogleUserData(result.user);
-        form.setFieldValue('nombreCompleto', result.user.displayName || '');
-        form.setFieldValue('email', result.user.email || '');
-        setPhotoPreview(result.user.photoURL);
-        // Ya no avanzamos automáticamente a la fase 2, el usuario debe presionar "Continue"
-      }
-    } catch (error: any) {
-      setError(error.message || 'Error al registrarse con Google');
-    } finally {
-      setIsGoogleLoading(false);
-    }
-  };
-
-  const handlePhotoChange = (file: File | null, field: AnyFieldApi) => {
-    field.handleChange(file);
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPhotoPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setPhotoPreview(null);
-    }
-  };
-
-  const validatePhase1 = () => {
-    const { nombreCompleto, email } = form.state.values;
-    return nombreCompleto && email && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
-  };
-
-  const handleContinueToPhase2 = () => {
-    if (validatePhase1()) {
-      setCurrentPhase(2);
-      setError('');
-    } else {
-      setError('Por favor completa todos los campos requeridos de esta fase');
-    }
-  };
-
-  const handleBackToPhase1 = () => {
-    setCurrentPhase(1);
-    setError('');
-  };
+  const registerGuideLogic = useRegisterGuide(form);
+  const {
+    currentPhase,
+    setCurrentPhase,
+    showPassword,
+    setShowPassword,
+    photoPreview,
+    setPhotoPreview,
+    isGoogleLoading,
+    setIsGoogleLoading,
+    error,
+    setError,
+    googleUserData,
+    setGoogleUserData,
+    handlePhotoChange,
+    handleContinueToPhase2,
+    handleBackToPhase1,
+    handleGoogleRegister,
+    validatePhase1,
+  } = registerGuideLogic;
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#1E1E1E' }}>
@@ -294,10 +211,10 @@ export default function GuideRegister() {
                   {/* Name Field */}
                   <div>
                     <form.Field
-                      name="nombreCompleto"
+                      name="fullName"
                       validators={{
                         onChange: ({ value }) =>
-                          !value ? 'The name is required' : undefined,
+                          !value ? 'Full name is required' : undefined,
                       }}
                       children={(field) => (
                         <>
@@ -328,7 +245,7 @@ export default function GuideRegister() {
                             </div>
                           </div>
                           {googleUserData && (
-                            <p className="text-green-400 text-xs mt-1">✓ full name obtained from Google</p>
+                            <p className="text-green-400 text-xs mt-1">✓ Full name obtained from Google</p>
                           )}
                           <FieldInfo field={field} />
                         </>
@@ -434,10 +351,10 @@ export default function GuideRegister() {
                 {/* Phone Field */}
                 <div>
                   <form.Field
-                    name="telefono"
+                    name="phone"
                     validators={{
                       onChange: ({ value }) =>
-                        !value ? 'The phone is required' : undefined,
+                        !value ? 'Phone is required' : undefined,
                     }}
                     children={(field) => (
                       <>
@@ -469,10 +386,10 @@ export default function GuideRegister() {
                 {/* Gender Field */}
                 <div>
                   <form.Field
-                    name="genero"
+                    name="gender"
                     validators={{
                       onChange: ({ value }) =>
-                        !value ? 'The gender is required' : undefined,
+                        !value ? 'Gender is required' : undefined,
                     }}
                     children={(field) => (
                       <>
@@ -489,9 +406,9 @@ export default function GuideRegister() {
                             onChange={(e) => field.handleChange(e.target.value)}
                           >
                             <option value="" className="bg-[#1E1E1E] text-[#B3B3B3]">Choose gender</option>
-                            <option value="Masculino" className="bg-[#1E1E1E] text-white">Male</option>
-                            <option value="Femenino" className="bg-[#1E1E1E] text-white">Female</option>
-                            <option value="Otro" className="bg-[#1E1E1E] text-white">Other</option>
+                            <option value="Male" className="bg-[#1E1E1E] text-white">Male</option>
+                            <option value="Female" className="bg-[#1E1E1E] text-white">Female</option>
+                            <option value="Other" className="bg-[#1E1E1E] text-white">Other</option>
                           </select>
                           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                             <svg className="w-4 h-4 text-[#B3B3B3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -508,19 +425,19 @@ export default function GuideRegister() {
                 {/* Password Field */}
                 <div className="md:col-span-2">
                   <form.Field
-                    name="contraseña"
+                    name="password"
                     validators={{
                       onChange: ({ value }) =>
                         !value
-                          ? 'La contraseña es obligatoria'
+                          ? 'Password is required'
                           : value.length < 8
-                          ? 'La contraseña debe tener al menos 8 caracteres'
+                          ? 'Password must be at least 8 characters'
                           : undefined,
                     }}
                     children={(field) => (
                       <>
                         <label htmlFor={field.name} className="block text-white font-medium mb-2 text-sm">
-                          Contraseña <span className="text-red-400">*</span>
+                          Password <span className="text-red-400">*</span>
                         </label>
                         <div className="relative">
                           <input
@@ -545,7 +462,7 @@ export default function GuideRegister() {
                             ) : (
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268-2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                               </svg>
                             )}
                           </button>
@@ -562,7 +479,7 @@ export default function GuideRegister() {
                 {/* Description Field */}
                 <div className="md:col-span-2">
                   <form.Field
-                    name="descripcion"
+                    name="description"
                     validators={{
                       onChange: ({ value }) =>
                         value && value.length > 200 ? 'Description too long (maximum 200 characters)' : undefined,
@@ -721,4 +638,4 @@ export default function GuideRegister() {
       </div>
     </div>
   );
-}
+  }

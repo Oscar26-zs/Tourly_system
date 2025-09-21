@@ -14,6 +14,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Montserrat', 'ui-sans-serif', 'system-ui'],
+        inter: ['Inter', 'ui-sans-serif', 'system-ui'],
+        poppins: ['Poppins', 'ui-sans-serif', 'system-ui'],
       },
     },
   },

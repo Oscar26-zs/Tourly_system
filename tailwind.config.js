@@ -17,6 +17,11 @@ module.exports = {
         inter: ['Inter', 'ui-sans-serif', 'system-ui'],
         poppins: ['Poppins', 'ui-sans-serif', 'system-ui'],
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(circle at center, var(--tw-gradient-stops))',
+        'gradient-radial-at-t': 'radial-gradient(circle at top, var(--tw-gradient-stops))',
+        'gradient-radial-at-b': 'radial-gradient(circle at bottom, var(--tw-gradient-stops))',
+      },
     },
   },
   plugins: [

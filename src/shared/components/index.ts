@@ -1,3 +1,3 @@
 // Export shared components from this file
 
-export {};
+export { default as Navbar } from './Navbar';

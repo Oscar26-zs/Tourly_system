@@ -1,6 +1,7 @@
 import { MapPin, Clock, Users, Star } from 'lucide-react';
 import type { Tour } from '../types/tour';
 import { useSlotsByTour } from '../hooks/useSlotByTourId';
+import { useNavigate } from 'react-router-dom';
 
 interface TourCardProps {
   tour: Tour;
@@ -10,10 +11,12 @@ interface TourCardProps {
 export default function TourCard({ tour, onBookNow }: TourCardProps) {
   // Hook para obtener slots del tour
   const { data: slots = [], isLoading: slotsLoading } = useSlotsByTour(tour.id);
+  const navigate = useNavigate();
 
   const handleBookNow = () => {
     if (onBookNow) {
       onBookNow(tour.id);
+      navigate('/tour/' + tour.id);
     }
   };
 

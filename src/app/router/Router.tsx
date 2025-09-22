@@ -5,6 +5,7 @@ import GuideRegister from '../../features/public/pages/RegisterGuide'
 import GuideOnly from '../../features/public/components/GuideOnly'
 import Login from '../../features/public/pages/login'
 import Home from '../../features/public/pages/Home'
+import TourDetail from '../../features/public/pages/TourDetail'
 
 const Router = () => (
   <AuthProvider>
@@ -14,6 +15,7 @@ const Router = () => (
         <Route path="/registerGuide" element={<GuideRegister />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
+        <Route path="/tour/:id" element={<TourDetail />} />
         <Route path="/guide-only" element={<GuideOnly />} />
       </Routes>
     </BrowserRouter>

@@ -1,5 +1,7 @@
 import { MapPin, Clock, Users, Star } from 'lucide-react';
 import type { Tour } from '../types/tour';
+import { useSlotsByTour } from '../hooks/useSlotByTourId';
+import { useNavigate } from 'react-router-dom';
 
 interface TourCardProps {
   tour: Tour;
@@ -7,9 +9,14 @@ interface TourCardProps {
 }
 
 export default function TourCard({ tour, onBookNow }: TourCardProps) {
+  // Hook para obtener slots del tour
+  const { data: slots = [], isLoading: slotsLoading } = useSlotsByTour(tour.id);
+  const navigate = useNavigate();
+
   const handleBookNow = () => {
     if (onBookNow) {
       onBookNow(tour.id);
+      navigate('/tour/' + tour.id);
     }
   };
 
@@ -23,6 +30,12 @@ export default function TourCard({ tour, onBookNow }: TourCardProps) {
 
   const formatPrice = (price: number) => {
     return `$${price}`;
+  };
+
+  // Calcular capacidad máxima del tour
+  const getMaxCapacity = () => {
+    if (slots.length === 0) return 15; // Fallback
+    return Math.max(...slots.map(slot => slot.capacidadMax || 0));
   };
 
   return (
@@ -64,7 +77,11 @@ export default function TourCard({ tour, onBookNow }: TourCardProps) {
           
           <div className="flex items-center text-zinc-400 font-poppins">
             <Users className="w-4 h-4 mr-1 text-green-700" />
-            <span>Up to 15</span>
+            {slotsLoading ? (
+              <span className="animate-pulse">Loading...</span>
+            ) : (
+              <span>Up to {getMaxCapacity()}</span>
+            )}
           </div>
         </div>
 

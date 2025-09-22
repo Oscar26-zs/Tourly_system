@@ -2,20 +2,27 @@ import { Navbar } from '../../../shared/components';
 import HeroSection from '../components/HeroSection';
 import SearchSection from '../components/SearchSection';
 import StatsSection from '../components/StatsSection';
+import TourGrid from '../components/TourGrid';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-black to-neutral-950 text-white relative">
-      {/* Gradient overlay centered */}
-      <div className="absolute inset-0 bg-gradient-radial from-[#228B22]/20 via-transparent to-transparent opacity-50"></div>
+    <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 text-white relative">
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-radial from-[#228B22]/40 via-[#228B22]/10 to-transparent opacity-80"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#228B22]/5 via-transparent to-[#228B22]/15 opacity-60"></div>
       
       <Navbar />
       
-      {/* Main Content */}
+      {/* Hero Section */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen space-y-16 px-4">
         <HeroSection />
         <SearchSection />
         <StatsSection />
+      </div>
+
+      {/* Tours Section */}
+      <div className="relative z-10">
+        <TourGrid />
       </div>
     </div>
   );

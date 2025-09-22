@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
-import firebaseApp from "../../../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../../config/firebase";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -15,26 +15,77 @@ export default function Login() {
     e.preventDefault();
     setError("");
     setLoading(true);
+
+    // Validaciones básicas
+    if (!email.trim()) {
+      setError("Por favor ingresa tu correo electrónico");
+      setLoading(false);
+      return;
+    }
+
+    if (!contrasena.trim()) {
+      setError("Por favor ingresa tu contraseña");
+      setLoading(false);
+      return;
+    }
+
+    if (contrasena.length < 6) {
+      setError("La contraseña debe tener al menos 6 caracteres");
+      setLoading(false);
+      return;
+    }
+
     try {
-      const auth = getAuth(firebaseApp);
+      console.log("Intentando autenticar con:", { email });
+      
       const userCredential = await signInWithEmailAndPassword(auth, email, contrasena);
-      const db = getFirestore(firebaseApp);
+      
       const userDoc = await getDoc(doc(db, "usuarios", userCredential.user.uid));
+      
       if (!userDoc.exists()) {
         setError("Usuario no encontrado en la base de datos.");
         setLoading(false);
         return;
       }
+      
       const userData = userDoc.data();
+      console.log("Datos del usuario:", userData);
+      
       if (userData.idRol === 2) {
         navigate("/guide-only");
       } else if (userData.idRol === 1) {
-        navigate("/home");
+        navigate("/");
       } else {
         setError("Rol no permitido.");
       }
-    } catch {
-      setError("Credenciales incorrectas");
+    } catch (error: any) {
+      
+      // Manejo específico de errores de Firebase
+      switch (error.code) {
+        case 'auth/user-not-found':
+          setError("No existe una cuenta con este correo electrónico");
+          break;
+        case 'auth/wrong-password':
+          setError("Contraseña incorrecta");
+          break;
+        case 'auth/invalid-email':
+          setError("Formato de correo electrónico inválido");
+          break;
+        case 'auth/user-disabled':
+          setError("Esta cuenta ha sido deshabilitada");
+          break;
+        case 'auth/too-many-requests':
+          setError("Demasiados intentos fallidos. Inténtalo más tarde");
+          break;
+        case 'auth/network-request-failed':
+          setError("Error de conexión. Verifica tu internet");
+          break;
+        case 'auth/invalid-credential':
+          setError("Credenciales inválidas. Verifica tu correo y contraseña");
+          break;
+        default:
+          setError(`Error de autenticación: ${error.message || 'Credenciales incorrectas'}`);
+      }
     }
     setLoading(false);
   };

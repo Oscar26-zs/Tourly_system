@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerGuide, registerGuideWithGoogle, completeGoogleGuideRegistration } from '../../../services/registerGuide';
-import { AnyFieldApi } from '@tanstack/react-form';
 
 export function useRegisterGuide(form: any) {
   const [currentPhase, setCurrentPhase] = useState(1);
@@ -12,7 +11,7 @@ export function useRegisterGuide(form: any) {
   const [googleUserData, setGoogleUserData] = useState<any>(null);
   const navigate = useNavigate();
 
-  const handlePhotoChange = (file: File | null, field: AnyFieldApi) => {
+  const handlePhotoChange = (file: File | null, field: any) => {
     field.handleChange(file);
     if (file) {
       const reader = new FileReader();

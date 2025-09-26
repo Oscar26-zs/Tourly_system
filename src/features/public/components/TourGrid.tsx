@@ -20,9 +20,9 @@ export default function TourGrid({ filters }: TourGridProps) {
         if (!locationMatch) return false;
       }
 
-      // Filtrar por duración (convertir minutos a horas)
+      // Filtrar por duración (convertir minutos a horas usando Math.floor para consistencia con la visualización)
       if (filters.duration) {
-        const tourDurationHours = tour.duracion / 60;
+        const tourDurationHours = Math.floor(tour.duracion / 60);
         if (tourDurationHours > filters.duration) return false;
       }
 

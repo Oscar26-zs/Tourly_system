@@ -1,10 +1,17 @@
+import { useState } from 'react';
 import { Navbar } from '../../../shared/components';
 import HeroSection from '../components/HeroSection';
 import SearchSection from '../components/SearchSection';
 import StatsSection from '../components/StatsSection';
 import TourGrid from '../components/TourGrid';
+import type { SearchFilters } from '../types/filters';
 
 export default function Home() {
+  const [filters, setFilters] = useState<SearchFilters>({});
+
+  const handleFiltersChange = (newFilters: SearchFilters) => {
+    setFilters(newFilters);
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 text-white relative">
       {/* Gradient overlays */}
@@ -16,13 +23,13 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen space-y-16 px-4">
         <HeroSection />
-        <SearchSection />
+        <SearchSection onFiltersChange={handleFiltersChange} />
         <StatsSection />
       </div>
 
       {/* Tours Section */}
       <div className="relative z-10">
-        <TourGrid />
+        <TourGrid filters={filters} />
       </div>
     </div>
   );

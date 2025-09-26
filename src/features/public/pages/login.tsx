@@ -1,15 +1,27 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../../config/firebase";
+import { auth } from "../../../config/firebase";
+import { getUserData } from "../../../services/userService";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Mostrar mensaje de éxito si viene de reset de contraseña
+  useEffect(() => {
+    const message = location.state?.message;
+    if (message) {
+      setSuccess(message);
+      // Limpiar el mensaje después de 5 segundos
+      setTimeout(() => setSuccess(""), 5000);
+    }
+  }, [location]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,18 +51,23 @@ export default function Login() {
       console.log("Intentando autenticar con:", { email });
       
       const userCredential = await signInWithEmailAndPassword(auth, email, contrasena);
+      console.log("Usuario autenticado exitosamente:", {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+      });
       
-      const userDoc = await getDoc(doc(db, "usuarios", userCredential.user.uid));
+      // Usar el nuevo servicio para obtener/crear datos del usuario
+      const userData = await getUserData(userCredential.user);
       
-      if (!userDoc.exists()) {
-        setError("Usuario no encontrado en la base de datos.");
+      if (!userData) {
+        setError("Error al obtener datos del usuario. Inténtalo de nuevo.");
         setLoading(false);
         return;
       }
       
-      const userData = userDoc.data();
-      console.log("Datos del usuario:", userData);
+      console.log("Datos del usuario obtenidos:", userData);
       
+      // Redirigir según el rol
       if (userData.idRol === 2) {
         navigate("/guide-only");
       } else if (userData.idRol === 1) {
@@ -142,7 +159,20 @@ export default function Login() {
             >
               {loading ? "Ingresando..." : "Ingresar"}
             </button>
+            {success && (
+              <div className="text-green-400 text-center text-sm bg-green-500/10 border border-green-500/20 rounded-lg p-3 mt-4">
+                {success}
+              </div>
+            )}
             {error && <div className="text-red-400 text-center mt-2">{error}</div>}
+            <div className="mt-4 text-center">
+              <Link 
+                to="/forgot-password" 
+                className="text-[#20B2AA] hover:text-[#17a2a2] text-sm font-medium transition-colors duration-200"
+              >
+                ¿Olvidaste tu contraseña?
+              </Link>
+            </div>
           </form>
         </div>
       </div>

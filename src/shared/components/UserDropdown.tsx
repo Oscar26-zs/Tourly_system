@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { User, LogOut, MapPin, LogIn } from 'lucide-react';
+import { User, MapPin, LogIn, LogOut } from 'lucide-react';
 import { useAuth } from '../../app/providers/useAuth';
-import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../config/firebase';
+import { logoutService } from '../../services/logoutService';
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,13 +33,12 @@ export default function UserDropdown() {
   };
 
   const handleLogout = async () => {
-    console.log('Cerrando sesión');
     try {
-      await signOut(auth);
+      await logoutService();
       setIsOpen(false);
-      navigate('/');
+      navigate('/login');
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error al cerrar sesión:', error);
     }
   };
 
@@ -79,13 +77,13 @@ export default function UserDropdown() {
                 <span>Mis Tours</span>
               </div>
               
-              <div className="mx-4 h-px bg-neutral-700/50"></div>
+              <div className="border-t border-neutral-700/50"></div>
               
               <div
                 onClick={handleLogout}
-                className="px-4 py-3 text-red-400 hover:bg-red-500/10 cursor-pointer flex items-center gap-3"
+                className="px-4 py-3 text-white hover:bg-red-600/20 cursor-pointer flex items-center gap-3"
               >
-                <LogOut className="w-4 h-4 text-red-400" />
+                <LogOut className="w-4 h-4 text-red-500" />
                 <span>Cerrar Sesión</span>
               </div>
             </div>

@@ -20,29 +20,27 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
   const renderGallery = () => {
     switch (imageCount) {
       case 1:
-        // Una sola imagen ocupa todo el ancho
+        // Una sola imagen centrada con ancho máximo del 80%
         return (
-          <div className="h-full items-center justify-center flex">
+          <div className="h-full flex items-center justify-center bg-gray-800 rounded-lg">
             <img 
               src={images[0]} 
               alt="Tour imagen" 
-              className="w-[75%] h-full object-cover rounded-lg hover:scale-105 hover:cursor-pointer transition-transform duration-300"
+              className="max-w-[80%] max-h-full object-contain rounded-lg hover:scale-105 hover:cursor-pointer transition-transform duration-300"
             />
           </div>
         );
 
       case 2:
-        // Dos imágenes lado a lado
+        // Dos imágenes lado a lado con gap
         return (
-          <div className="grid grid-cols-2 gap-2 h-full">
+          <div className="grid grid-cols-2 gap-3 h-full">
             {images.map((image, index) => (
-              <div key={index} className="relative overflow-hidden">
+              <div key={index} className="relative bg-gray-800 rounded-lg overflow-hidden">
                 <img 
                   src={image} 
                   alt={`Tour imagen ${index + 1}`} 
-                  className={`w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300 ${
-                    index === 0 ? 'rounded-l-lg' : 'rounded-r-lg'
-                  }`}
+                  className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
                 />
               </div>
             ))}
@@ -50,28 +48,26 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
         );
 
       case 3:
-        // Una imagen principal (2/3) y dos thumbnails (1/3)
+        // Primera imagen arriba ocupando todo el ancho, dos abajo
         return (
-          <div className="grid grid-cols-3 gap-2 h-full">
-            {/* Imagen principal */}
-            <div className="col-span-2 relative overflow-hidden">
+          <div className="grid grid-rows-2 gap-3 h-full">
+            {/* Imagen principal arriba */}
+            <div className="relative bg-gray-800 rounded-lg overflow-hidden">
               <img 
                 src={images[0]} 
                 alt="Tour imagen principal" 
-                className="w-full h-full object-cover rounded-l-lg hover:scale-105 hover:cursor-pointer transition-transform duration-300"
+                className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
               />
             </div>
             
-            {/* Thumbnails verticales */}
-            <div className="col-span-1 grid grid-rows-2 gap-2">
+            {/* Dos imágenes abajo */}
+            <div className="grid grid-cols-2 gap-3">
               {images.slice(1, 3).map((image, index) => (
-                <div key={index} className="relative overflow-hidden">
+                <div key={index} className="relative bg-gray-800 rounded-lg overflow-hidden">
                   <img 
                     src={image} 
                     alt={`Tour imagen ${index + 2}`} 
-                    className={`w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300 ${
-                      index === 0 ? 'rounded-tr-lg' : 'rounded-br-lg'
-                    }`}
+                    className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
                   />
                 </div>
               ))}
@@ -80,72 +76,51 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
         );
 
       case 4:
-        // Una imagen principal (1/2) y 3 thumbnails en grid (1/2)
+        // Grid de 2x2
         return (
-          <div className="grid grid-cols-4 gap-2 h-full">
-            {/* Imagen principal */}
-            <div className="col-span-2 relative overflow-hidden">
-              <img 
-                src={images[0]} 
-                alt="Tour imagen principal" 
-                className="w-full h-full object-cover rounded-l-lg hover:scale-105 hover:cursor-pointer transition-transform duration-300"
-              />
-            </div>
-            
-            {/* Grid de 3 thumbnails */}
-            <div className="col-span-2 grid grid-cols-2 grid-rows-2 gap-2">
-              {images.slice(1, 4).map((image, index) => (
-                <div 
-                  key={index} 
-                  className={`relative overflow-hidden ${
-                    index === 0 ? 'col-span-2' : 'col-span-1'
-                  }`}
-                >
-                  <img 
-                    src={image} 
-                    alt={`Tour imagen ${index + 2}`} 
-                    className={`w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300 ${
-                      index === 0 ? 'rounded-tr-lg' : ''
-                    } ${index === 2 ? 'rounded-br-lg' : ''}`}
-                  />
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-2 grid-rows-2 gap-3 h-full">
+            {images.slice(0, 4).map((image, index) => (
+              <div key={index} className="relative bg-gray-800 rounded-lg overflow-hidden">
+                <img 
+                  src={image} 
+                  alt={`Tour imagen ${index + 1}`} 
+                  className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
+                />
+              </div>
+            ))}
           </div>
         );
 
       default:
-        // 5 o más imágenes - layout clásico con contador
+        // 5 o más imágenes - Layout tipo Instagram
         const mainImage = images[0];
-        const thumbnails = images.slice(1, 5);
+        const sideImages = images.slice(1, 5);
         const remainingCount = images.length - 5;
 
         return (
-          <div className="grid grid-cols-4 gap-2 h-full">
-            {/* Imagen principal */}
-            <div className="col-span-2 relative overflow-hidden">
+          <div className="grid grid-cols-4 gap-3 h-full">
+            {/* Imagen principal ocupando 2 columnas */}
+            <div className="col-span-2 relative bg-gray-800 rounded-lg overflow-hidden">
               <img 
                 src={mainImage} 
                 alt="Tour imagen principal" 
-                className="w-full h-full object-cover rounded-l-lg hover:scale-105 hover:cursor-pointer transition-transform duration-300"
+                className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
               />
             </div>
             
-            {/* Grid de thumbnails */}
-            <div className="col-span-2 grid grid-cols-2 gap-2">
-              {thumbnails.map((image, index) => (
-                <div key={index} className="relative overflow-hidden">
+            {/* Grid de 4 thumbnails (2x2) */}
+            <div className="col-span-2 grid grid-cols-2 grid-rows-2 gap-3">
+              {sideImages.map((image, index) => (
+                <div key={index} className="relative bg-gray-800 rounded-lg overflow-hidden">
                   <img 
                     src={image} 
                     alt={`Tour imagen ${index + 2}`} 
-                    className={`w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300 ${
-                      index === 1 ? 'rounded-tr-lg' : ''
-                    } ${index === 3 ? 'rounded-br-lg' : ''}`}
+                    className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
                   />
                   
                   {/* Overlay con contador en la última imagen si hay más fotos */}
                   {index === 3 && remainingCount > 0 && (
-                    <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center rounded-br-lg hover:cursor-pointer">
+                    <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center hover:cursor-pointer rounded-lg">
                       <span className="text-white text-xl font-bold">
                         +{remainingCount}
                       </span>
@@ -161,7 +136,7 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
 
   return (
     <div className="container mx-auto px-4 pt-8 mb-8">
-      <div className="relative h-64 lg:h-80">
+      <div className="relative h-72 lg:h-136">
         {renderGallery()}
       </div>
     </div>

@@ -25,7 +25,7 @@ export function TourHeader({ title, location, price }: TourHeaderProps) {
       
       {/* Precio */}
       <div className="text-right lg:text-right">
-        <div className="text-4xl lg:text-5xl font-bold text-green-400 mb-1">
+        <div className="text-4xl lg:text-5xl font-bold text-green-700 mb-1">
           ${price}
         </div>
         <div className="text-gray-400 text-lg">

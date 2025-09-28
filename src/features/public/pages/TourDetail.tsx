@@ -37,12 +37,12 @@ export function TourDetailPage() {
   }
 
   return (
-    <div className="tour-detail bg-gray-900 min-h-screen">
+    <div className="tour-detail bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 min-h-screen">
       {/* Galería de imágenes - ya tiene su propio container */}
       <TourImageGallery images={tour.imagenes || []} />
       
       {/* Contenido principal */}
-      <div className="relative bg-gray-900 text-white">
+      <div className="relative text-white">
         <div className="container mx-auto px-4 py-8">
           {/* Header con título, ubicación y precio */}
           <TourHeader 
@@ -51,23 +51,21 @@ export function TourDetailPage() {
             price={tour.precio}
           />
           
-          {/* Grid de contenido */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
-            {/* Descripción - ocupa 2 columnas */}
-            <div className="lg:col-span-2">
+          {/* Contenido apilado verticalmente */}
+          <div className="space-y-8 mt-12">
+            {/* Descripción */}
+            <div>
               <TourDescription description={tour.descripcion} />
             </div>
             
-            {/* Features sidebar - ocupa 1 columna */}
-            <div className="lg:col-span-1">
+            {/* Features debajo de la descripción */}
+            <div>
               <TourFeatures 
                 rating={tour.ratingPromedio || 0}
                 duration={tour.duracion}
                 capacity={15} // Valor por defecto
                 transportation={tour.incluye || []}
                 meetingPoint={tour.puntoEncuentro || 'Por definir'}
-                includes={tour.incluye || []}
-                notIncludes={tour.noIncluye || []}
               />
             </div>
           </div>

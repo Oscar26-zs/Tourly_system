@@ -36,7 +36,7 @@ export function RegisterGuideStepTwo({
         <form.Field
           name="telefono"
           validators={{
-            onChange: ({ value }) =>
+            onChange: ({ value }: { value: string }) =>
               !value ? 'Phone is required' : undefined,
           }}
           children={(field: AnyFieldApi) => (
@@ -68,7 +68,7 @@ export function RegisterGuideStepTwo({
         <form.Field
           name="genero"
           validators={{
-            onChange: ({ value }) =>
+            onChange: ({ value }: { value: string }) =>
               !value ? 'Gender is required' : undefined,
           }}
           children={(field: AnyFieldApi) => (
@@ -104,7 +104,7 @@ export function RegisterGuideStepTwo({
         <form.Field
           name="contraseña"
           validators={{
-            onChange: ({ value }) =>
+            onChange: ({ value }: { value: string }) =>
               !value
                 ? 'Password is required'
                 : value.length < 8
@@ -155,7 +155,7 @@ export function RegisterGuideStepTwo({
         <form.Field
           name="descripcion"
           validators={{
-            onChange: ({ value }) =>
+            onChange: ({ value }: { value?: string }) =>
               value && value.length > 200 ? 'Description too long (maximum 200 characters)' : undefined,
           }}
           children={(field: AnyFieldApi) => (
@@ -186,7 +186,7 @@ export function RegisterGuideStepTwo({
         <form.Field
           name="acceptTerms"
           validators={{
-            onChange: ({ value }) =>
+            onChange: ({ value }: { value: boolean }) =>
               !value ? 'You must accept the terms and conditions' : undefined,
           }}
           children={(field: AnyFieldApi) => (
@@ -223,8 +223,8 @@ export function RegisterGuideStepTwo({
         {/* Submit Button */}
         <div className="md:col-span-2">
           <form.Subscribe
-            selector={(state) => [state.canSubmit, state.isSubmitting]}
-            children={([canSubmit, isSubmitting]) => (
+            selector={(state: any) => [state.canSubmit, state.isSubmitting]}
+            children={([canSubmit, isSubmitting]: [boolean, boolean]) => (
               <button
                 type="button"
                 onClick={(e) => {

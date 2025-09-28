@@ -1,3 +1,12 @@
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import firebaseApp from "../config/firebase";
+import type { User } from "../shared/types/users";
+
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
+const googleProvider = new GoogleAuthProvider();
+
 // Completa el registro de guía para usuarios autenticados con Google
 export async function completeGoogleGuideRegistration(userUid: string, userData: Omit<User, "idUsuario" | "activo">) {
   // Actualizar datos en Firestore
@@ -16,14 +25,6 @@ export async function completeGoogleGuideRegistration(userUid: string, userData:
   await setDoc(doc(db, "usuarios", userUid), userDoc, { merge: true });
   return userDoc;
 }
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, updatePassword } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
-import firebaseApp from "../config/firebase";
-import type { User } from "../shared/types/users";
-
-const auth = getAuth(firebaseApp);
-const db = getFirestore(firebaseApp);
-const googleProvider = new GoogleAuthProvider();
 
 export async function registerGuide(userData: Omit<User, "idUsuario" | "activo"> & { password: string }) {
   // Crear usuario en Auth

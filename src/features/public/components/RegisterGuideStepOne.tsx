@@ -108,7 +108,7 @@ export function RegisterGuideStepOne({
           <form.Field
             name="nombreCompleto"
             validators={{
-              onChange: ({ value }) =>
+              onChange: ({ value }: { value: string }) =>
                 !value ? 'Full name is required' : undefined,
             }}
             children={(field: AnyFieldApi) => (
@@ -151,7 +151,7 @@ export function RegisterGuideStepOne({
           <form.Field
             name="email"
             validators={{
-              onChange: ({ value }) =>
+              onChange: ({ value }: { value: string }) =>
                 !value
                   ? 'The email is required'
                   : !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value)

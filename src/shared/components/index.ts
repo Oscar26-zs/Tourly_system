@@ -2,3 +2,4 @@
 
 export { default as Navbar } from './Navbar';
 export { default as UserDropdown } from './UserDropdown';
+export { FieldInfo } from './FieldInfo';

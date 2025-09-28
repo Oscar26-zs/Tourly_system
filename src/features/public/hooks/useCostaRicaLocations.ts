@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getCombinedLocations, filterCostaRicaLocations } from '../services/costaRicaApi';
 import type { CostaRicaLocation } from '../types/costaRica';
 
@@ -58,13 +58,13 @@ export function useCostaRicaLocations(): UseCostaRicaLocationsResult {
   }, []);
 
   // Función para filtrar ubicaciones por texto de búsqueda
-  const filterByText = (searchText: string) => {
+  const filterByText = useCallback((searchText: string) => {
     const filtered = filterCostaRicaLocations(locations, searchText);
     setFilteredLocations(filtered);
-  };
+  }, [locations]);
 
   // Función para obtener destinos populares (provincias principales)
-  const getPopularDestinations = (): string[] => {
+  const getPopularDestinations = useCallback((): string[] => {
     // Retornar las provincias más conocidas como destinos populares
     const popularProvinces = locations
       .filter(location => location.type === 'provincia')
@@ -77,7 +77,7 @@ export function useCostaRicaLocations(): UseCostaRicaLocationsResult {
     }
 
     return popularProvinces;
-  };
+  }, [locations]);
 
   return {
     locations,

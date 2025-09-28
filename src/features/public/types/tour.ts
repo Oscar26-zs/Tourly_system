@@ -20,6 +20,25 @@ export interface Tour {
     lat: number;
     lng: number;
   };
+  itinerary?: ItineraryItem[];
+  highlights?: string[];
+}
+
+interface ItineraryItem {
+  step: string;
+  title: string;
+  duration: string;
+  description: string;
+}
+
+export interface Review {
+  id: string;
+  userId: string;
+  userName: string;
+  userEmail?: string;
+  rating: number;
+  comment: string;
+  createdAt: Date;
 }
 
 // Tipo para las categorías

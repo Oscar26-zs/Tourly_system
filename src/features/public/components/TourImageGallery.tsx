@@ -26,7 +26,7 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
             <img 
               src={images[0]} 
               alt="Tour imagen" 
-              className="max-w-[80%] max-h-full object-contain rounded-lg hover:scale-105 hover:cursor-pointer transition-transform duration-300"
+              className="max-w-full max-h-full object-contain rounded-lg hover:scale-105 hover:cursor-pointer transition-transform duration-300"
             />
           </div>
         );

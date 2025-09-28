@@ -24,15 +24,6 @@ export function TourBookingButtons({ price, onBookNow, onCancel }: TourBookingBu
           </button>
         )}
       </div>
-      
-      <div className="mt-4 text-center">
-        <p className="text-gray-400 text-sm">
-          <span className="text-green-400">✓</span> Free cancellation up to 24 hours before
-        </p>
-        <p className="text-gray-400 text-sm">
-          <span className="text-green-400">✓</span> Reserve now and pay later
-        </p>
-      </div>
     </div>
   );
 }

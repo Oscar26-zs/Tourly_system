@@ -20,6 +20,15 @@ export interface Tour {
     lat: number;
     lng: number;
   };
+  itinerary?: ItineraryItem[];
+  highlights?: string[];
+}
+
+interface ItineraryItem {
+  time: string;
+  title: string;
+  duration: string;
+  description: string;
 }
 
 // Tipo para las categorías

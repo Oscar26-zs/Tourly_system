@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 interface TourTabsProps {
   activeTab: string;
   onTabChange: (tab: string) => void;

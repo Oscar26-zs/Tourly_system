@@ -51,27 +51,26 @@ export function TourDetailPage() {
     switch (activeTab) {
       case 'overview':
         return (
-          <TourOverview
+          <TourOverview 
             description={tour.descripcion}
             includes={tour.incluye || []}
             notIncludes={tour.noIncluye || []}
+            highlights={tour.highlights || []} // Nuevo prop
           />
         );
       case 'itinerary':
-        return (
-          <TourItinerary
-            meetingPoint={tour.puntoEncuentro || 'Meeting point TBD'}
-          />
-        );
+        return <TourItinerary itinerary={tour.itinerary || []} />; // Nuevo prop
       case 'reviews':
+        return <TourReviews averageRating={0} totalReviews={0} />;
+      default:
         return (
-          <TourReviews
-            averageRating={tour.ratingPromedio || 0}
-            totalReviews={tour.cantidadReseñas || 0}
+          <TourOverview 
+            description={tour.descripcion}
+            includes={tour.incluye || []}
+            notIncludes={tour.noIncluye || []}
+            highlights={tour.highlights || []} // Nuevo prop
           />
         );
-      default:
-        return null;
     }
   };
 

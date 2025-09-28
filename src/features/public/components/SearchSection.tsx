@@ -1,151 +1,48 @@
-import { useState, useEffect, useRef } from 'react';
 import { MapPin, Clock, DollarSign, Search, X } from 'lucide-react';
 import type { SearchFilters } from '../types/filters';
-import { useCities } from '../hooks/useCities';
+import { useSearchSection } from '../hooks/useSearchSection';
 
 interface SearchSectionProps {
   onFiltersChange: (filters: SearchFilters) => void;
 }
 
 export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
-  const [locationInput, setLocationInput] = useState<string>('');
-  const [selectedDuration, setSelectedDuration] = useState<number | null>(null);
-  const [priceInput, setPriceInput] = useState<string>('');
-  const [showDurationDropdown, setShowDurationDropdown] = useState(false);
-  const [showLocationSuggestions, setShowLocationSuggestions] = useState(false);
-  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
-  
-  const searchRef = useRef<HTMLDivElement>(null);
-  const locationRef = useRef<HTMLDivElement>(null);
-  const { cities, popularDestinations, isLoading: citiesLoading } = useCities();
-
-  const durations = [1, 2, 3, 4, 6, 8, 12]; // horas
-
-  // Filtrar ubicaciones basándose en el input usando datos dinámicos
-  const filteredLocations = locationInput.trim() 
-    ? cities.filter(location =>
-        location.toLowerCase().includes(locationInput.toLowerCase())
-      ).slice(0, 8) // Máximo 8 cuando hay filtro de texto
-    : cities.slice(0, 10); // Mostrar las primeras 10 ciudades cuando no hay texto
-
-  // Cerrar dropdowns al hacer clic fuera
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      // Cerrar dropdown de ubicaciones si se hace click fuera
-      if (locationRef.current && !locationRef.current.contains(event.target as Node)) {
-        setShowLocationSuggestions(false);
-        setSelectedSuggestionIndex(-1);
-      }
-      
-      // Cerrar dropdown de duración si se hace click fuera del contenedor principal
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowDurationDropdown(false);
-      }
-    };
+  const {
+    // Estados del formulario
+    locationInput,
+    selectedDuration,
+    priceInput,
     
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleSearch = () => {
-    const filters: SearchFilters = {};
+    // Estados de UI
+    showDurationDropdown,
+    showLocationSuggestions,
+    selectedSuggestionIndex,
     
-    if (locationInput.trim()) filters.location = locationInput.trim();
-    if (selectedDuration) filters.duration = selectedDuration;
-    if (priceInput.trim()) {
-      const price = parseFloat(priceInput);
-      if (!isNaN(price) && price > 0) filters.maxPrice = price;
-    }
+    // Referencias
+    searchRef,
+    locationRef,
     
-    onFiltersChange(filters);
-  };
-
-  const handleDurationSelect = (duration: number) => {
-    setSelectedDuration(duration);
-    setShowDurationDropdown(false);
-  };
-
-  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setLocationInput(value);
-    // Mostrar sugerencias siempre que el input esté enfocado
-    setShowLocationSuggestions(true);
-    setSelectedSuggestionIndex(-1);
-  };
-
-  const handleLocationSelect = (location: string) => {
-    setLocationInput(location);
-    setShowLocationSuggestions(false);
-    setSelectedSuggestionIndex(-1);
-  };
-
-  const handleLocationFocus = () => {
-    // Mostrar sugerencias al hacer focus, incluso sin texto
-    setShowLocationSuggestions(true);
-  };
-
-  const handleLocationKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!showLocationSuggestions || filteredLocations.length === 0) return;
-
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        setSelectedSuggestionIndex(prev => 
-          prev < filteredLocations.length - 1 ? prev + 1 : 0
-        );
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        setSelectedSuggestionIndex(prev => 
-          prev > 0 ? prev - 1 : filteredLocations.length - 1
-        );
-        break;
-      case 'Enter':
-        e.preventDefault();
-        if (selectedSuggestionIndex >= 0) {
-          handleLocationSelect(filteredLocations[selectedSuggestionIndex]);
-        }
-        break;
-      case 'Escape':
-        setShowLocationSuggestions(false);
-        setSelectedSuggestionIndex(-1);
-        break;
-    }
-  };
-
-  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    // Permitir solo números y punto decimal
-    if (value === '' || /^\d*\.?\d*$/.test(value)) {
-      setPriceInput(value);
-    }
-  };
-
-  const handlePopularDestination = (destination: string) => {
-    setLocationInput(destination);
-    const filters: SearchFilters = { location: destination };
-    if (selectedDuration) filters.duration = selectedDuration;
-    if (priceInput.trim()) {
-      const price = parseFloat(priceInput);
-      if (!isNaN(price) && price > 0) filters.maxPrice = price;
-    }
-    onFiltersChange(filters);
-  };
-
-  const handleClearFilters = () => {
-    setLocationInput('');
-    setSelectedDuration(null);
-    setPriceInput('');
-    setShowLocationSuggestions(false);
-    setShowDurationDropdown(false);
-    setSelectedSuggestionIndex(-1);
+    // Datos
+    filteredLocations,
+    citiesLoading,
+    durations,
+    popularDestinations,
+    hasActiveFilters,
     
-    // Notificar al componente padre que se limpiaron los filtros
-    onFiltersChange({});
-  };
-
-  // Verificar si hay filtros activos
-  const hasActiveFilters = locationInput.trim() || selectedDuration || priceInput.trim();
+    // Handlers
+    handleSearch,
+    handleDurationSelect,
+    handleLocationChange,
+    handleLocationSelect,
+    handleLocationFocus,
+    handleLocationKeyDown,
+    handlePriceChange,
+    handlePopularDestination,
+    handleClearFilters,
+    
+    // Setters de UI
+    setShowDurationDropdown,
+  } = useSearchSection({ onFiltersChange });
   return (
     <div 
       ref={searchRef}
@@ -178,30 +75,33 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
           {showLocationSuggestions && (
             <div className="absolute top-full left-0 right-0 mt-1 bg-stone-900 border border-neutral-600 rounded-[10px] z-20 max-h-60 overflow-y-auto shadow-xl">
               {citiesLoading ? (
-                <div className="p-3 text-zinc-400 text-sm">Loading locations...</div>
+                <div className="p-3 text-zinc-400 text-sm">Cargando ubicaciones...</div>
               ) : filteredLocations.length > 0 ? (
                 <>
                   {!locationInput.trim() && (
                     <div className="p-2 text-zinc-500 text-xs border-b border-neutral-700 bg-stone-800">
-                      Available destinations (sorted by popularity)
+                      Ubicaciones disponibles en Costa Rica
                     </div>
                   )}
                   {filteredLocations.map((location, index) => (
                     <div
-                      key={location}
-                      onClick={() => handleLocationSelect(location)}
+                      key={location.id}
+                      onClick={() => handleLocationSelect(location.name)}
                       className={`p-3 text-white cursor-pointer border-b border-neutral-700 last:border-b-0 flex items-center gap-2 transition-colors ${
                         index === selectedSuggestionIndex ? 'bg-green-700/30' : 'hover:bg-stone-800'
                       }`}
                     >
                       <MapPin className="w-4 h-4 text-green-700" />
-                      <span>{location}</span>
+                      <div className="flex flex-col">
+                        <span className="text-sm">{location.name}</span>
+                        <span className="text-xs text-zinc-400">{location.fullName}</span>
+                      </div>
                     </div>
                   ))}
                 </>
               ) : (
                 <div className="p-3 text-zinc-400 text-sm">
-                  No locations found matching "{locationInput}"
+                  No se encontraron ubicaciones que coincidan con "{locationInput}"
                 </div>
               )}
             </div>
@@ -209,7 +109,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
         </div>
 
         {/* Duration */}
-        <div className="w-32 flex flex-col justify-start items-start gap-2.5 relative">
+        <div className="w-48 flex flex-col justify-start items-start gap-2.5 relative">
           <div className="self-stretch text-white text-2xl font-medium font-inter flex items-center gap-2">
             Duration?
             {selectedDuration && (
@@ -243,7 +143,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
         </div>
 
         {/* Price */}
-        <div className="w-32 flex flex-col justify-start items-start gap-2.5">
+        <div className="w-48 flex flex-col justify-start items-start gap-2.5">
           <div className="self-stretch text-white text-2xl font-medium font-inter flex items-center gap-2">
             Max Price
             {priceInput.trim() && (
@@ -291,10 +191,10 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
 
       {/* Popular Destinations */}
       <div className="w-[750px] flex flex-col justify-start items-center gap-7">
-        <div className="self-stretch text-center text-zinc-400 text-xl font-medium font-poppins">Popular Destinations</div>
+        <div className="self-stretch text-center text-zinc-400 text-xl font-medium font-poppins">Destinos Populares en Costa Rica</div>
         <div className="self-stretch flex justify-center items-center gap-11 flex-wrap">
           {citiesLoading ? (
-            <div className="text-zinc-500 text-lg">Loading destinations...</div>
+            <div className="text-zinc-500 text-lg">Cargando destinos...</div>
           ) : popularDestinations.length > 0 ? (
             popularDestinations.map((destination) => (
               <div 
@@ -308,7 +208,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
               </div>
             ))
           ) : (
-            <div className="text-zinc-500 text-lg">No destinations available</div>
+            <div className="text-zinc-500 text-lg">No hay destinos disponibles</div>
           )}
         </div>
       </div>

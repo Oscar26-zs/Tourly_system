@@ -22,7 +22,7 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
       case 1:
         // Una sola imagen centrada con ancho máximo del 80%
         return (
-          <div className="h-full flex items-center justify-center bg-gray-800 rounded-lg">
+          <div className="h-full flex items-center justify-center rounded-lg">
             <img 
               src={images[0]} 
               alt="Tour imagen" 

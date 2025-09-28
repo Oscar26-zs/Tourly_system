@@ -6,11 +6,11 @@ interface TourBookingButtonsProps {
 
 export function TourBookingButtons({ price, onBookNow, onCancel }: TourBookingButtonsProps) {
   return (
-    <div className="bg-gray-800 rounded-lg p-6 mt-8">
+    <div className="rounded-lg p-6 mt-8">
       <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={onBookNow}
-          className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 text-lg"
+          className="flex-1 bg-green-700 hover:bg-green-600 text-white font-inter font-medium py-4 px-6 hover:cursor-pointer rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-green-700/30 hover:scale-[1.02] active:scale-[0.98] text-lg"
         >
           Book now - ${price}
         </button>

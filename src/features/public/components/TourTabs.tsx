@@ -17,9 +17,9 @@ export function TourTabs({ activeTab, onTabChange }: TourTabsProps) {
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`py-4 px-2 font-medium text-lg transition-colors duration-200 border-b-2 ${
+            className={`py-4 px-2 font-medium text-lg transition-colors hover:cursor-pointer duration-200 border-b-2 ${
               activeTab === tab.id
-                ? 'text-green-400 border-green-400'
+                ? 'text-green-700 border-green-700'
                 : 'text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-600'
             }`}
           >

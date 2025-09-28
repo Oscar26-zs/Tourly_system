@@ -10,35 +10,8 @@ interface TourItineraryProps {
 }
 
 export function TourItinerary({ itinerary }: TourItineraryProps) {
-  // Itinerario por defecto si no viene de Firebase
-  const defaultItinerary: ItineraryItem[] = [
-    {
-      time: "9:00 AM",
-      title: "Meet at designated meeting point in Manzanillo",
-      duration: "15 min",
-      description: "Check-in and meet your professional guide who will provide a safety briefing"
-    },
-    {
-      time: "9:15 AM", 
-      title: "Safety briefing and horse assignment (based on experience level)",
-      duration: "20 min",
-      description: "Learn basic riding techniques and get familiar with your horse"
-    },
-    {
-      time: "9:35 AM",
-      title: "Begin horseback ride along the beach and coastal trails",
-      duration: "60 min",
-      description: "Enjoy stunning views of the Caribbean Sea and pristine beaches"
-    },
-    {
-      time: "10:35 AM",
-      title: "Photo stop at a scenic viewpoint by the Caribbean Sea",
-      duration: "20 min", 
-      description: "Capture memories with professional photos and enjoy the ocean breeze"
-    }
-  ];
 
-  const tourItinerary = itinerary && itinerary.length > 0 ? itinerary : defaultItinerary;
+  const tourItinerary = itinerary && itinerary.length > 0 ? itinerary : [];
 
   return (
     <div className="space-y-6">
@@ -51,7 +24,7 @@ export function TourItinerary({ itinerary }: TourItineraryProps) {
           <div key={index} className="flex gap-6">
             {/* Hora */}
             <div className="flex-shrink-0">
-              <div className="text-green-400 font-semibold text-lg">
+              <div className="text-green-700 font-semibold text-lg">
                 {item.time}
               </div>
             </div>

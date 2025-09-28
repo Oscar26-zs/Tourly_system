@@ -19,7 +19,7 @@ export function TourOverview({ description, includes, notIncludes, highlights }:
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Tour Highlights */}
-        <div className="bg-gray-800 rounded-lg p-6">
+        <div className="bg-black/20 backdrop-blur-sm border border-gray-700/30 rounded-lg p-6">
           <h3 className="text-xl font-semibold text-white mb-4">Tour Highlights</h3>
           {tourHighlights.length > 0 ? (
             <ul className="space-y-3">
@@ -36,7 +36,7 @@ export function TourOverview({ description, includes, notIncludes, highlights }:
         </div>
 
         {/* What's Included */}
-        <div className="bg-gray-800 rounded-lg p-6">
+        <div className="bg-black/20 backdrop-blur-sm border border-gray-700/30 rounded-lg p-6">
           <h3 className="text-xl font-semibold text-white mb-4">What's Included</h3>
           
           {/* Incluye - Solo datos de Firebase */}

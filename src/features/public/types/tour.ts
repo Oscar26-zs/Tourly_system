@@ -31,6 +31,16 @@ interface ItineraryItem {
   description: string;
 }
 
+export interface Review {
+  id: string;
+  userId: string;
+  userName: string;
+  userEmail?: string;
+  rating: number;
+  comment: string;
+  createdAt: Date;
+}
+
 // Tipo para las categorías
 export interface Categoria {
   id: string;

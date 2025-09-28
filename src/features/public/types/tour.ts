@@ -25,7 +25,7 @@ export interface Tour {
 }
 
 interface ItineraryItem {
-  time: string;
+  step: string;
   title: string;
   duration: string;
   description: string;

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import type { SearchFilters } from '../types/filters';
 import { useCostaRicaLocations } from './useCostaRicaLocations';
 
@@ -31,7 +31,7 @@ export function useSearchSection({ onFiltersChange }: UseSearchSectionProps) {
 
   // Configuración
   const durations = [1, 2, 3, 4, 6, 8, 12]; // horas
-  const popularDestinations = getPopularDestinations();
+  const popularDestinations = useMemo(() => getPopularDestinations(), [getPopularDestinations]);
 
   // Usar el filtro de ubicaciones del hook
   useEffect(() => {

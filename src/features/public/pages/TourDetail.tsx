@@ -75,8 +75,8 @@ export function TourDetailPage() {
     }
   };
 
-  return (
-    <div className="tour-detail bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 min-h-screen">
+   return (
+    <div className="tour-detail bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 min-h-screen pt-24">
       <Navbar/>
       
       {/* Galería de imágenes */}
@@ -84,7 +84,7 @@ export function TourDetailPage() {
       
       {/* Contenido principal */}
       <div className="relative text-white">
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-20 py-8 max-w-7xl">
           {/* Header con título, ubicación y precio */}
           <TourHeader 
             title={tour.titulo}

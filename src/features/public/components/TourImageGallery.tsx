@@ -134,8 +134,8 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
     }
   };
 
-  return (
-    <div className="container mx-auto px-4 pt-8 mb-8">
+   return (
+    <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-20 max-w-7xl pt-8 mb-8">
       <div className="relative h-72 lg:h-136">
         {renderGallery()}
       </div>

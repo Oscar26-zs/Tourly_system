@@ -1,59 +1,33 @@
 import { Globe, User, Menu, X, LogOut, LogIn, Languages } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useAuth } from '../../app/providers/useAuth';
-import { logoutService } from '../../services/logoutService';
 import UserDropdown from './UserDropdown';
+import { useNavbar } from '../hooks/useNavbar';
 
 export default function Navbar() {
-  const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { user } = useAuth();
-
-  const handleBecomeHost = () => {
-    navigate('/login');
-    setIsMenuOpen(false);
-  };
-
-  const handleGoHome = () => {
-    navigate('/');
-    setIsMenuOpen(false);
-  };
-
-  const handleLogin = () => {
-    navigate('/login');
-    setIsMenuOpen(false);
-  };
-
-  const handleLogout = async () => {
-    try {
-      await logoutService();
-      setIsMenuOpen(false);
-      navigate('/login');
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error);
-    }
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
-  };
-
-  const toggleLanguage = () => {
-    setIsLanguageOpen(prev => !prev);
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(prev => !prev);
-  };
-
-  const getUserName = () => {
-    if (user?.displayName) return user.displayName;
-    if (user?.email) return user.email.split('@')[0];
-    return 'Usuario';
-  };
+  const {
+    // Estados
+    isMenuOpen,
+    isLanguageOpen,
+    isDropdownOpen,
+    user,
+    
+    // Handlers
+    handleBecomeHost,
+    handleGoHome,
+    handleLogin,
+    handleLogout,
+    handleLanguageChange,
+    
+    // Toggle functions
+    toggleMenu,
+    toggleLanguage,
+    toggleDropdown,
+    
+    // Utility functions
+    getUserName,
+    
+    // Setters
+    setIsDropdownOpen,
+  } = useNavbar();
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 w-full h-16 md:h-24 px-4 py-2.5 bg-gradient-to-r from-neutral-900/95 via-neutral-800/95 to-neutral-900/95 backdrop-blur-xl border-b border-green-700/20 flex justify-center items-center">
@@ -147,7 +121,7 @@ export default function Navbar() {
                   className="w-full flex items-center gap-3 text-left text-white hover:text-red-400 hover:bg-red-600/10 transition-all duration-200 px-4 py-3 rounded-md"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Cerrar Sesión</span>
+                  <span>Sign out</span>
                 </button>
               </div>
             ) : (
@@ -156,7 +130,7 @@ export default function Navbar() {
                 className="w-full flex items-center gap-3 text-left text-white hover:text-green-400 hover:bg-green-700/10 transition-all duration-200 px-4 py-3 rounded-md"
               >
                 <LogIn className="w-4 h-4" />
-                <span>Iniciar Sesión</span>
+                <span>Sign in</span>
               </button>
             )}
 
@@ -169,27 +143,19 @@ export default function Navbar() {
                 className="w-full flex items-center gap-3 text-left text-white hover:text-green-400 hover:bg-green-700/10 transition-all duration-200 px-4 py-3 rounded-md"
               >
                 <Languages className="w-4 h-4" />
-                <span>Idioma</span>
+                <span>Language</span>
               </button>
               
               {isLanguageOpen && (
                 <div className="ml-4 mt-2 space-y-1">
                   <button
-                    onClick={() => {
-                      console.log('Cambiar a Español');
-                      setIsLanguageOpen(false);
-                      setIsMenuOpen(false);
-                    }}
+                    onClick={() => handleLanguageChange('Español')}
                     className="w-full text-left text-zinc-300 hover:text-white hover:bg-neutral-700/30 transition-all duration-200 px-4 py-2 rounded-md text-sm"
                   >
-                    🇪🇸 Español
+                    🇪🇸 Spanish
                   </button>
                   <button
-                    onClick={() => {
-                      console.log('Cambiar a English');
-                      setIsLanguageOpen(false);
-                      setIsMenuOpen(false);
-                    }}
+                    onClick={() => handleLanguageChange('English')}
                     className="w-full text-left text-zinc-300 hover:text-white hover:bg-neutral-700/30 transition-all duration-200 px-4 py-2 rounded-md text-sm"
                   >
                     🇺🇸 English

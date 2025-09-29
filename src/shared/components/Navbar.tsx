@@ -63,18 +63,18 @@ export default function Navbar() {
         <div className="hidden md:flex justify-center items-center gap-1">
           <button 
             onClick={handleBecomeHost}
-            className="text-white text-xl lg:text-2xl font-medium font-inter hover:text-green-400 hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 cursor-pointer px-2 py-1 rounded-md"
+            className="text-white text-xl lg:text-2xl font-medium font-inter hover:text-green-400 hover:cursor-pointer hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 cursor-pointer px-2 py-1 rounded-md"
           >
             Become a host
           </button>
         </div>
 
         {/* Navigation Links - Home button (Always visible) */}
-        <div className="flex justify-start items-center cursor-pointer hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 px-2 py-1 rounded-md" onClick={handleGoHome}>
+        <div className="flex justify-start items-center cursor-pointer hover:cursor-pointer hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 px-2 py-1 rounded-md" onClick={handleGoHome}>
           <div className="w-8 h-8 md:w-9 md:h-9 relative">
             <Globe className="w-6 h-6 md:w-7 md:h-7 text-green-700 absolute top-1 left-1 hover:text-green-500 transition-colors duration-200" />
           </div>
-          <button className="text-white text-xl md:text-2xl font-medium font-inter hover:text-green-400 transition-colors duration-200">
+          <button className="text-white text-xl md:text-2xl font-medium font-inter hover:cursor-pointer hover:text-green-400 transition-colors duration-200">
             Tourly
           </button>
         </div>
@@ -89,7 +89,7 @@ export default function Navbar() {
           <div className="relative">
             <button
               onClick={toggleDropdown}
-              className="flex items-center gap-2 px-3 py-2 text-white hover:text-green-400 hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 rounded-md"
+              className="flex items-center gap-2 px-3 py-2 text-white hover:cursor-pointer hover:text-green-400 hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 rounded-md"
             >
               {user ? (
                 <>

@@ -120,10 +120,10 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
             </div>
             <div 
               onClick={() => setShowDurationDropdown(!showDurationDropdown)}
-              className="self-stretch p-2.5 bg-stone-900 border border-neutral-600 rounded-[10px] flex justify-center items-center gap-3.5 cursor-pointer hover:bg-stone-800 hover:border-neutral-500 transition-all duration-300"
+              className="self-stretch p-2.5 bg-stone-900 border border-neutral-600 rounded-[10px] flex items-center gap-3.5 cursor-pointer hover:bg-stone-800 hover:border-neutral-500 transition-all duration-300"
             >
               <Clock className="w-5 h-5 lg:w-6 lg:h-6 text-green-700" />
-              <div className="text-zinc-400 text-lg lg:text-xl font-light font-poppins">
+              <div className="text-zinc-400 text-lg lg:text-xl font-light font-poppins flex-1">
                 {selectedDuration ? `${selectedDuration}h` : "1 hour?"}
               </div>
             </div>

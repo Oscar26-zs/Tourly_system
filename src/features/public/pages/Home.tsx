@@ -21,7 +21,7 @@ export default function Home() {
       <Navbar />
       
       {/* Hero Section */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen space-y-16 px-4">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen space-y-16 px-4 pt-18 md:pt-26">
         <HeroSection />
         <SearchSection onFiltersChange={handleFiltersChange} />
         <StatsSection />

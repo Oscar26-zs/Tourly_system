@@ -17,7 +17,6 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        console.log('Click fuera del dropdown');
         onClose();
       }
     };
@@ -30,7 +29,6 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
   }, [isOpen, onClose]);
 
   const handleMyTours = () => {
-    console.log('Navegando a Mis Tours');
     onClose();
   };
 

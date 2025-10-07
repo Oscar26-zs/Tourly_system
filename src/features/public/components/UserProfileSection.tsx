@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { User, Mail, Phone, Calendar, Shield } from 'lucide-react';
 import { useUserProfileById } from '../../../shared/hooks/useUserProfileById';
 import { useAuth } from '../../../app/providers/useAuth';
+import EditUserProfileSection from '../../../shared/components/EditUserProfileSection';
 
 interface UserProfileSectionProps {
   className?: string;
@@ -8,7 +10,32 @@ interface UserProfileSectionProps {
 
 export default function UserProfileSection({ className = '' }: UserProfileSectionProps) {
   const { user } = useAuth();
-  const { data: userProfile, isLoading, error, isError } = useUserProfileById(user?.uid || '');
+  const { data: userProfile, isLoading, error, isError, refetch } = useUserProfileById(user?.uid || '');
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+  };
+
+  const handleSaveEdit = () => {
+    setIsEditing(false);
+    refetch(); // Refrescar los datos después de guardar
+  };
+
+  // Si está en modo edición, mostrar el componente de edición
+  if (isEditing) {
+    return (
+      <EditUserProfileSection
+        onCancel={handleCancelEdit}
+        onSave={handleSaveEdit}
+        className={className}
+      />
+    );
+  }
 
   if (isLoading) {
     return (
@@ -163,7 +190,10 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
 
       {/* Botón de editar */}
       <div className="flex justify-end pt-6">
-        <button className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center gap-2">
+        <button 
+          onClick={handleEditClick}
+          className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center gap-2"
+        >
           <User className="w-4 h-4" />
           Edit Profile
         </button>

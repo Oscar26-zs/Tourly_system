@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Navbar } from '../../../shared/components';
-import SimpleSidebar from '../../../shared/components/SimpleSidebar';
+import { Navbar, SimpleSidebar, UserProfileSection } from '../../../shared/components';
 
 const TouristSettings = () => {
   const [activeItem, setActiveItem] = useState('profile');
@@ -12,47 +11,16 @@ const TouristSettings = () => {
   const renderContent = () => {
     switch (activeItem) {
       case 'profile':
-        return (
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Perfil de Usuario</h2>
-            <p className="text-gray-300">Aquí puedes editar tu información personal.</p>
-          </div>
-        );
+        return <UserProfileSection />;
       case 'settings':
         return (
           <div>
-            <h2 className="text-2xl font-bold mb-4">Configuraciones</h2>
-            <p className="text-gray-300">Ajusta tus preferencias de la aplicación.</p>
-          </div>
-        );
-      case 'help':
-        return (
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Ayuda</h2>
-            <p className="text-gray-300">Encuentra respuestas a preguntas frecuentes.</p>
-          </div>
-        );
-      case 'support':
-        return (
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Soporte</h2>
-            <p className="text-gray-300">Contacta con nuestro equipo de soporte.</p>
-          </div>
-        );
-      case 'feedback':
-        return (
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Feedback</h2>
-            <p className="text-gray-300">Comparte tus comentarios y sugerencias.</p>
+            <h2 className="text-2xl font-bold mb-4">My Bookings</h2>
+            <p className="text-gray-300">Here you can view and manage your tour bookings.</p>
           </div>
         );
       default:
-        return (
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Perfil de Usuario</h2>
-            <p className="text-gray-300">Aquí puedes editar tu información personal.</p>
-          </div>
-        );
+        return <UserProfileSection />;
     }
   };
 

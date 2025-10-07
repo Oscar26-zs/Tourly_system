@@ -17,13 +17,13 @@ export default function SimpleSidebar({ activeItem, onItemClick }: SimpleSidebar
   const sidebarItems: SidebarItem[] = [
     {
       id: 'profile',
-      label: 'Perfil',
+      label: 'Profile',
       icon: <User className="w-5 h-5" />,
       active: activeItem === 'profile'
     },
     {
       id: 'settings',
-      label: 'Mis reservas',
+      label: 'My Bookings',
       icon: <BookCheck className="w-5 h-5" />,
       active: activeItem === 'settings'
     },
@@ -33,7 +33,7 @@ export default function SimpleSidebar({ activeItem, onItemClick }: SimpleSidebar
     <div className="w-64 bg-gradient-to-r from-neutral-900/95 via-neutral-800/95 to-neutral-900/95 backdrop-blur-xl text-white min-h-screen border-r border-green-700/20">
       {/* Sidebar Header */}
       <div className="p-6 border-b border-green-700/20">
-        <h2 className="text-lg font-semibold">Configuración</h2>
+        <h2 className="text-lg font-semibold">Settings</h2>
       </div>
 
       {/* Sidebar Content */}

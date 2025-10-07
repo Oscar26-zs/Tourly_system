@@ -5,4 +5,4 @@ export { default as UserDropdown } from './UserDropdown';
 export { FieldInfo } from './FieldInfo';
 export { default as SimpleSidebar } from './SimpleSidebar';
 export { default as UserProfileSection } from '../../features/public/components/UserProfileSection';
-export { default as EditUserProfileSection } from './EditUserProfileSection';
+export { EditUserProfileSection } from '../../features/public/components/EditUserProfileSection';

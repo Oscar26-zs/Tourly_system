@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { useForm } from '@tanstack/react-form';
-import { FieldInfo } from '../../../shared/components';
+import { FieldInfo, Navbar } from '../../../shared/components';
 import { verifyResetCode, confirmPasswordResetWithCode } from "../../../services/confirmPasswordReset";
 
 export default function ResetPassword() {
@@ -62,21 +62,24 @@ export default function ResetPassword() {
   // Página de verificación
   if (verifying) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#1E1E1E' }}>
-        <div className="w-full max-w-md">
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
-               style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4"
-                   style={{ backgroundColor: '#228B22' }}>
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+      <div className="min-h-screen" style={{ backgroundColor: '#1E1E1E' }}>
+        <Navbar />
+        <div className="min-h-screen flex items-center justify-center p-4 pt-24">
+          <div className="w-full max-w-md">
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+                 style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4"
+                     style={{ backgroundColor: '#228B22' }}>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+                </div>
+                <h1 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  Verificando enlace
+                </h1>
+                <p className="text-[#B3B3B3] text-base">
+                  Por favor espera mientras verificamos tu solicitud...
+                </p>
               </div>
-              <h1 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
-                Verificando enlace
-              </h1>
-              <p className="text-[#B3B3B3] text-base">
-                Por favor espera mientras verificamos tu solicitud...
-              </p>
             </div>
           </div>
         </div>
@@ -87,34 +90,37 @@ export default function ResetPassword() {
   // Página de error
   if (verificationError && !email) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#1E1E1E' }}>
-        <div className="w-full max-w-md">
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
-               style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4"
-                   style={{ backgroundColor: '#EF4444' }}>
-                <svg width="32" height="32" fill="#ffffff" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                </svg>
+      <div className="min-h-screen" style={{ backgroundColor: '#1E1E1E' }}>
+        <Navbar />
+        <div className="min-h-screen flex items-center justify-center p-4 pt-24">
+          <div className="w-full max-w-md">
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+                 style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4"
+                     style={{ backgroundColor: '#EF4444' }}>
+                  <svg width="32" height="32" fill="#ffffff" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                  </svg>
+                </div>
+                <h1 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  Enlace inválido
+                </h1>
+                <p className="text-[#B3B3B3] text-base mb-6">
+                  {verificationError}
+                </p>
+                <Link 
+                  to="/forgot-password" 
+                  className="inline-block py-3 px-6 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105"
+                  style={{
+                    background: 'linear-gradient(135deg, #228B22 100%)',
+                    color: '#FFFFFF',
+                    fontFamily: 'Inter, sans-serif'
+                  }}
+                >
+                  Solicitar nuevo enlace
+                </Link>
               </div>
-              <h1 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
-                Enlace inválido
-              </h1>
-              <p className="text-[#B3B3B3] text-base mb-6">
-                {verificationError}
-              </p>
-              <Link 
-                to="/forgot-password" 
-                className="inline-block py-3 px-6 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105"
-                style={{
-                  background: 'linear-gradient(135deg, #228B22 100%)',
-                  color: '#FFFFFF',
-                  fontFamily: 'Inter, sans-serif'
-                }}
-              >
-                Solicitar nuevo enlace
-              </Link>
             </div>
           </div>
         </div>
@@ -125,28 +131,31 @@ export default function ResetPassword() {
   // Página de éxito
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#1E1E1E' }}>
-        <div className="w-full max-w-md">
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
-               style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6"
-                   style={{ backgroundColor: '#22C55E' }}>
-                <svg width="40" height="40" fill="#ffffff" viewBox="0 0 24 24">
-                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                </svg>
-              </div>
-              <h1 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Inter, sans-serif' }}>
-                ¡Contraseña actualizada!
-              </h1>
-              <p className="text-[#B3B3B3] text-base mb-6">
-                Tu contraseña ha sido cambiada exitosamente. Serás redirigido al login en unos segundos.
-              </p>
-              <div className="animate-pulse">
-                <div className="flex justify-center">
-                  <div className="rounded-full h-2 w-2 bg-[#228B22] mx-1"></div>
-                  <div className="rounded-full h-2 w-2 bg-[#228B22] mx-1"></div>
-                  <div className="rounded-full h-2 w-2 bg-[#228B22] mx-1"></div>
+      <div className="min-h-screen" style={{ backgroundColor: '#1E1E1E' }}>
+        <Navbar />
+        <div className="min-h-screen flex items-center justify-center p-4 pt-24">
+          <div className="w-full max-w-md">
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+                 style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6"
+                     style={{ backgroundColor: '#22C55E' }}>
+                  <svg width="40" height="40" fill="#ffffff" viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                  </svg>
+                </div>
+                <h1 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  ¡Contraseña actualizada!
+                </h1>
+                <p className="text-[#B3B3B3] text-base mb-6">
+                  Tu contraseña ha sido cambiada exitosamente. Serás redirigido al login en unos segundos.
+                </p>
+                <div className="animate-pulse">
+                  <div className="flex justify-center">
+                    <div className="rounded-full h-2 w-2 bg-[#228B22] mx-1"></div>
+                    <div className="rounded-full h-2 w-2 bg-[#228B22] mx-1"></div>
+                    <div className="rounded-full h-2 w-2 bg-[#228B22] mx-1"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -158,7 +167,9 @@ export default function ResetPassword() {
 
   // Página de formulario para nueva contraseña
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#1E1E1E' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#1E1E1E' }}>
+      <Navbar />
+      <div className="min-h-screen flex items-center justify-center p-4 pt-24">
       <div className="w-full max-w-md">
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
              style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}>
@@ -330,6 +341,7 @@ export default function ResetPassword() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

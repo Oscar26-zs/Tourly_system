@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Navbar, SimpleSidebar, UserProfileSection } from '../../../shared/components';
+import UserBookingsSection from '../components/UserBookingSection';
 
 const TouristSettings = () => {
   const [activeItem, setActiveItem] = useState('profile');
@@ -13,12 +14,7 @@ const TouristSettings = () => {
       case 'profile':
         return <UserProfileSection />;
       case 'settings':
-        return (
-          <div>
-            <h2 className="text-2xl font-bold mb-4">My Bookings</h2>
-            <p className="text-gray-300">Here you can view and manage your tour bookings.</p>
-          </div>
-        );
+        return <UserBookingsSection />;
       default:
         return <UserProfileSection />;
     }

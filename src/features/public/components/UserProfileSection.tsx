@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { User, Mail, Phone, Calendar, Shield } from 'lucide-react';
 import { useUserProfileById } from '../../../shared/hooks/useUserProfileById';
 import { useAuth } from '../../../app/providers/useAuth';
-import EditUserProfileSection from '../../../shared/components/EditUserProfileSection';
+import { EditUserProfileSection } from './EditUserProfileSection';
 
 interface UserProfileSectionProps {
   className?: string;
@@ -30,6 +30,7 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
   if (isEditing) {
     return (
       <EditUserProfileSection
+        userProfile={userProfile ?? null}
         onCancel={handleCancelEdit}
         onSave={handleSaveEdit}
         className={className}

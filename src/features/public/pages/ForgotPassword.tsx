@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from '@tanstack/react-form';
-import { FieldInfo } from '../../../shared/components';
+import { FieldInfo, Navbar } from '../../../shared/components';
 import { resetPassword } from "../../../services/resetPassword";
 
 export default function ForgotPassword() {
@@ -28,7 +28,9 @@ export default function ForgotPassword() {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#1E1E1E' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#1E1E1E' }}>
+      <Navbar />
+      <div className="min-h-screen flex items-center justify-center p-4 pt-24">
       <div className="w-full max-w-md">
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
              style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}>
@@ -157,6 +159,7 @@ export default function ForgotPassword() {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }

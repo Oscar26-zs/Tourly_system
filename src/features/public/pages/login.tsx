@@ -3,6 +3,7 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../config/firebase";
 import { getUserData } from "../../../services/userService";
+import { Navbar } from '../../../shared/components';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -108,7 +109,9 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#1E1E1E' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#1E1E1E' }}>
+      <Navbar />
+      <div className="min-h-screen flex items-center justify-center p-4 pt-24">
       <div className="w-full max-w-md">
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
              style={{ boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}>
@@ -176,6 +179,7 @@ export default function Login() {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }

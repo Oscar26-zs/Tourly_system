@@ -11,10 +11,12 @@ import ResetPassword from '../../features/public/pages/ResetPassword'
 import { TourDetailPage } from '../../features/public/pages/TourDetail'
 import BookingForm from '../../features/public/pages/BookingForm'
 import UserSettings from '../../shared/pages/UserSettings'
+import { ToastProvider } from '../../shared/components/Toast'
 
 
 const Router = () => (
   <AuthProvider>
+    <ToastProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/registerTourist" element={<TouristRegister />} />
@@ -30,6 +32,7 @@ const Router = () => (
         <Route path="/BookingForm" element={<BookingForm />} />
       </Routes>
     </BrowserRouter>
+    </ToastProvider>
   </AuthProvider>
 )
 

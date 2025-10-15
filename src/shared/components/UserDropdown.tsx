@@ -73,7 +73,7 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
             className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
           >
             <Settings className="w-4 h-4 text-green-700" />
-            <span>Configuración</span>
+            <span>Perfil</span>
           </div>
           
           <div className="border-t border-neutral-700/50"></div>

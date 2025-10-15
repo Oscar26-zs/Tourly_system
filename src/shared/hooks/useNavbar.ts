@@ -8,11 +8,29 @@ export function useNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isHostDropdownOpen, setIsHostDropdownOpen] = useState(false);
   const { user } = useAuth();
 
   const handleBecomeHost = () => {
+    // Toggle the host dropdown (desktop) or open host options (mobile)
+    setIsHostDropdownOpen(prev => !prev);
+    setIsMenuOpen(false);
+  };
+
+  const toggleHostDropdown = () => {
+    setIsHostDropdownOpen(prev => !prev);
+  };
+
+  const handleHostRegister = () => {
+    navigate('/registerGuide');
+    setIsMenuOpen(false);
+    setIsHostDropdownOpen(false);
+  };
+
+  const handleHostLogin = () => {
     navigate('/login');
     setIsMenuOpen(false);
+    setIsHostDropdownOpen(false);
   };
 
   const handleGoHome = () => {
@@ -83,5 +101,11 @@ export function useNavbar() {
     
     // Setters para control externo
     setIsDropdownOpen,
+    // Host dropdown control
+    isHostDropdownOpen,
+    setIsHostDropdownOpen,
+    toggleHostDropdown,
+    handleHostRegister,
+    handleHostLogin,
   };
 }

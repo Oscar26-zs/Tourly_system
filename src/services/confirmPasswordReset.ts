@@ -1,5 +1,5 @@
 import { confirmPasswordReset, verifyPasswordResetCode } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth } from "../app/config/firebase";
 
 /**
  * Verifica que el código de reset sea válido

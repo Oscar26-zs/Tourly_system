@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerGuide, registerGuideWithGoogle, completeGoogleGuideRegistration } from '../../../services/registerGuide';
+import { registerGuide, registerGuideWithGoogle, completeGoogleGuideRegistration } from '../services/registerGuide';
 
 export function useRegisterGuide(form: any) {
   const [currentPhase, setCurrentPhase] = useState(1);

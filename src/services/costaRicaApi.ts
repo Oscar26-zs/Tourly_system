@@ -6,7 +6,7 @@ import type {
   CantonesResponse, 
   DistritosResponse,
   CostaRicaLocation 
-} from '../types/costaRica';
+} from '../shared/types/costaRica';
 
 const BASE_URL = 'https://api-geo-cr.vercel.app';
 

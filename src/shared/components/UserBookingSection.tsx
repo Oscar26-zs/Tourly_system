@@ -1,8 +1,8 @@
 
 import { Calendar, Users, MapPin, Clock, DollarSign, AlertCircle } from 'lucide-react';
-import { useAuth } from '../../../app/providers/useAuth';
+import { useAuth } from '../../app/providers/useAuth';
 import { useUserBookings } from '../hooks/useUserBookings';
-import type { BookingStatus, UserBooking } from '../../../shared/types';
+import type { BookingStatus, UserBooking } from '../types';
 import { useNavigate } from 'react-router-dom';
 
 const UserBookingsSection = () => {

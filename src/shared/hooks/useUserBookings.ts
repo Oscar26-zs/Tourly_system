@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import type { UserBookings } from '../../../shared/types';
-import { getUserBookings } from '../../../services/getUserBookings';
+import type { UserBookings } from '../types';
+import { getUserBookings } from '../../services/getUserBookings';
 
 export const useUserBookings = (userId: string) => {
   return useQuery<UserBookings, Error>({

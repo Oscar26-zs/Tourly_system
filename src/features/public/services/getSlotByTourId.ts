@@ -1,5 +1,5 @@
 import { collection, getDocs, query } from "firebase/firestore";
-import { db } from "../../../config/firebase";
+import { db } from "../../../app/config/firebase";
 import type { Slot } from "../types/slot";
 
 export async function getSlotsByTourId(tourId: string): Promise<Slot[]> {

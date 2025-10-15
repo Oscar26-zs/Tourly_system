@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from '../providers/AuthProvider'
 import TouristRegister from '../../features/public/pages/RegisterTourist'
-import GuideRegister from '../../features/public/pages/RegisterGuide'
-import GuideOnly from '../../features/public/components/GuideOnly'
+import GuideRegister from '../../features/guide/pages/RegisterGuide'
+import GuideOnly from '../../features/guide/pages/GuideOnly'
 import Login from '../../features/public/pages/login'
 import Home from '../../features/public/pages/Home'
 import ForgotPassword from '../../features/public/pages/ForgotPassword'
 import PasswordResetSent from '../../features/public/pages/PasswordResetSent'
 import ResetPassword from '../../features/public/pages/ResetPassword'
 import { TourDetailPage } from '../../features/public/pages/TourDetail'
-import TouristSettings from '../../features/public/pages/TouristSettings'
 import BookingForm from '../../features/public/pages/BookingForm'
+import UserSettings from '../../shared/pages/UserSettings'
 
 
 const Router = () => (
@@ -26,7 +26,7 @@ const Router = () => (
         <Route path="/" element={<Home />} />
         <Route path="/tour/:tourId" element={<TourDetailPage />} />
         <Route path="/guide-only" element={<GuideOnly />} />
-        <Route path="/tourist-settings" element={<TouristSettings />} />
+        <Route path="/user-settings" element={<UserSettings />} />
         <Route path="/BookingForm" element={<BookingForm />} />
       </Routes>
     </BrowserRouter>

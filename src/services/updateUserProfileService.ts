@@ -1,6 +1,6 @@
 import { doc, updateDoc } from 'firebase/firestore';
 import { updatePassword, verifyBeforeUpdateEmail, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
-import { db, auth } from '../config/firebase';
+import { db, auth } from '../app/config/firebase';
 import type { UserProfileEdit } from '../shared/types/userProfile';
 
 // Servicio para actualizar el perfil del usuario

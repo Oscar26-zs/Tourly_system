@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerTourist, registerTouristWithGoogle, completeGoogleTouristRegistration } from '../../../services/registerTourist';
+import { registerTourist, registerTouristWithGoogle, completeGoogleTouristRegistration } from '../services/registerTourist';
 
 export function useRegisterTourist(form: any) {
   const [currentPhase, setCurrentPhase] = useState(1);

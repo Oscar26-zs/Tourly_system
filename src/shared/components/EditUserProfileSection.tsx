@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { User, Save, X, Camera } from 'lucide-react';
-import { useUserProfileEditor } from '../../../shared/hooks/useUpdateUserProfile';
-import type { UserProfile } from '../../../shared/types/userProfile';
+import { useUserProfileEditor } from '../hooks/useUpdateUserProfile';
+import type { UserProfile } from '../types/userProfile';
 
 export interface EditUserProfileSectionProps {
   userProfile: UserProfile | null;

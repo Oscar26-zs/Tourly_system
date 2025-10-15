@@ -1,5 +1,5 @@
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../config/firebase';
+import { db } from '../app/config/firebase';
 import type { UserProfile } from '../shared/types/userProfile';
 
 // Servicio para obtener un usuario por ID específico

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { User, Mail, Phone, Calendar, Shield } from 'lucide-react';
-import { useUserProfileById } from '../../../shared/hooks/useUserProfileById';
-import { useAuth } from '../../../app/providers/useAuth';
+import { useUserProfileById } from '../hooks/useUserProfileById';
+import { useAuth } from '../../app/providers/useAuth';
 import { EditUserProfileSection } from './EditUserProfileSection';
 
 interface UserProfileSectionProps {

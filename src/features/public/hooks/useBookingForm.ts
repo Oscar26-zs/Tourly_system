@@ -146,7 +146,7 @@ export function useBookingForm(slotId: string | null): UseBookingFormReturn {
         // También añadimos las keys en inglés para el nuevo modelo si se prefiere
         reservaDoc.fullName = payload.fullName;
         reservaDoc.peopleCount = payload.peopleCount;
-        reservaDoc.status = 'pending';
+        reservaDoc.status = 'confirmed';
         reservaDoc.createdAt = now.toISOString();
 
         tx.set(newReservaRef, reservaDoc);

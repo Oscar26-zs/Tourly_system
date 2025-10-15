@@ -62,7 +62,7 @@ export default function TouristRegister() {
             </svg>
           </div>
           <h1 className="text-3xl font-bold text-white mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
-            Turista
+            Become a Tourist
           </h1>
           <p className="text-[#B3B3B3] text-base">Register to join Tourly as a tourist</p>
           

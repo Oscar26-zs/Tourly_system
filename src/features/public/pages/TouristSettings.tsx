@@ -3,7 +3,8 @@ import { Navbar, SimpleSidebar, UserProfileSection } from '../../../shared/compo
 import UserBookingsSection from '../components/UserBookingSection';
 
 const TouristSettings = () => {
-  const [activeItem, setActiveItem] = useState('profile');
+  // Show bookings by default
+  const [activeItem, setActiveItem] = useState('settings');
 
   const handleItemClick = (itemId: string) => {
     setActiveItem(itemId);
@@ -11,12 +12,12 @@ const TouristSettings = () => {
 
   const renderContent = () => {
     switch (activeItem) {
-      case 'profile':
-        return <UserProfileSection />;
       case 'settings':
         return <UserBookingsSection />;
-      default:
+      case 'profile':
         return <UserProfileSection />;
+      default:
+        return <UserBookingsSection />;
     }
   };
 

@@ -18,6 +18,25 @@ export const getUserProfileById = async (userId: string): Promise<UserProfile | 
 
     const userData = userDoc.data();
     
+    const parseDate = (val: any): Date | undefined => {
+      if (!val) return undefined;
+      // Firestore Timestamp has toDate()
+      if (typeof val?.toDate === 'function') return val.toDate();
+      // ISO string
+      if (typeof val === 'string') {
+        const d = new Date(val);
+        return isNaN(d.getTime()) ? undefined : d;
+      }
+      // number (milliseconds since epoch)
+      if (typeof val === 'number') {
+        const d = new Date(val);
+        return isNaN(d.getTime()) ? undefined : d;
+      }
+      // Date instance
+      if (val instanceof Date) return val;
+      return undefined;
+    };
+
     return {
       idUsuario: userDoc.id,
       nombreCompleto: userData.nombreCompleto || '',
@@ -28,8 +47,8 @@ export const getUserProfileById = async (userId: string): Promise<UserProfile | 
       idRol: userData.idRol || 1,
       activo: userData.activo !== undefined ? userData.activo : true,
       descripcion: userData.descripcion || '',
-      fechaCreacion: userData.fechaCreacion?.toDate(),
-      fechaActualizacion: userData.fechaActualizacion?.toDate(),
+      fechaCreacion: parseDate(userData.fechaCreacion),
+      fechaActualizacion: parseDate(userData.fechaActualizacion),
     } as UserProfile;
 
   } catch (error) {

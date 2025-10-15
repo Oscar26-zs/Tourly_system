@@ -10,6 +10,8 @@ import PasswordResetSent from '../../features/public/pages/PasswordResetSent'
 import ResetPassword from '../../features/public/pages/ResetPassword'
 import { TourDetailPage } from '../../features/public/pages/TourDetail'
 import TouristSettings from '../../features/public/pages/TouristSettings'
+import BookingForm from '../../features/public/pages/BookingForm'
+
 
 const Router = () => (
   <AuthProvider>
@@ -25,6 +27,7 @@ const Router = () => (
         <Route path="/tour/:tourId" element={<TourDetailPage />} />
         <Route path="/guide-only" element={<GuideOnly />} />
         <Route path="/tourist-settings" element={<TouristSettings />} />
+        <Route path="/BookingForm" element={<BookingForm />} />
       </Routes>
     </BrowserRouter>
   </AuthProvider>

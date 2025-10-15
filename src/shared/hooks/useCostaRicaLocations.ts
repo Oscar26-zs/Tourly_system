@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getCombinedLocations, filterCostaRicaLocations } from '../services/costaRicaApi';
+import { getCombinedLocations, filterCostaRicaLocations } from '../../services/costaRicaApi';
 import type { CostaRicaLocation } from '../types/costaRica';
 
 interface UseCostaRicaLocationsResult {

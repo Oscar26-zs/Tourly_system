@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { db } from '../config/firebase';
+import { db } from '../../../app/config/firebase';
 import {
   doc,
   getDoc,
@@ -7,7 +7,7 @@ import {
   collection,
   Timestamp,
 } from 'firebase/firestore';
-import type { Slot } from '../features/public/types/slot';
+import type { Slot } from '../types/slot';
 
 export type BookingStatus = 'pending' | 'confirmed' | 'cancelled';
 

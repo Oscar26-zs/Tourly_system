@@ -29,7 +29,7 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
   }, [isOpen, onClose]);
 
   const handleSettings = () => {
-    navigate('/tourist-settings');
+    navigate('/user-settings');
   };
 
   const handleLogout = async () => {

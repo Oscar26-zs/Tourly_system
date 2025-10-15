@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useTours } from './useTours';
+import { useTours } from '../../features/public/hooks/useTours';
 
 export const useCities = () => {
   const { data: tours = [], isLoading, error } = useTours();

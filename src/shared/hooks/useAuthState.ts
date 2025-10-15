@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import firebaseApp from "../../config/firebase";
+import firebaseApp from "../../app/config/firebase";
 
 export function useAuthState() {
   const [user, setUser] = useState<import("firebase/firestore").DocumentData | null>(null);

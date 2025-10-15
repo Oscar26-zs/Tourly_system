@@ -4,7 +4,7 @@ import { Navbar, FieldInfo } from '../../../shared/components';
 import CalendarPicker from '../../../shared/components/CalendarPicker';
 import { ToastProvider } from '../../../shared/components/Toast';
 import { useForm } from '@tanstack/react-form';
-import useBookingForm from '../../../hooks/useBookingForm';
+import useBookingForm from '../hooks/useBookingForm';
 function useQuery() {
   const { search } = useLocation();
   return useMemo(() => new URLSearchParams(search), [search]);
@@ -30,7 +30,7 @@ export default function BookingFormPage() {
       setSlotsError(null);
       try {
         const { collection, getDocs } = await import('firebase/firestore');
-        const { db } = await import('../../../config/firebase');
+        const { db } = await import('../../../app/config/firebase');
         const col = collection(db, 'slot');
         const snap = await getDocs(col);
         const list = snap.docs.map(d => ({ id: d.id, ...(d.data() as any) }));

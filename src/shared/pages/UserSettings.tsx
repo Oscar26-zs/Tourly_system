@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Navbar, SimpleSidebar, UserProfileSection } from '../../../shared/components';
+import { Navbar, SimpleSidebar, UserProfileSection } from '../components';
 import UserBookingsSection from '../components/UserBookingSection';
 
-const TouristSettings = () => {
+const UserSettings = () => {
   // Show bookings by default
   const [activeItem, setActiveItem] = useState('settings');
 
@@ -39,4 +39,4 @@ const TouristSettings = () => {
   )
 }
 
-export default TouristSettings
+export default UserSettings

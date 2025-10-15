@@ -1,8 +1,8 @@
 import { useForm } from '@tanstack/react-form';
 import type { AnyFieldApi } from '@tanstack/react-form';
 import { useRegisterTourist } from '../hooks/useRegisterTourist';
-import { RegisterGuideStepOne } from '../components/RegisterGuideStepOne';
-import { RegisterGuideStepTwo } from '../components/RegisterGuideStepTwo';
+import { RegisterGuideStepOne } from '../../guide/components/RegisterGuideStepOne';
+import { RegisterGuideStepTwo } from '../../guide/components/RegisterGuideStepTwo';
 import { Navbar } from '../../../shared/components';
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {

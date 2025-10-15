@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
-import { auth } from "../../../config/firebase";
+import { auth } from "../../../app/config/firebase";
 import { getUserData } from "../../../services/userService";
 import { Navbar } from '../../../shared/components';
 

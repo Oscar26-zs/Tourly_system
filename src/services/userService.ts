@@ -1,5 +1,5 @@
 import { doc, getDoc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../config/firebase";
+import { db } from "../app/config/firebase";
 import type { User as FirebaseUser } from "firebase/auth";
 
 /**

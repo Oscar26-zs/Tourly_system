@@ -1,5 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../config/firebase";
+import { db } from "../../../app/config/firebase";
 import type { Tour } from "../types/tour";
 
 export async function getTourById(tourId: string): Promise<Tour | null> {

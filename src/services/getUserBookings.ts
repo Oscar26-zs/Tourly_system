@@ -5,7 +5,7 @@ import {
   getDocs
 } from 'firebase/firestore';
 import type { UserBookings } from '../shared/types';
-import { db } from '../config/firebase';
+import { db } from '../app/config/firebase';
 
 export const getUserBookings = async (userId: string): Promise<UserBookings> => {
   if (!userId) {

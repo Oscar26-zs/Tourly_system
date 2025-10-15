@@ -1,7 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import firebaseApp from "../config/firebase";
-import type { User } from "../shared/types/users";
+import firebaseApp from "../../../app/config/firebase";
+import type { User } from "../../../shared/types/users";
 
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);

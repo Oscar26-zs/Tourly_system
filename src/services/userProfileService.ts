@@ -1,5 +1,5 @@
 import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore';
-import { db, auth } from '../config/firebase';
+import { db, auth } from '../app/config/firebase';
 import type { UserProfile, UserProfileEdit } from '../shared/types/userProfile';
 
 // Servicio para obtener el perfil del usuario actual

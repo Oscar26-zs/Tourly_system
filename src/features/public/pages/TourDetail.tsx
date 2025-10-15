@@ -9,7 +9,7 @@ import { TourItinerary } from '../components/TourItinerary';
 import { TourReviews } from '../components/TourReviews';
 import { TourBookingButtons } from '../components/TourBookingButtons';
 import { TourFeatures } from '../components/TourFeatures';
-import { Navbar } from '../../../shared/components';
+import { Navbar, Footer } from '../../../shared/components';
 
 export function TourDetailPage() {
   const { tourId } = useParams<{ tourId: string }>();
@@ -75,8 +75,9 @@ export function TourDetailPage() {
     }
   };
 
-   return (
-    <div className="tour-detail bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 min-h-screen pt-24">
+  return (
+   <>
+   <div className="tour-detail bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 min-h-screen pt-24">
       <Navbar/>
       
       {/* Galería de imágenes */}
@@ -118,5 +119,7 @@ export function TourDetailPage() {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

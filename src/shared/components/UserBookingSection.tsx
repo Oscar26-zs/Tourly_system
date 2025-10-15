@@ -1,11 +1,9 @@
 import { Calendar, Users, MapPin, Clock, DollarSign, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../app/providers/useAuth';
-import { useUserBookings } from '../hooks/useUserBookings';
+import { useUserBookings, useCancelBooking } from '../hooks/useUserBookings';
 import type { BookingStatus, UserBooking } from '../types';
 import { useNavigate } from 'react-router-dom';
-import { useToast } from '../components/Toast'; // Ajusta la ruta según tu estructura
-import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../../app/config/firebase';
+import { useToast } from '../components/Toast';
 
 const UserBookingsSection = () => {
   const { user } = useAuth();
@@ -89,18 +87,15 @@ const UserBookingsSection = () => {
 
   // Componente de tarjeta de reserva
   const BookingCard = ({ booking }: { booking: UserBooking }) => {
+    const { user } = useAuth();
+    const { cancelBooking } = useCancelBooking();
+    
     const handleCancelBooking = async () => {
-      try {
-        // Asegurar que tenemos un ID válido
-        const bookingId = booking.id || booking.idReserva;
-        if (!bookingId) {
-          throw new Error('No booking ID found');
-        }
+      const bookingId = booking.id || booking.idReserva;
+      if (!bookingId || !user?.uid) return;
 
-        const bookingRef = doc(db, 'reserva', bookingId);
-        await updateDoc(bookingRef, {
-          estado: 'cancelled'
-        });
+      try {
+        await cancelBooking(bookingId, user.uid);
         
         toast.show({
           id: `cancel-${bookingId}`,
@@ -110,7 +105,7 @@ const UserBookingsSection = () => {
         });
       } catch (error) {
         toast.show({
-          id: `error-${booking.idReserva}`,
+          id: `error-${bookingId}`,
           title: 'Error Cancelling Booking',
           description: 'There was an error cancelling your booking. Please try again.',
           duration: 5000
@@ -213,11 +208,11 @@ const UserBookingsSection = () => {
             </p>
             <p className="text-sm text-neutral-400">Confirmed</p>
           </div>
-          <div className="bg-neutral-800/50 rounded-lg p-4 text-center">
-            <p className="text-2xl font-bold text-yellow-400">
-              {bookings.filter(b => b.estado === 'pending').length}
+           <div className="bg-neutral-800/50 rounded-lg p-4 text-center">
+            <p className="text-2xl font-bold text-red-400">
+              {bookings.filter(b => b.estado === 'cancelled').length}
             </p>
-            <p className="text-sm text-neutral-400">Pending</p>
+            <p className="text-sm text-neutral-400">Cancelled</p>
           </div>
           <div className="bg-neutral-800/50 rounded-lg p-4 text-center">
             <p className="text-2xl font-bold text-green-400">

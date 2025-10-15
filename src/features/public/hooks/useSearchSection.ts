@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import type { SearchFilters } from '../types/filters';
-import { useCostaRicaLocations } from './useCostaRicaLocations';
+import { useCostaRicaLocations } from '../../../shared/hooks/useCostaRicaLocations';
 
 interface UseSearchSectionProps {
   onFiltersChange: (filters: SearchFilters) => void;

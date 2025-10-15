@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { MapPin, LogIn, LogOut } from 'lucide-react';
+import { LogIn, LogOut, Settings, UserPlus } from 'lucide-react';
 import { useAuth } from '../../app/providers/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { logoutService } from '../../services/logoutService';
@@ -28,8 +28,8 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen, onClose]);
 
-  const handleMyTours = () => {
-    onClose();
+  const handleSettings = () => {
+    navigate('/user-settings');
   };
 
   const handleLogout = async () => {
@@ -40,6 +40,11 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }
+  };
+
+  const handleRegister = () => {
+    onClose();
+    navigate('/registerTourist');
   };
 
   const getUserName = () => {
@@ -64,11 +69,11 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
           </div>
           
           <div
-            onClick={handleMyTours}
+            onClick={handleSettings}
             className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
           >
-            <MapPin className="w-4 h-4 text-green-700" />
-            <span>Mis Tours</span>
+            <Settings className="w-4 h-4 text-green-700" />
+            <span>Perfil</span>
           </div>
           
           <div className="border-t border-neutral-700/50"></div>
@@ -89,6 +94,13 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
           >
             <LogIn className="w-4 h-4 text-green-700" />
             <span>Iniciar Sesión</span>
+          </div>
+          <div
+            onClick={handleRegister}
+            className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
+          >
+            <UserPlus className="w-4 h-4 text-green-700" />
+            <span>Registrarse</span>
           </div>
         </div>
       )}

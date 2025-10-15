@@ -1,4 +1,4 @@
-import { Globe, User, Menu, X, LogOut, LogIn, Languages } from 'lucide-react';
+import { Globe, User, Menu, X, LogOut, LogIn, Languages, UserPlus } from 'lucide-react';
 import UserDropdown from './UserDropdown';
 import { useNavbar } from '../hooks/useNavbar';
 
@@ -9,6 +9,7 @@ export default function Navbar() {
     isLanguageOpen,
     isDropdownOpen,
     user,
+    isHostDropdownOpen,
     
     // Handlers
     handleBecomeHost,
@@ -16,6 +17,8 @@ export default function Navbar() {
     handleLogin,
     handleLogout,
     handleLanguageChange,
+  handleHostRegister,
+  handleHostLogin,
     
     // Toggle functions
     toggleMenu,
@@ -26,21 +29,45 @@ export default function Navbar() {
     getUserName,
     
     // Setters
-    setIsDropdownOpen,
+  setIsDropdownOpen,
   } = useNavbar();
+  
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 w-full h-16 md:h-24 px-4 py-2.5 bg-gradient-to-r from-neutral-900/95 via-neutral-800/95 to-neutral-900/95 backdrop-blur-xl border-b border-green-700/20 flex justify-center items-center">
       <div className="w-full max-w-7xl flex justify-between items-center">
         
-        {/* Logo - Become a host button (Desktop) */}
-        <div className="hidden md:flex justify-center items-center gap-1">
+  {/* Logo - Become a host button (Desktop) */}
+  <div className="hidden md:flex justify-center items-center gap-1 relative">
           <button 
             onClick={handleBecomeHost}
             className="text-white text-xl lg:text-2xl font-medium font-inter hover:text-green-400 hover:cursor-pointer hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 cursor-pointer px-2 py-1 rounded-md"
           >
             Become a host
           </button>
+          {/* Host dropdown for desktop */}
+          {/* The dropdown will be positioned relative to this container */}
+          {isHostDropdownOpen && (
+            <div className="absolute left-0 top-full mt-2 w-56 bg-neutral-900 border border-green-700/20 rounded-lg shadow-xl z-50">
+              <div className="py-2">
+                <div
+                  onClick={handleHostRegister}
+                  className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
+                >
+                  <UserPlus className="w-4 h-4 text-green-700" />
+                  <span>Registrarse</span>
+                </div>
+
+                <div
+                  onClick={handleHostLogin}
+                  className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
+                >
+                  <LogIn className="w-4 h-4 text-green-700" />
+                  <span>Iniciar Sesión</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Navigation Links - Home button (Always visible) */}
@@ -105,6 +132,25 @@ export default function Navbar() {
             >
               Become a host
             </button>
+
+            {/* Host options for mobile */}
+            <div className="pl-4">
+              <button
+                onClick={handleHostRegister}
+                className="w-full flex items-center gap-3 text-left text-white hover:text-green-400 hover:bg-green-700/10 transition-all duration-200 px-4 py-3 rounded-md"
+              >
+                <UserPlus className="w-4 h-4" />
+                <span>Registrarse</span>
+              </button>
+
+              <button
+                onClick={handleHostLogin}
+                className="w-full flex items-center gap-3 text-left text-white hover:text-green-400 hover:bg-green-700/10 transition-all duration-200 px-4 py-3 rounded-md"
+              >
+                <LogIn className="w-4 h-4" />
+                <span>Iniciar Sesión</span>
+              </button>
+            </div>
 
             <div className="border-t border-neutral-700/30 my-2"></div>
 

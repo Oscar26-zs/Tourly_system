@@ -1,7 +1,7 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import firebaseApp from "../config/firebase";
-import type { User } from "../shared/types/users";
+import firebaseApp from "../../../app/config/firebase";
+import type { User } from "../../../shared/types/users";
 
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
@@ -28,7 +28,18 @@ export async function completeGoogleGuideRegistration(userUid: string, userData:
 
 export async function registerGuide(userData: Omit<User, "idUsuario" | "activo"> & { password: string }) {
   // Crear usuario en Auth
-  const userCredential = await createUserWithEmailAndPassword(auth, userData.email, userData.password);
+  let userCredential;
+  try {
+    userCredential = await createUserWithEmailAndPassword(auth, userData.email, userData.password);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error creating auth user (guide):', {
+      code: (error as any)?.code,
+      message: (error as any)?.message,
+      raw: error,
+    });
+    throw error;
+  }
 
   // Guardar datos en Firestore
   const userDoc: User = {
@@ -63,7 +74,33 @@ export async function registerGuideWithGoogle() {
     // Solo retornar los datos del usuario de Google, sin crear documento en Firestore
     return { user };
   } catch (error) {
-    console.error("Error during Google registration:", error);
+    // Better logging
+    // eslint-disable-next-line no-console
+    console.error('Error during Google registration (guide):', {
+      code: (error as any)?.code,
+      message: (error as any)?.message,
+      customData: (error as any)?.customData,
+      raw: error,
+    });
+
+    const code = (error as any)?.code;
+    if (
+      code === 'auth/cancelled-popup-request' ||
+      code === 'auth/popup-closed-by-user' ||
+      code === 'auth/operation-not-supported-in-this-environment'
+    ) {
+      try {
+        // eslint-disable-next-line no-console
+        console.info('Falling back to signInWithRedirect due to popup issue (guide)');
+        await signInWithRedirect(auth, googleProvider);
+        return { redirect: true };
+      } catch (redirectError) {
+        // eslint-disable-next-line no-console
+        console.error('Redirect fallback also failed (guide):', redirectError);
+        throw redirectError;
+      }
+    }
+
     throw error;
   }
 }

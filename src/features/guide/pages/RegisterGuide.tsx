@@ -3,6 +3,7 @@ import type { AnyFieldApi } from '@tanstack/react-form';
 import { useRegisterGuide } from '../hooks/useRegisterGuide';
 import { RegisterGuideStepOne } from '../components/RegisterGuideStepOne';
 import { RegisterGuideStepTwo } from '../components/RegisterGuideStepTwo';
+import { Navbar } from '../../../shared/components';
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -48,7 +49,9 @@ export default function RegisterGuide() {
   } = registerGuideLogic;
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#1E1E1E' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#1E1E1E' }}>
+      <Navbar />
+      <div className="min-h-screen flex items-center justify-center p-4 pt-24">
       <div className="w-full max-w-4xl">
         {/* Header Section */}
         <div className="text-center mb-8">
@@ -173,6 +176,7 @@ export default function RegisterGuide() {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }

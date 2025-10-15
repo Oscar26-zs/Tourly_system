@@ -1,5 +1,5 @@
 import { collection, query, orderBy, onSnapshot, type Unsubscribe } from 'firebase/firestore';
-import { db } from '../../../config/firebase';
+import { db } from '../../../app/config/firebase';
 import type { Review } from '../types/tour';
 
 export const getReviewsByTour = {

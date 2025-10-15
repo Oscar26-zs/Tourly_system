@@ -1,5 +1,5 @@
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth } from "../app/config/firebase";
 
 /**
  * Envía un email de recuperación de contraseña al usuario

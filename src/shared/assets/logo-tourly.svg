@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="40" viewBox="0 0 160 40" fill="none">
+  <rect width="160" height="40" rx="6" fill="transparent" />
+  <circle cx="18" cy="20" r="12" fill="#16A34A" />
+  <path d="M12 20a6 6 0 1 0 12 0 6 6 0 1 0-12 0z" fill="#05261A" opacity="0.06"/>
+  <text x="40" y="26" font-family="Inter, sans-serif" font-size="16" fill="#FFFFFF" font-weight="600">Tourly</text>
+</svg>

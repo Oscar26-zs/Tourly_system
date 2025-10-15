@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navbar } from '../../../shared/components';
+import { Navbar, Footer } from '../../../shared/components';
 import HeroSection from '../components/HeroSection';
 import SearchSection from '../components/SearchSection';
 import StatsSection from '../components/StatsSection';
@@ -31,6 +31,7 @@ export default function Home() {
       <div className="relative z-10">
         <TourGrid filters={filters} />
       </div>
+        <Footer />
     </div>
   );
 }

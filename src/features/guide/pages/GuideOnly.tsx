@@ -62,14 +62,11 @@ export default function GuideOnly() {
         <SimpleSidebar variant="guide" activeItem={activeItem} onItemClick={handleItemClick} />
         <div className="flex-1 min-h-screen flex flex-col">
           <Navbar hideBecomeHost />
-          <main className="p-6 flex-1">
-            <h1 className="text-2xl font-semibold mb-4">Panel de guía</h1>
-          </main>
-          <div className="flex-1 p-8">
+        <main className="p-36 flex-1">
             <div className="max-w-4xl mx-auto">
               {renderContent()}
             </div>
-          </div>
+          </main>
         </div>
       </div>
     </div>

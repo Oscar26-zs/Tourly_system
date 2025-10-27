@@ -73,7 +73,7 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
             className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
           >
             <Settings className="w-4 h-4 text-green-700" />
-            <span>Perfil</span>
+            <span>Profile</span>
           </div>
           
           <div className="border-t border-neutral-700/50"></div>
@@ -83,7 +83,7 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
             className="px-4 py-3 text-white hover:bg-red-600/20 cursor-pointer flex items-center gap-3"
           >
             <LogOut className="w-4 h-4 text-red-500" />
-            <span>Cerrar Sesión</span>
+            <span>Log Out</span>
           </div>
         </div>
       ) : (
@@ -93,14 +93,14 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
             className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
           >
             <LogIn className="w-4 h-4 text-green-700" />
-            <span>Iniciar Sesión</span>
+            <span>Log In</span>
           </div>
           <div
             onClick={handleRegister}
             className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
           >
             <UserPlus className="w-4 h-4 text-green-700" />
-            <span>Registrarse</span>
+            <span>Sign Up</span>
           </div>
         </div>
       )}

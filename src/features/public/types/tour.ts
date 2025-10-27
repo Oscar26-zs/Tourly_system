@@ -1,4 +1,5 @@
 export interface Tour {
+  title: ReactNode;
   id: string;
   Activo: boolean;
   cantidadReseñas: number;

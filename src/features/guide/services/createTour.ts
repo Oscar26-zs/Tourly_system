@@ -57,9 +57,25 @@ export async function createTour(input: CreateTourInput): Promise<string> {
       fotos: Array.isArray(input.fotos) ? input.fotos : input.fotos ? [input.fotos] : [],
       incluye: Array.isArray(input.incluye) ? input.incluye : input.incluye ? [input.incluye] : [],
       noIncluye: Array.isArray(input.noIncluye) ? input.noIncluye : input.noIncluye ? [input.noIncluye] : [],
-      puntoEncuentro: input.puntoEncuentro ?? "",
-      Activo: typeof input.Activo === "boolean" ? input.Activo : true,
-      itinerary: input.itinerary ?? [],
+  puntoEncuentro: input.puntoEncuentro ?? "",
+  Activo: typeof input.Activo === "boolean" ? input.Activo : true,
+      // Ensure itinerary is stored as a plain array of objects even if caller passed an object-like map
+      // (sometimes form libraries or serialization may produce {0: {...}, 1: {...}})
+      ...(Array.isArray(input.itinerary)
+        ? { itinerary: input.itinerary.map((it) => ({
+            step: String((it as any).step ?? ""),
+            title: String((it as any).title ?? ""),
+            duration: String((it as any).duration ?? ""),
+            description: String((it as any).description ?? ""),
+          })) }
+        : input.itinerary
+        ? { itinerary: Object.values(input.itinerary as any).map((it: any) => ({
+            step: String(it?.step ?? ""),
+            title: String(it?.title ?? ""),
+            duration: String(it?.duration ?? ""),
+            description: String(it?.description ?? ""),
+          })) }
+        : { itinerary: [] }),
       highlights: input.highlights ?? [],
       ratingPromedio: input.ratingPromedio ?? 0,
       cantidadReseñas: input.cantidadReseñas ?? 0,

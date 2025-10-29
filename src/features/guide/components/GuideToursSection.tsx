@@ -5,7 +5,7 @@ import type { Tour } from "../../public/types/tour";
 import { useGuideTours } from "../hooks/useToursByGuide";
 import TourEditSheet from "./TourEditSheet";
 
-export default function GuideToursSection({ guideId }: { guideId?: string | null }) {
+export default function GuideToursSection({ guideId, onCreate }: { guideId?: string | null; onCreate?: () => void }) {
   const navigate = useNavigate();
   const { data: tours = [], isLoading, isError, error, refetch } = useGuideTours(guideId);
 
@@ -21,7 +21,10 @@ export default function GuideToursSection({ guideId }: { guideId?: string | null
         <h2 className="text-xl font-semibold">My tours</h2>
         <div className="flex gap-2">
           <button
-            onClick={() => navigate("/guide/tours/new")}
+            onClick={() => {
+              if (onCreate) onCreate();
+              else navigate("/guide/tours/new");
+            }}
             className="px-3 py-1 bg-green-700 text-white rounded-md hover:bg-green-600"
           >
             Create tour
@@ -106,4 +109,3 @@ export default function GuideToursSection({ guideId }: { guideId?: string | null
     </section>
   );
 }
-// ...existing code...

@@ -4,6 +4,7 @@ import { SimpleSidebar, Navbar } from "../../../shared/components";
 import { useAuthState } from "../../../shared/hooks/useAuthState";
 import { Navigate } from "react-router-dom";
 import GuideToursSection from "../components/GuideToursSection";
+import CreateTour from "../components/CreateTour";
 
 type User = {
   idRol: number;
@@ -33,28 +34,6 @@ export default function GuideOnly() {
     setActiveItem(itemId);
   };
 
-  const renderContent = () => {
-    switch (activeItem) {
-      case 'tours':
-        return <GuideToursSection guideId={guideId} />;
-      case 'config':
-        return (
-          <section>
-            <h2 className="text-lg font-medium mb-2">Configuración</h2>
-            <div className="text-zinc-400">Aquí van las opciones de configuración del guía.</div>
-          </section>
-        );
-      case 'profile':
-        return (
-          <section>
-            <h2 className="text-lg font-medium mb-2">Perfil</h2>
-            <div className="text-zinc-400">Información del perfil del guía.</div>
-          </section>
-        );
-      default:
-        return <GuideToursSection guideId={guideId} />;
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-neutral-900/95 via-neutral-800/95 to-neutral-900/95 text-white">
@@ -62,9 +41,30 @@ export default function GuideOnly() {
         <SimpleSidebar variant="guide" activeItem={activeItem} onItemClick={handleItemClick} />
         <div className="flex-1 min-h-screen flex flex-col">
           <Navbar hideBecomeHost />
-        <main className="p-36 flex-1">
+
+          <main className="p-6 flex-1">
             <div className="max-w-4xl mx-auto">
-              {renderContent()}
+              {activeItem === 'tours' && (
+                <GuideToursSection guideId={guideId} onCreate={() => setActiveItem('create')} />
+              )}
+
+              {activeItem === 'create' && (
+                <CreateTour guideId={guideId} onCreated={() => setActiveItem('tours')} />
+              )}
+
+              {activeItem === 'config' && (
+                <section>
+                  <h2 className="text-lg font-medium mb-2">Configuración</h2>
+                  <div className="text-zinc-400">Aquí van las opciones de configuración del guía.</div>
+                </section>
+              )}
+
+              {activeItem === 'profile' && (
+                <section>
+                  <h2 className="text-lg font-medium mb-2">Perfil</h2>
+                  <div className="text-zinc-400">Información del perfil del guía.</div>
+                </section>
+              )}
             </div>
           </main>
         </div>

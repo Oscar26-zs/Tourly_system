@@ -42,7 +42,8 @@ export default function GuideOnly() {
         <div className="flex-1 min-h-screen flex flex-col">
           <Navbar hideBecomeHost />
 
-          <main className="p-6 flex-1">
+          {/* add extra top padding so content isn't hidden behind the navbar */}
+          <main className="pt-20 md:pt-32 p-6 flex-1">
             <div className="max-w-4xl mx-auto">
               {activeItem === 'tours' && (
                 <GuideToursSection guideId={guideId} onCreate={() => setActiveItem('create')} />

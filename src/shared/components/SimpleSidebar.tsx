@@ -67,7 +67,7 @@ export default function SimpleSidebar({
     };
 
   return (
-    <div className="w-64 bg-gradient-to-r from-neutral-900/95 via-neutral-800/95 to-neutral-900/95 backdrop-blur-xl text-white min-h-screen border-r border-green-700/20 flex flex-col">
+    <div className="w-64 bg-gradient-to-r pt-24 from-neutral-900/95 via-neutral-800/95 to-neutral-900/95 backdrop-blur-xl text-white min-h-screen border-r border-green-700/20 flex flex-col">
       {/* Sidebar Header */}
       <div className="p-6 border-b border-green-700/20">
         <h2 className="text-lg font-semibold">

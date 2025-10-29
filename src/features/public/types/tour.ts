@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export interface Tour {
   title: ReactNode;
   id: string;
@@ -17,10 +19,6 @@ export interface Tour {
   puntoEncuentro: string;
   ratingPromedio: number;
   titulo: string;
-  ubicacion: {
-    lat: number;
-    lng: number;
-  };
   itinerary?: ItineraryItem[];
   highlights?: string[];
 }

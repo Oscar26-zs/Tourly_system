@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
-import { uploadImageFile } from "../services/uploadImage";
 import { useCreateTour } from "../hooks/useCreateTour";
 import type { CreateTourInput } from "../services/createTour";
+import { uploadImageCloudinary } from "../services/uploadImage";
 
 type UseCreateTourFormProps = {
   guideId?: string | null;
@@ -142,8 +142,7 @@ export function useCreateTourForm({ guideId: guideIdProp, onCreated }: UseCreate
       let imagenes: string[] = [];
 
       if (file) {
-        const path = guideId ? `tours/${guideId}` : `uploads`;
-        const url = await uploadImageFile(file, path);
+        const url = await uploadImageCloudinary(file);
         if (url) imagenes = [url];
       }
 

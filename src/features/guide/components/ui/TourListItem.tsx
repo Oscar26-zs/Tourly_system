@@ -1,3 +1,4 @@
+// ...existing code...
 import { useState } from "react";
 import type { Tour } from "../../../public/types/tour";
 import { useToggleTourStatus } from "../../hooks/useToggleTourStatus";
@@ -7,9 +8,10 @@ import { useQuery } from "@tanstack/react-query";
 interface TourListItemProps {
   tour: Tour;
   onEdit: () => void;
+  onAddSlot: () => void; // nuevo prop opcional
 }
 
-export default function TourListItem({ tour, onEdit }: TourListItemProps) {
+export default function TourListItem({ tour, onEdit, onAddSlot }: TourListItemProps) {
   const toggleStatus = useToggleTourStatus();
   const [isToggling, setIsToggling] = useState(false);
 
@@ -146,16 +148,25 @@ export default function TourListItem({ tour, onEdit }: TourListItemProps) {
             >
               Editar
             </button>
+
+
             <button
               onClick={handleToggleStatus}
               disabled={isToggling}
               className={`px-4 py-2 rounded-md font-medium transition-colors ${
                 tour.Activo
-                  ? "bg-red-600 hover:bg-red-500 text-white"
+                  ? "bg-neutral border border-green-700 hover:bg-green-800 text-white"
                   : "bg-green-600 hover:bg-green-500 text-white"
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               {isToggling ? "..." : tour.Activo ? "Desactivar" : "Activar"}
+            </button>
+            {/* Nuevo botón Agregar slot */}
+            <button
+              onClick={onAddSlot}
+              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors font-medium"
+            >
+              Agregar slot
             </button>
           </div>
         </div>

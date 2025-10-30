@@ -5,6 +5,7 @@ import type { Tour } from "../../public/types/tour";
 import { useGuideTours } from "../hooks/useToursByGuide";
 import TourListItem from "./ui/TourListItem";
 import GuideEditTourSection from "./EditTour";
+import CreateSlot from "./CreateSlot";
 
 export default function GuideToursSection({ guideId, onCreate }: { guideId?: string | null; onCreate?: () => void }) {
   const navigate = useNavigate();
@@ -14,6 +15,9 @@ export default function GuideToursSection({ guideId, onCreate }: { guideId?: str
   const visibleTours = (tours || []).slice(0, 9);
 
   const [editingTour, setEditingTour] = useState<Tour | null>(null);
+
+  // state to open AddSlotSection for a specific tour
+  const [addingSlotForTourId, setAddingSlotForTourId] = useState<string | null>(null);
 
   // Si estamos editando un tour, mostrar el formulario de edición
   if (editingTour) {
@@ -26,6 +30,20 @@ export default function GuideToursSection({ guideId, onCreate }: { guideId?: str
           refetch();
         }}
         onCancel={() => setEditingTour(null)}
+      />
+    );
+  }
+
+  // Si estamos agregando un slot a un tour, mostrar la sección AddSlotSection
+  if (addingSlotForTourId) {
+    return (
+      <CreateSlot
+        tourId={addingSlotForTourId}
+        onCreated={() => {
+          setAddingSlotForTourId(null);
+          refetch();
+        }}
+        onCancel={() => setAddingSlotForTourId(null)}
       />
     );
   }
@@ -65,9 +83,13 @@ export default function GuideToursSection({ guideId, onCreate }: { guideId?: str
             onEdit={() => {
               setEditingTour(tour);
             }}
+            onAddSlot={() => {
+              setAddingSlotForTourId(tour.id);
+            }}
           />
         ))}
       </div>
     </section>
   );
 }
+// ...existing code...

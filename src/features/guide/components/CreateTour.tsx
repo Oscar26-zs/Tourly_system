@@ -1,3 +1,4 @@
+import { useCategories } from "../hooks/useCategories";
 import useCreateTourForm from "../hooks/useCreateTourForm";
 
 export default function GuideCreateTourSection({
@@ -18,6 +19,9 @@ export default function GuideCreateTourSection({
 
     previewUrl,handleFileChange, uploadingImage, error,success, handleSubmit,resetForm,
   } = useCreateTourForm({ guideId: guideIdProp, onCreated });
+
+  const { data: categories = [], isLoading: categoriesLoading } = useCategories();
+
 
   return (
     <section className="max-w-3xl w-full mx-auto bg-neutral-900/95 p-6 rounded-lg shadow-lg">
@@ -212,16 +216,21 @@ export default function GuideCreateTourSection({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white mb-1">
-            Category ID (optional)
-          </label>
-          <input
-            value={categoriaId}
-            onChange={(e) => setCategoriaId(e.target.value)}
-            className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-            placeholder="Category document id"
-          />
-        </div>
+    <label className="block text-sm font-medium text-white mb-1">Category</label>
+    <select
+      value={categoriaId}
+      onChange={(e) => setCategoriaId(e.target.value)}
+      className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
+    >
+      <option value="">Select category</option>
+      {categories.map((c) => (
+        <option key={c.id} value={c.id}>
+          {c.nombreCategoria}
+        </option>
+      ))}
+    </select>
+    {categoriesLoading && <div className="text-sm text-zinc-400 mt-1">Loading categories…</div>}
+  </div>
 
         {/* Includes / Not-Includes dynamic lists */}
         <div>

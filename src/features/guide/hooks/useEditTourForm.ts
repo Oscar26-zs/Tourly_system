@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { Tour } from "../../public/types/tour";
-import { uploadImageFile } from "../services/uploadImage";
 import { useUpdateTour } from "./useUpdateTour";
+import { uploadImageCloudinary } from "../services/uploadImage";
 
 type ItineraryItem = {
   step: string;
@@ -167,8 +167,7 @@ export function useEditTourForm({ tour, guideId, onUpdated }: UseEditTourFormPro
 
       // Si hay un nuevo archivo, subirlo
       if (file) {
-        const path = guideId ? `tours/${guideId}` : "uploads";
-        const url = await uploadImageFile(file, path);
+        const url = await uploadImageCloudinary(file);
         if (url) imageUrl = url;
       }
 

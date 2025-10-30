@@ -117,9 +117,13 @@ export default function AddSlotSection({
               type="number"
               min={1}
               value={capacidadMax}
-              onChange={(e) =>
-                setCapacidadMax(e.target.value === "" ? "" : Number(e.target.value))
-              }
+                onChange={(e) => {
+                  const val = e.target.value === "" ? "" : Number(e.target.value);
+                  setCapacidadMax(val);
+                  // Al poner la capacidad máxima, actualizar automáticamente
+                  // los asientos disponibles con el mismo número.
+                  setAsientosDisponibles(val);
+                }}
               className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
             />
           </div>
@@ -135,8 +139,9 @@ export default function AddSlotSection({
               onChange={(e) =>
                 setAsientosDisponibles(e.target.value === "" ? "" : Number(e.target.value))
               }
-              className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-            />
+              className="w-full px-3 py-2 bg-neutral-800 text-white rounded border hover:cursor-not-allowed border-neutral-700"
+          disabled
+          />
           </div>
         </div>
 

@@ -1,10 +1,6 @@
 import { useMutation, useQueryClient, type UseMutationOptions } from "@tanstack/react-query";
 import { createSlot, type CreateSlotInput } from "../services/createSlot";
 
-/**
- * Hook para crear un slot usando React Query.
- * Invalida la cache de "slots" y "tours" por defecto tras el éxito.
- */
 export function useCreateSlot(
   options?: UseMutationOptions<string, Error, CreateSlotInput, unknown>
 ) {

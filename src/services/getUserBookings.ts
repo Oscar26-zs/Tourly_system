@@ -52,10 +52,17 @@ export const getUserBookings = async (userId: string): Promise<UserBookings> => 
 
   const bookings: UserBooking[] = snap.docs.map((d) => {
     const data = d.data() as any;
+    // Map fields supporting both legacy (spanish) and new (english) names
+    const cantidad = Number(data.cantidadPersonas ?? data.peopleCount ?? data.people ?? 0);
+    const precioUnitario = Number(data.precioUnitario ?? data.price ?? data.precio ?? 0);
+    const totalVal = Number(data.total ?? data.precioTotal ?? data.totalPrice ?? 0);
+
     return {
       id: d.id,
       idReserva: data.idReserva || d.id,
-      cantidadPersonas: Number(data.cantidadPersonas ?? 0),
+      cantidadPersonas: cantidad,
+      // también exponemos el campo en inglés cuando exista
+      peopleCount: Number(data.peopleCount ?? data.cantidadPersonas ?? data.people ?? 0),
       fechaReserva: toDateSafe(data.fechaReserva),
       fechaCreacion: toDateSafe(data.fechaCreacion),
       fechaActualizacion: data.fechaActualizacion ? toDateSafe(data.fechaActualizacion) : undefined,
@@ -63,8 +70,11 @@ export const getUserBookings = async (userId: string): Promise<UserBookings> => 
       idSlot: idFromRefOrPath(data.idSlot),
       idTour: idFromRefOrPath(data.idTour),
       idTurista: idFromRefOrPath(data.idTurista),
-      precioUnitario: Number(data.precioUnitario ?? 0),
-      total: Number(data.total ?? 0),
+      precioUnitario: precioUnitario,
+      // legacy `total` para compatibilidad
+      total: totalVal,
+      // nuevo campo total (precioTotal)
+      precioTotal: Number(data.precioTotal ?? data.total ?? data.totalPrice ?? 0),
       estado: (data.estado as UserBooking['estado']) ?? 'pending',
     };
   });

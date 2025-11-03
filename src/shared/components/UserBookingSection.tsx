@@ -126,7 +126,7 @@ const UserBookingsSection = () => {
             </span>
           </div>
           <div className="text-right">
-            <p className="text-2xl font-bold text-green-400">${booking.total}</p>
+            <p className="text-2xl font-bold text-green-400">${booking.precioTotal}</p>
             <p className="text-sm text-neutral-400">Total Amount</p>
           </div>
         </div>
@@ -144,7 +144,7 @@ const UserBookingsSection = () => {
             <Users className="h-5 w-5 text-blue-500 mr-3" />
             <div>
               <p className="font-medium">Guests</p>
-              <p className="text-sm text-neutral-400">{booking.cantidadPersonas} person{booking.cantidadPersonas > 1 ? 's' : ''}</p>
+              <p className="text-sm text-neutral-400">{booking.peopleCount ?? 0} person{(booking.peopleCount ?? 0) !== 1 ? 's' : ''}</p>
             </div>
           </div>
 

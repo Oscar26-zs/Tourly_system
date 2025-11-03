@@ -1,13 +1,16 @@
 import { useState } from "react";
 import type { CreateSlotInput } from "../services/createSlot";
 import { useCreateSlot } from "../hooks/useCreateSlot";
+import { useAuth } from "../../../app/providers/useAuth";
 
 export default function AddSlotSection({
   tourId,
+  guideId,
   onCreated,
   onCancel,
 }: {
   tourId: string;
+  guideId?: string | null;
   onCreated?: (id: string) => void;
   onCancel?: () => void;
 }) {
@@ -36,6 +39,8 @@ export default function AddSlotSection({
       setSuccess(null);
     },
   });
+
+  const { user } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,7 +71,7 @@ export default function AddSlotSection({
       return;
     }
 
-    const payload: CreateSlotInput = {
+    const payload: CreateSlotInput & { guideId?: string } = {
       idTour: tourId,
       activo,
       asientosDisponibles: Number(asientosDisponibles),
@@ -74,6 +79,18 @@ export default function AddSlotSection({
       fechaHoraInicio: start.toISOString(),
       fechaHoraFin: end.toISOString(),
     };
+
+    // si se pasó guideId desde el padre (auth.uid), incluirlo para que el servicio guarde idGuia
+    // solo asignar si es string para cumplir la firma esperada por useCreateSlot
+    if (typeof guideId === "string" && guideId.length > 0) {
+      payload.guideId = guideId;
+    }
+
+    // incluir el nombre legible del guía cuando esté disponible (displayName || email || uid)
+    const guideName = user?.displayName ?? user?.email ?? user?.uid;
+    if (typeof guideName === "string" && guideName.length > 0) {
+      (payload as any).guideName = guideName;
+    }
 
     console.debug("AddSlotSection - payload:", payload);
     createSlot.mutate(payload);

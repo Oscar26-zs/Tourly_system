@@ -5,6 +5,7 @@ import { useAuthState } from "../../../shared/hooks/useAuthState";
 import { Navigate } from "react-router-dom";
 import GuideToursSection from "../components/GuideToursSection";
 import CreateTour from "../components/CreateTour";
+import SlotsList from "../components/SlotsList";
 
 type User = {
   idRol: number;
@@ -51,6 +52,10 @@ export default function GuideOnly() {
 
               {activeItem === 'create' && (
                 <CreateTour guideId={guideId} onCreated={() => setActiveItem('tours')} />
+              )}
+
+              {activeItem === 'slots' && (
+                <SlotsList guideId={guideId} />
               )}
 
               {activeItem === 'config' && (

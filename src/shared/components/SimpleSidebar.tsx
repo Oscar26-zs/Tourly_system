@@ -49,10 +49,10 @@ export default function SimpleSidebar({
       active: activeItem === 'tours'
     },
     {
-      id: 'bookings',
-      label: 'Bookings',
+      id: 'slots',
+      label: 'Slots',
       icon: <BookCheck className="w-5 h-5" />,
-      active: activeItem === 'bookings'
+      active: activeItem === 'slots'
     },
   ];
 

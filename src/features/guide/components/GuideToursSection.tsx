@@ -39,6 +39,7 @@ export default function GuideToursSection({ guideId, onCreate }: { guideId?: str
     return (
       <CreateSlot
         tourId={addingSlotForTourId}
+        guideId={guideId}
         onCreated={() => {
           setAddingSlotForTourId(null);
           refetch();

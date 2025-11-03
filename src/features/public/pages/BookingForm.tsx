@@ -1,10 +1,12 @@
-import { useMemo, useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Navbar, FieldInfo } from '../../../shared/components';
 import CalendarPicker from '../../../shared/components/CalendarPicker';
 import { ToastProvider } from '../../../shared/components/Toast';
 import { useForm } from '@tanstack/react-form';
 import useBookingForm from '../hooks/useBookingForm';
+import { useSlots } from '../hooks/useSlots';
+import { useAuth } from '../../../app/providers/useAuth';
 function useQuery() {
   const { search } = useLocation();
   return useMemo(() => new URLSearchParams(search), [search]);
@@ -17,36 +19,13 @@ export default function BookingFormPage() {
 
   // selected slot is provided via query param
   const selectedSlotId = slotIdFromQuery;
-  const [slots, setSlots] = useState<any[]>([]);
-  const [slotsLoading, setSlotsLoading] = useState(false);
-  const [slotsError, setSlotsError] = useState<Error | null>(null);
+  const { data: slots = [], isLoading: slotsLoading, isError: slotsErrorFlag, error: slotsErrorObj } = useSlots();
 
   const { slot, availableSeats, isLoading, error, onSubmit } = useBookingForm(selectedSlotId);
+  const { user } = useAuth();
 
   // Cargar lista de slots activos (para que el usuario pueda seleccionar uno)
-  useEffect(() => {
-    const fetchSlots = async () => {
-      setSlotsLoading(true);
-      setSlotsError(null);
-      try {
-        const { collection, getDocs } = await import('firebase/firestore');
-        const { db } = await import('../../../app/config/firebase');
-        const col = collection(db, 'slot');
-        const snap = await getDocs(col);
-        const list = snap.docs.map(d => ({ id: d.id, ...(d.data() as any) }));
-        // Filtrar solo activos
-        const active = list.filter(s => s.activo === true);
-        setSlots(active);
-      } catch (err: any) {
-        setSlotsError(err instanceof Error ? err : new Error(String(err)));
-      } finally {
-        setSlotsLoading(false);
-      }
-    };
 
-    // sólo cargar si no viene slotId por query o siempre para ofrecer selección
-    void fetchSlots();
-  }, []);
 
   const formatDateValue = (v: any) => {
     if (!v) return '';
@@ -70,8 +49,8 @@ export default function BookingFormPage() {
 
   const form = useForm({
     defaultValues: {
-      fullName: '',
-      email: '',
+      fullName: user?.displayName ?? user?.email ?? '',
+      email: user?.email ?? '',
       phone: '',
       peopleCount: 1,
       notes: '',
@@ -118,42 +97,21 @@ export default function BookingFormPage() {
                 <h1 className="text-2xl font-bold text-white mb-4">Selecciona una fecha</h1>
                 {slotsLoading ? (
                   <div className="text-neutral-400">Cargando fechas disponibles...</div>
-                ) : slotsError ? (
-                  <div className="bg-red-900/20 border border-red-700/30 rounded-lg p-4 text-red-300">Error cargando fechas: {slotsError.message}</div>
+                ) : slotsErrorFlag ? (
+                  <div className="bg-red-900/20 border border-red-700/30 rounded-lg p-4 text-red-300">Error cargando fechas: {slotsErrorObj?.message}</div>
                 ) : slots.length === 0 ? (
                   <div className="text-neutral-400">No hay fechas disponibles en este momento.</div>
                 ) : (
-                  <div>
-                    <div className="w-full max-w-md">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="w-full">
                       <CalendarPicker
                         selected={calendarDate}
                         onSelect={(d) => {
-                          setCalendarDate(d);
-                          if (!d) return;
-                          const selectedDay = d.toDateString();
-                          const matching = slots.filter((s) => {
-                            const start = s.fechaHoraInicio;
-                            let startDate: Date | null = null;
-                            if (start && typeof start === 'object' && typeof start.toDate === 'function') startDate = start.toDate();
-                            else if (start && start.seconds) startDate = new Date(start.seconds * 1000);
-                            else if (typeof start === 'string') startDate = new Date(start);
-                            if (!startDate) return false;
-                            return startDate.toDateString() === selectedDay;
-                          });
-
-                          // If no slots for the selected day, emit a toast event that will
-                          // show: "No hay tours para este dia"
-                          if (matching.length === 0) {
-                            window.dispatchEvent(new CustomEvent('booking:availability', { detail: { date: d.toISOString(), count: 0 } }));
-                            return;
-                          }
-
-                          // If there are slots, navigate directly to the booking form for the first slot.
-                          const firstSlotId = matching[0].id;
-                          if (firstSlotId) {
-                            navigate({ search: `?slotId=${firstSlotId}` });
-                            // Do NOT dispatch an availability toast when there are tours; user requested
-                            // to be taken directly to the form when a day has tours.
+                          // set selected day and show matching slots on the right column
+                          setCalendarDate(d ?? undefined);
+                          if (!d) {
+                            // dispatch availability 0 when cleared
+                            window.dispatchEvent(new CustomEvent('booking:availability', { detail: { date: null, count: 0 } }));
                           }
                         }}
                         highlightedDays={slots.map(s => {
@@ -164,6 +122,46 @@ export default function BookingFormPage() {
                           return undefined;
                         }).filter(Boolean) as Date[]}
                       />
+                    </div>
+
+                    <div className="w-full">
+                      <h3 className="text-lg font-semibold text-white mb-4">Slots disponibles</h3>
+                      {(() => {
+                        const target = calendarDate ?? new Date();
+                        const targetDay = target.toDateString();
+                        const matching = slots.filter((s) => {
+                          const start = s.fechaHoraInicio;
+                          let startDate: Date | null = null;
+                          if (start && typeof start === 'object' && typeof start.toDate === 'function') startDate = start.toDate();
+                          else if (start && start.seconds) startDate = new Date(start.seconds * 1000);
+                          else if (typeof start === 'string') startDate = new Date(start);
+                          if (!startDate) return false;
+                          return startDate.toDateString() === targetDay;
+                        });
+
+                        if (matching.length === 0) {
+                          return <div className="text-neutral-400">No hay slots para el día seleccionado.</div>;
+                        }
+
+                        return (
+                          <div className="space-y-4">
+                            {matching.map((s) => (
+                              <div key={s.id} className="bg-neutral-900/50 p-4 rounded-lg border border-neutral-800">
+                                <div className="flex items-center justify-between">
+                                  <div>
+                                    <div className="text-sm text-zinc-300">{formatDateValue(s.fechaHoraInicio)} — {formatDateValue(s.fechaHoraFin)}</div>
+                                    <div className="text-white font-semibold">{s.capacidadMax} plazas • {s.asientosDisponibles} disponibles</div>
+                                    <div className="text-sm text-zinc-400">Guía: {s.guiaName ?? (s.idGuia?.id ?? '—')}</div>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <button onClick={() => navigate({ search: `?slotId=${s.id}` })} className="px-3 py-2 bg-green-600 text-white rounded-md">Reservar</button>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })()}
                     </div>
                   </div>
                 )}

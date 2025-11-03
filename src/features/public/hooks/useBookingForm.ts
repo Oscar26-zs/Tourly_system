@@ -8,6 +8,7 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import type { Slot } from '../types/slot';
+import { useAuth } from '../../../app/providers/useAuth';
 
 export type BookingStatus = 'pending' | 'confirmed' | 'cancelled';
 
@@ -22,6 +23,9 @@ export interface Reservation {
   notes?: string;
   createdAt: string; // ISO
   status: BookingStatus;
+  precioUnitario?: number;
+  precioTotal?: number;
+  idTurista?: string;
 }
 
 type UseBookingFormReturn = {
@@ -47,6 +51,7 @@ export function useBookingForm(slotId: string | null): UseBookingFormReturn {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
+  const { user } = useAuth();
 
   const fetchSlot = useCallback(async () => {
     if (!slotId) return;
@@ -96,7 +101,12 @@ export function useBookingForm(slotId: string | null): UseBookingFormReturn {
     setError(null);
 
     try {
-      const slotRef = doc(db, 'slot', slotId);
+  const slotRef = doc(db, 'slot', slotId);
+
+  // Resolve logged user values (if available) and prefer them when present
+  const resolvedEmail = (user && user.email) ? user.email : payload.email;
+  const resolvedUserId = (user && user.uid) ? user.uid : (payload.userId ?? undefined);
+  const resolvedFullName = (user && (user.displayName || user.email)) ? (user.displayName ?? user.email ?? payload.fullName) : payload.fullName;
 
       const reservationId = await runTransaction(db, async (tx) => {
         const slotSnap = await tx.get(slotRef);
@@ -129,25 +139,44 @@ export function useBookingForm(slotId: string | null): UseBookingFormReturn {
 
         const now = new Date();
 
+        // Try to read tour price if available
+        let precioUnitario = 0;
+        try {
+          if (tourId) {
+            const tourRef = doc(db, 'tours', tourId);
+            const tourSnap = await tx.get(tourRef);
+            if (tourSnap.exists()) {
+              const tourData: any = tourSnap.data();
+              precioUnitario = Number(tourData.precio ?? tourData.price ?? 0) || 0;
+            }
+          }
+        } catch (e) {
+          // ignore and keep precioUnitario = 0
+        }
+
+        const precioTotal = precioUnitario * payload.peopleCount;
+
         const reservaDoc: any = {
           idReserva: newReservaRef.id,
           idSlot: slotId,
           idTour: tourId,
-          nombreCompleto: payload.fullName,
-          email: payload.email,
+          // Use a single canonical name field
+          fullName: resolvedFullName,
+          email: resolvedEmail || '',
           telefono: payload.phone || '',
-          cantidadPersonas: payload.peopleCount,
+          peopleCount: payload.peopleCount,
           notas: payload.notes || '',
           estado: 'pending',
+          status: 'pending',
           fechaCreacion: Timestamp.fromDate(now),
           fechaReserva: Timestamp.fromDate(now),
+          createdAt: now.toISOString(),
+          // pricing
+          precioUnitario,
+          precioTotal,
+          // tourist id (user id)
+          idTurista: resolvedUserId ?? null,
         };
-
-        // También añadimos las keys en inglés para el nuevo modelo si se prefiere
-        reservaDoc.fullName = payload.fullName;
-        reservaDoc.peopleCount = payload.peopleCount;
-        reservaDoc.status = 'confirmed';
-        reservaDoc.createdAt = now.toISOString();
 
         tx.set(newReservaRef, reservaDoc);
 

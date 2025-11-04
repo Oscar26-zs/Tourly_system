@@ -2,6 +2,7 @@ export interface Slot {
   id: string;
   idTour: any; // DocumentReference o string - Firebase puede usar ambos
   activo: boolean;
+  idGuia?: any;
   asientosDisponibles: number;
   capacidadMax: number;
   fechaHoraFin: string;

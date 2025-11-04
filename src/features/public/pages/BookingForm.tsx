@@ -24,27 +24,40 @@ export default function BookingFormPage() {
   const { slot, availableSeats, isLoading, error, onSubmit } = useBookingForm(selectedSlotId);
   const { user } = useAuth();
 
-  // Cargar lista de slots activos (para que el usuario pueda seleccionar uno)
+  // Cargar lista de slots activos (para q
 
-
-  const formatDateValue = (v: any) => {
-    if (!v) return '';
-    // Firestore Timestamp has toDate()
+  // Parse a Firestore Timestamp / ISO string / number into a Date or null
+  const parseToDate = (v: any): Date | null => {
+    if (!v) return null;
     if (typeof v === 'object') {
-      if (typeof v.toDate === 'function') {
-        return v.toDate().toLocaleString();
-      }
-      // older form: { seconds, nanoseconds }
-      if ('seconds' in v) {
-        try {
-          return new Date(v.seconds * 1000).toLocaleString();
-        } catch (_) {
-          return String(v);
-        }
-      }
+      if (typeof v.toDate === 'function') return v.toDate();
+      if ('seconds' in v && typeof v.seconds === 'number') return new Date(v.seconds * 1000);
     }
-    if (typeof v === 'number') return new Date(v).toLocaleString();
-    return String(v);
+    if (typeof v === 'number') return new Date(v);
+    if (typeof v === 'string') {
+      const d = new Date(v);
+      return isNaN(d.getTime()) ? null : d;
+    }
+    return null;
+  };
+
+  const formatSlotRange = (startRaw: any, endRaw: any) => {
+    const start = parseToDate(startRaw);
+    const end = parseToDate(endRaw);
+    if (!start && !end) return '';
+    // If same day, show short date + times; otherwise show full dates
+    const optsDate: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short' };
+    const optsTime: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' };
+    if (start && end) {
+      const sameDay = start.toDateString() === end.toDateString();
+      if (sameDay) {
+        return `${start.toLocaleDateString(undefined, optsDate)} · ${start.toLocaleTimeString(undefined, optsTime)}–${end.toLocaleTimeString(undefined, optsTime)}`;
+      }
+      return `${start.toLocaleString()} — ${end.toLocaleString()}`;
+    }
+    if (start) return `${start.toLocaleString()}`;
+    if (end) return `${end.toLocaleString()}`;
+    return '';
   };
 
   const form = useForm({
@@ -149,7 +162,7 @@ export default function BookingFormPage() {
                               <div key={s.id} className="bg-neutral-900/50 p-4 rounded-lg border border-neutral-800">
                                 <div className="flex items-center justify-between">
                                   <div>
-                                    <div className="text-sm text-zinc-300">{formatDateValue(s.fechaHoraInicio)} — {formatDateValue(s.fechaHoraFin)}</div>
+                                    <div className="text-sm text-zinc-300">{formatSlotRange(s.fechaHoraInicio, s.fechaHoraFin)}</div>
                                     <div className="text-white font-semibold">{s.capacidadMax} plazas • {s.asientosDisponibles} disponibles</div>
                                     <div className="text-sm text-zinc-400">Guía: {s.guiaName ?? (s.idGuia?.id ?? '—')}</div>
                                   </div>
@@ -231,7 +244,7 @@ export default function BookingFormPage() {
             <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
               <div className="mb-6 text-center">
                 <h1 className="text-2xl font-bold text-white">Reserva tu lugar</h1>
-                <p className="text-neutral-400">Slot: {formatDateValue(slot?.fechaHoraInicio)} - {formatDateValue(slot?.fechaHoraFin)}</p>
+                <p className="text-neutral-400">Slot: {formatSlotRange(slot?.fechaHoraInicio, slot?.fechaHoraFin)}</p>
                 <p className="text-neutral-400">Capacidad: {slot?.capacidadMax} — Asientos disponibles: {availableSeats}</p>
               </div>
 

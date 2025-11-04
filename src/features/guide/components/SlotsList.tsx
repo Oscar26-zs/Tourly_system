@@ -80,24 +80,6 @@ export default function SlotsList({ guideId }: { guideId?: string | null }) {
                 </div>
 
               </div>
-
-              <div className="mt-6 flex items-center justify-between">
-                <div className="flex gap-3">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-neutral-800 text-zinc-300 rounded-md hover:bg-neutral-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M10 3a7 7 0 100 14 7 7 0 000-14zM8 9a2 2 0 114 0 2 2 0 01-4 0z" />
-                    </svg>
-                    <span className="text-sm">Ver</span>
-                  </button>
-                  <button className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M17.414 2.586a2 2 0 010 2.828l-9.9 9.9a1 1 0 01-.464.263l-4 1a1 1 0 01-1.213-1.213l1-4a1 1 0 01.263-.464l9.9-9.9a2 2 0 012.828 0z" />
-                    </svg>
-                    <span className="text-sm">Editar</span>
-                  </button>
-                </div>
-
-              </div>
             </article>
           ))}
         </div>

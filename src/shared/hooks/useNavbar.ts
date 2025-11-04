@@ -12,7 +12,15 @@ export function useNavbar() {
   const { user } = useAuth();
 
   const handleBecomeHost = () => {
-    // Toggle the host dropdown (desktop) or open host options (mobile)
+    // If user is logged in, send them straight to the guide dashboard.
+    // Otherwise toggle the host dropdown (desktop) or open host options (mobile).
+    if (user) {
+      navigate('/guide-only');
+      setIsMenuOpen(false);
+      setIsHostDropdownOpen(false);
+      return;
+    }
+
     setIsHostDropdownOpen(prev => !prev);
     setIsMenuOpen(false);
   };

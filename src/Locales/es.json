@@ -9,4 +9,38 @@
     "spanish": "Español",
     "english": "Inglés"
   }
+  ,
+  "footer": {
+    "description": "Descubre tours y experiencias asombrosas alrededor del mundo. Reserva con confianza y crea recuerdos inolvidables.",
+    "popularDestinations": "Destinos Populares",
+    "destinations": {
+      "guanacaste": "Guanacaste",
+      "limon": "Limón",
+      "puntarenas": "Puntarenas",
+      "manuelAntonio": "Manuel Antonio",
+      "monteverde": "Monteverde"
+    },
+    "support": "Soporte",
+    "supportItems": {
+      "helpCenter": "Centro de Ayuda",
+      "contactUs": "Contáctanos",
+      "cancellationPolicy": "Política de Cancelación",
+      "safetyGuidelines": "Guías de Seguridad",
+      "termsOfService": "Términos del Servicio"
+    },
+    "stayUpdated": "Mantente al día",
+    "newsletter": {
+      "text": "Recibe las últimas ofertas e inspiración de viajes en tu bandeja de entrada.",
+      "placeholder": "Introduce tu correo",
+      "subscribe": "Suscribirse"
+    },
+    "copyright": "© {{year}} Tourly. Todos los derechos reservados."
+  },
+  "user": {
+    "profile": "Perfil",
+    "logOut": "Cerrar sesión",
+    "logIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "anonymous": "Usuario"
+  }
 }

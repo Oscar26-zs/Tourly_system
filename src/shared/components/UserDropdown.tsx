@@ -3,6 +3,7 @@ import { LogIn, LogOut, Settings, UserPlus } from 'lucide-react';
 import { useAuth } from '../../app/providers/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { logoutService } from '../../services/logoutService';
+import { useTranslation } from 'react-i18next';
 
 interface UserDropdownProps {
   isOpen: boolean;
@@ -13,6 +14,7 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -50,7 +52,7 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
   const getUserName = () => {
     if (user?.displayName) return user.displayName;
     if (user?.email) return user.email.split('@')[0];
-    return 'Usuario';
+    return t('user.anonymous');
   };
 
   if (!isOpen) return null;
@@ -73,7 +75,7 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
             className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
           >
             <Settings className="w-4 h-4 text-green-700" />
-            <span>Profile</span>
+            <span>{t('user.profile')}</span>
           </div>
           
           <div className="border-t border-neutral-700/50"></div>
@@ -83,7 +85,7 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
             className="px-4 py-3 text-white hover:bg-red-600/20 cursor-pointer flex items-center gap-3"
           >
             <LogOut className="w-4 h-4 text-red-500" />
-            <span>Log Out</span>
+            <span>{t('user.logOut')}</span>
           </div>
         </div>
       ) : (
@@ -93,14 +95,14 @@ export default function UserDropdown({ isOpen, onClose }: UserDropdownProps) {
             className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
           >
             <LogIn className="w-4 h-4 text-green-700" />
-            <span>Log In</span>
+            <span>{t('user.logIn')}</span>
           </div>
           <div
             onClick={handleRegister}
             className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
           >
             <UserPlus className="w-4 h-4 text-green-700" />
-            <span>Sign Up</span>
+            <span>{t('user.signUp')}</span>
           </div>
         </div>
       )}

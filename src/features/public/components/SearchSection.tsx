@@ -169,12 +169,12 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
           {/* Search and Clear Buttons */}
           <div className="w-full lg:w-auto flex flex-col gap-2">
             {/* Search Button */}
-            <button 
+            <button
               onClick={handleSearch}
-              className="px-3.5 py-2.5 bg-green-700 hover:bg-green-600 rounded-[10px] flex justify-center items-center gap-2.5 transition-all duration-300 shadow-lg shadow-green-700/30 transform hover:scale-105 w-full lg:w-auto"
+              className="w-full lg:w-auto inline-flex items-center justify-center gap-3 px-4 py-2 bg-green-700 hover:bg-green-600 rounded-[10px] transition-all duration-300 shadow-lg shadow-green-700/30 transform hover:scale-105 min-h-[44px]"
             >
-              <Search className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
-              <div className="text-white text-lg lg:text-xl font-medium font-poppins">{t('public.search.searchTours')}</div>
+              <Search className="w-5 h-5 lg:w-6 lg:h-6 text-white flex-shrink-0" />
+              <span className="text-white text-lg lg:text-xl font-medium font-poppins leading-none whitespace-nowrap">{t('public.search.searchTours')}</span>
             </button>
             
             {/* Clear Filters Button - Solo se muestra si hay filtros activos */}

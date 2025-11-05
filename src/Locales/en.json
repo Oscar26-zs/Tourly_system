@@ -244,6 +244,13 @@
 			"upTo": "Up to {{count}}",
 			"bookNow": "Book now"
 		},
+		"imageGallery": {
+			"noImages": "No images available",
+			"altSingle": "Tour image",
+			"altMain": "Main tour image",
+			"altIndex": "Tour image {{index}}",
+			"moreCount": "+{{count}} more"
+		},
 		"tourBooking": {
 			"bookNowPrice": "Book now - ${{price}}",
 			"cancel": "Cancel"

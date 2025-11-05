@@ -1,6 +1,8 @@
 import type { Tour } from "../../public/types/tour";
 import { useCategories } from "../hooks/useCategories";
 import { useEditTourForm } from "../hooks/useEditTourForm";
+import { useTranslation } from 'react-i18next';
+
 
 export default function GuideEditTourSection({
   tour,
@@ -60,6 +62,7 @@ export default function GuideEditTourSection({
     isLoading,
     handleSubmit,
   } = useEditTourForm({ tour, guideId, onUpdated });
+  const { t } = useTranslation();
 
   
     const { data: categories = [], isLoading: categoriesLoading } = useCategories();
@@ -319,7 +322,7 @@ export default function GuideEditTourSection({
 
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Not included
+            {t('guide.createTour.notIncludedLabel')}
           </label>
           <div className="flex items-center gap-2">
             <input
@@ -329,14 +332,14 @@ export default function GuideEditTourSection({
                 e.key === "Enter" && (e.preventDefault(), addNoIncluye())
               }
               className="flex-1 px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-              placeholder="Add a non-included item and press Enter or Add"
+              placeholder={t('guide.createTour.notIncludedPlaceholder')}
             />
             <button
               type="button"
               onClick={addNoIncluye}
               className="px-3 py-2 bg-neutral-700 rounded text-white"
             >
-              Add
+              {t('guide.createTour.add')}
             </button>
           </div>
           <div className="flex flex-wrap gap-2 mt-2">
@@ -360,7 +363,7 @@ export default function GuideEditTourSection({
 
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Image
+            {t('guide.createTour.imageLabel')}
           </label>
           <div className="flex items-center gap-3">
             <input type="file" accept="image/*" onChange={handleFileChange} />
@@ -372,7 +375,7 @@ export default function GuideEditTourSection({
               />
             )}
             {uploadingImage && (
-              <div className="text-sm text-zinc-300">Uploading image...</div>
+              <div className="text-sm text-zinc-300">{t('guide.createTour.uploadingImage')}</div>
             )}
           </div>
         </div>
@@ -386,7 +389,7 @@ export default function GuideEditTourSection({
             disabled={uploadingImage || isLoading}
             className="px-4 py-2 bg-green-600 hover:bg-green-500 rounded text-white disabled:opacity-60"
           >
-            {uploadingImage || isLoading ? "Saving..." : "Update tour"}
+            {uploadingImage || isLoading ? t('guide.createTour.saving') : t('guide.createTour.createTour')}
           </button>
 
           <button
@@ -394,7 +397,7 @@ export default function GuideEditTourSection({
             onClick={onCancel}
             className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded text-white"
           >
-            Cancel
+            {t('guide.createTour.cancel')}
           </button>
         </div>
       </form>

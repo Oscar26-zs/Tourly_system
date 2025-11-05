@@ -83,6 +83,13 @@
       "upTo": "Hasta {{count}}",
       "bookNow": "Reservar ahora"
     },
+    "imageGallery": {
+      "noImages": "No hay imágenes disponibles",
+      "altSingle": "Imagen del tour",
+      "altMain": "Imagen principal del tour",
+      "altIndex": "Imagen del tour {{index}}",
+      "moreCount": "+{{count}} más"
+    },
     "tourBooking": {
       "bookNowPrice": "Reservar ahora - ${{price}}",
       "cancel": "Cancelar"

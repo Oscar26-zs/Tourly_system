@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 // import NumberFlow, { continuous, type Format } from '@number-flow/react';
 // import clsx from 'clsx';
 
@@ -8,7 +9,7 @@ const NumberFlow = ({ value, className }: { value: number; className?: string })
 );
 
 export default function StatsSection() {
-  const { t } = require('react-i18next').useTranslation();
+  const { t } = useTranslation();
   const [stats, setStats] = useState({
     tours: 0,
     countries: 0,

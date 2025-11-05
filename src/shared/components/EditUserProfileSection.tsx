@@ -81,16 +81,16 @@ export const EditUserProfileSection: React.FC<EditUserProfileSectionProps> = ({
 
       const result = await updateProfile(updateData);
       if (result.success) {
-        setMessage({ type: 'success', text: 'Profile updated successfully!' });
+        setMessage({ type: 'success', text: t('profile.updateSuccess') });
         // Opcional: cerrar el modal después de un breve delay
         setTimeout(() => {
           onCancel();
         }, 2000);
       } else {
-        setMessage({ type: 'error', text: result.error || 'Failed to update profile' });
+        setMessage({ type: 'error', text: result.error || t('profile.updateFailed') });
       }
     } catch (error) {
-      setMessage({ type: 'error', text: 'An unexpected error occurred' });
+      setMessage({ type: 'error', text: t('profile.updateError') });
     }
   };
 
@@ -145,7 +145,7 @@ export const EditUserProfileSection: React.FC<EditUserProfileSectionProps> = ({
               {formData.fotoPerfil ? (
                 <img
                   src={formData.fotoPerfil}
-                  alt="Profile"
+                  alt={t('profile.picture')}
                   className="w-20 h-20 rounded-full object-cover border-2 border-green-700/30"
                 />
               ) : (

@@ -1,14 +1,18 @@
+import { useTranslation } from 'react-i18next';
+
 interface TourImageGalleryProps {
   images: string[];
 }
 
 export function TourImageGallery({ images }: TourImageGalleryProps) {
+  const { t } = useTranslation();
+
   // Si no hay imágenes, mostrar placeholder
   if (!images || images.length === 0) {
     return (
       <div className="container mx-auto px-4 pt-8">
         <div className="relative h-64 lg:h-80 bg-gray-800 flex items-center justify-center rounded-lg">
-          <span className="text-gray-400">No hay imágenes disponibles</span>
+          <span className="text-gray-400">{t('public.imageGallery.noImages')}</span>
         </div>
       </div>
     );
@@ -25,7 +29,7 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
           <div className="h-full flex items-center justify-center rounded-lg">
             <img 
               src={images[0]} 
-              alt="Tour imagen" 
+              alt={t('public.imageGallery.altSingle')}
               className="max-w-full max-h-full object-contain rounded-lg hover:scale-105 hover:cursor-pointer transition-transform duration-300"
             />
           </div>
@@ -39,7 +43,7 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
               <div key={index} className="relative bg-gray-800 rounded-lg overflow-hidden">
                 <img 
                   src={image} 
-                  alt={`Tour imagen ${index + 1}`} 
+                  alt={t('public.imageGallery.altIndex', { index: index + 1 })} 
                   className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
                 />
               </div>
@@ -55,7 +59,7 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
             <div className="relative bg-gray-800 rounded-lg overflow-hidden">
               <img 
                 src={images[0]} 
-                alt="Tour imagen principal" 
+                alt={t('public.imageGallery.altMain')} 
                 className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
               />
             </div>
@@ -66,7 +70,7 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
                 <div key={index} className="relative bg-gray-800 rounded-lg overflow-hidden">
                   <img 
                     src={image} 
-                    alt={`Tour imagen ${index + 2}`} 
+                    alt={t('public.imageGallery.altIndex', { index: index + 2 })} 
                     className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
                   />
                 </div>
@@ -83,7 +87,7 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
               <div key={index} className="relative bg-gray-800 rounded-lg overflow-hidden">
                 <img 
                   src={image} 
-                  alt={`Tour imagen ${index + 1}`} 
+                  alt={t('public.imageGallery.altIndex', { index: index + 1 })} 
                   className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
                 />
               </div>
@@ -114,7 +118,7 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
                 <div key={index} className="relative bg-gray-800 rounded-lg overflow-hidden">
                   <img 
                     src={image} 
-                    alt={`Tour imagen ${index + 2}`} 
+                    alt={t('public.imageGallery.altIndex', { index: index + 2 })} 
                     className="w-full h-full object-cover hover:scale-105 hover:cursor-pointer transition-transform duration-300"
                   />
                   
@@ -122,7 +126,7 @@ export function TourImageGallery({ images }: TourImageGalleryProps) {
                   {index === 3 && remainingCount > 0 && (
                     <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center hover:cursor-pointer rounded-lg">
                       <span className="text-white text-xl font-bold">
-                        +{remainingCount}
+                        {t('public.imageGallery.moreCount', { count: remainingCount })}
                       </span>
                     </div>
                   )}

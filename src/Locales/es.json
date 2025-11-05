@@ -93,6 +93,51 @@
       "transportation": "Transporte",
       "meetingPointTitle": "Punto de encuentro:"
     }
+    ,
+    "search": {
+      "whereTo": "¿A dónde?",
+      "clickToSee": "Haz clic para ver destinos",
+      "loadingLocations": "Cargando ubicaciones...",
+      "availableLocations": "Ubicaciones disponibles en Costa Rica",
+      "noLocationsFound": "No se encontraron ubicaciones que coincidan con \"{{query}}\"",
+      "durationLabel": "¿Duración?",
+      "defaultDuration": "1 hora?",
+      "hours": "{{count}} hora",
+      "maxPrice": "Precio máximo",
+      "enterMaxPrice": "Introduce el precio máximo",
+      "searchTours": "Buscar tours",
+      "clearFilters": "Borrar filtros",
+      "popularDestinationsTitle": "Destinos Populares en Costa Rica",
+      "loadingDestinations": "Cargando destinos...",
+      "noDestinationsAvailable": "No hay destinos disponibles"
+    },
+    "stats": {
+      "toursAvailable": "Tours disponibles",
+      "countries": "Países",
+      "happyHosts": "Anfitriones felices",
+      "happyTravelers": "Viajeros felices"
+    },
+    "reviews": {
+      "loading": "Cargando reseñas...",
+      "errorLoading": "Error al cargar reseñas",
+      "guestReviews": "Reseñas de huéspedes ({{count}})",
+      "noReviewsYet": "Aún no hay reseñas",
+      "beFirst": "¡Sé el primero en compartir tu experiencia!",
+      "ratingLabels": {
+        "excellent": "Excelente",
+        "veryGood": "Muy bueno",
+        "good": "Bueno",
+        "fair": "Regular",
+        "poor": "Malo"
+      },
+      "today": "Hoy",
+      "oneDayAgo": "hace 1 día",
+      "daysAgo": "hace {{count}} días",
+      "weeksAgo": "hace {{count}} semana",
+      "monthsAgo": "hace {{count}} mes",
+      "yearsAgo": "hace {{count}} año",
+      "showAllReviews": "Ver todas las reseñas ({{total}})"
+    }
   },
   "sidebar": {
     "header": {

@@ -1,12 +1,14 @@
 import { MapPin, Clock, DollarSign, Search, X } from 'lucide-react';
 import type { SearchFilters } from '../types/filters';
 import { useSearchSection } from '../hooks/useSearchSection';
+import { useTranslation } from 'react-i18next';
 
 interface SearchSectionProps {
   onFiltersChange: (filters: SearchFilters) => void;
 }
 
 export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
+  const { t } = useTranslation();
   const {
     // Estados del formulario
     locationInput,
@@ -55,7 +57,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
           {/* Where to? */}
           <div ref={locationRef} className="w-full lg:w-72 flex flex-col justify-start items-start gap-2.5 relative">
             <div className="self-stretch text-white text-xl lg:text-2xl font-medium font-inter flex items-center gap-2">
-              Where to?
+              {t('public.search.whereTo')}
               {locationInput.trim() && (
                 <span className="w-2 h-2 bg-green-500 rounded-full"></span>
               )}
@@ -68,7 +70,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
                 onChange={handleLocationChange}
                 onFocus={handleLocationFocus}
                 onKeyDown={handleLocationKeyDown}
-                placeholder="Click to see destinations"
+                placeholder={t('public.search.clickToSee')}
                 className="flex-1 bg-transparent text-white text-lg lg:text-xl font-light font-poppins placeholder-zinc-400 outline-none"
               />
             </div>
@@ -77,12 +79,12 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
             {showLocationSuggestions && (
               <div className="absolute top-full left-0 right-0 mt-1 bg-stone-900 border border-neutral-600 rounded-[10px] z-20 max-h-60 overflow-y-auto shadow-xl">
                 {citiesLoading ? (
-                  <div className="p-3 text-zinc-400 text-sm">Cargando ubicaciones...</div>
+                  <div className="p-3 text-zinc-400 text-sm">{t('public.search.loadingLocations')}</div>
                 ) : filteredLocations.length > 0 ? (
                   <>
                     {!locationInput.trim() && (
                       <div className="p-2 text-zinc-500 text-xs border-b border-neutral-700 bg-stone-800">
-                        Ubicaciones disponibles en Costa Rica
+                        {t('public.search.availableLocations')}
                       </div>
                     )}
                     {filteredLocations.map((location, index) => (
@@ -103,7 +105,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
                   </>
                 ) : (
                   <div className="p-3 text-zinc-400 text-sm">
-                    No se encontraron ubicaciones que coincidan con "{locationInput}"
+                    {t('public.search.noLocationsFound', { query: locationInput })}
                   </div>
                 )}
               </div>
@@ -113,7 +115,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
           {/* Duration */}
           <div className="w-full lg:w-48 flex flex-col justify-start items-start gap-2.5 relative">
             <div className="self-stretch text-white text-xl lg:text-2xl font-medium font-inter flex items-center gap-2">
-              Duration?
+              {t('public.search.durationLabel')}
               {selectedDuration && (
                 <span className="w-2 h-2 bg-green-500 rounded-full"></span>
               )}
@@ -124,7 +126,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
             >
               <Clock className="w-5 h-5 lg:w-6 lg:h-6 text-green-700" />
               <div className="text-zinc-400 text-lg lg:text-xl font-light font-poppins flex-1">
-                {selectedDuration ? `${selectedDuration}h` : "1 hour?"}
+                {selectedDuration ? t('public.search.hours', { count: selectedDuration }) : t('public.search.defaultDuration')}
               </div>
             </div>
             
@@ -137,7 +139,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
                     onClick={() => handleDurationSelect(duration)}
                     className="p-3 text-white hover:bg-stone-800 cursor-pointer border-b border-neutral-700 last:border-b-0"
                   >
-                    {duration} hour{duration > 1 ? 's' : ''}
+                    {t('public.search.hours', { count: duration })}
                   </div>
                 ))}
               </div>
@@ -147,7 +149,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
           {/* Price */}
           <div className="w-full lg:w-48 flex flex-col justify-start items-start gap-2.5">
             <div className="self-stretch text-white text-xl lg:text-2xl font-medium font-inter flex items-center gap-2">
-              Max Price
+              {t('public.search.maxPrice')}
               {priceInput.trim() && (
                 <span className="w-2 h-2 bg-green-500 rounded-full"></span>
               )}
@@ -158,7 +160,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
                 type="text"
                 value={priceInput}
                 onChange={handlePriceChange}
-                placeholder="Enter max price"
+                placeholder={t('public.search.enterMaxPrice')}
                 className="flex-1 bg-transparent text-white text-lg lg:text-xl font-light font-poppins placeholder-zinc-400 outline-none"
               />
             </div>
@@ -172,7 +174,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
               className="px-3.5 py-2.5 bg-green-700 hover:bg-green-600 rounded-[10px] flex justify-center items-center gap-2.5 transition-all duration-300 shadow-lg shadow-green-700/30 transform hover:scale-105 w-full lg:w-auto"
             >
               <Search className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
-              <div className="text-white text-lg lg:text-xl font-medium font-poppins">Search Tours</div>
+              <div className="text-white text-lg lg:text-xl font-medium font-poppins">{t('public.search.searchTours')}</div>
             </button>
             
             {/* Clear Filters Button - Solo se muestra si hay filtros activos */}
@@ -182,7 +184,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
                 className="px-3.5 py-1.5 bg-neutral-700 hover:bg-neutral-600 border border-neutral-600 rounded-[10px] flex justify-center items-center gap-2 transition-all duration-300 w-full lg:w-auto"
               >
                 <X className="w-4 h-4 text-zinc-400" />
-                <div className="text-zinc-400 text-sm font-medium font-poppins">Clear Filters</div>
+                <div className="text-zinc-400 text-sm font-medium font-poppins">{t('public.search.clearFilters')}</div>
               </button>
             )}
           </div>
@@ -194,11 +196,11 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
         {/* Popular Destinations */}
         <div className="flex flex-col justify-start items-center gap-7">
           <div className="text-center text-zinc-400 text-lg lg:text-xl font-medium font-poppins">
-            Destinos Populares en Costa Rica
+            {t('public.search.popularDestinationsTitle')}
           </div>
           <div className="flex justify-center items-center gap-4 lg:gap-11 flex-wrap">
             {citiesLoading ? (
-              <div className="text-zinc-500 text-lg">Cargando destinos...</div>
+              <div className="text-zinc-500 text-lg">{t('public.search.loadingDestinations')}</div>
             ) : popularDestinations.length > 0 ? (
               popularDestinations.map((destination) => (
                 <div 
@@ -212,7 +214,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
                 </div>
               ))
             ) : (
-              <div className="text-zinc-500 text-lg">No hay destinos disponibles</div>
+              <div className="text-zinc-500 text-lg">{t('public.search.noDestinationsAvailable')}</div>
             )}
           </div>
         </div>

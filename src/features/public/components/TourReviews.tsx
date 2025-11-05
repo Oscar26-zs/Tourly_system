@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useReviewsByTour } from '../hooks/useReviewsByTour';
+import { useTranslation } from 'react-i18next';
 
 interface TourReviewsProps {
   averageRating?: number;
@@ -9,17 +10,18 @@ interface TourReviewsProps {
 export function TourReviews({  }: TourReviewsProps) {
   const { tourId } = useParams<{ tourId: string }>();
   const { data: reviews, isLoading, error, averageRating, totalReviews, ratingDistribution } = useReviewsByTour(tourId || '');
+  const { t } = useTranslation();
 
   const formatDate = (date: Date) => {
     const now = new Date();
     const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
     
-    if (diffInDays === 0) return 'Today';
-    if (diffInDays === 1) return '1 day ago';
-    if (diffInDays < 7) return `${diffInDays} days ago`;
-    if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} week${Math.floor(diffInDays / 7) > 1 ? 's' : ''} ago`;
-    if (diffInDays < 365) return `${Math.floor(diffInDays / 30)} month${Math.floor(diffInDays / 30) > 1 ? 's' : ''} ago`;
-    return `${Math.floor(diffInDays / 365)} year${Math.floor(diffInDays / 365) > 1 ? 's' : ''} ago`;
+    if (diffInDays === 0) return t('public.reviews.today');
+    if (diffInDays === 1) return t('public.reviews.oneDayAgo');
+    if (diffInDays < 7) return t('public.reviews.daysAgo', { count: diffInDays });
+    if (diffInDays < 30) return t('public.reviews.weeksAgo', { count: Math.floor(diffInDays / 7) });
+    if (diffInDays < 365) return t('public.reviews.monthsAgo', { count: Math.floor(diffInDays / 30) });
+    return t('public.reviews.yearsAgo', { count: Math.floor(diffInDays / 365) });
   };
 
   const renderStars = (rating: number) => {
@@ -38,17 +40,17 @@ export function TourReviews({  }: TourReviewsProps) {
   };
 
   const getRatingLabel = (rating: number) => {
-    if (rating >= 4.5) return 'Excellent';
-    if (rating >= 4) return 'Very Good';
-    if (rating >= 3.5) return 'Good';
-    if (rating >= 2.5) return 'Fair';
-    return 'Poor';
+    if (rating >= 4.5) return t('public.reviews.ratingLabels.excellent');
+    if (rating >= 4) return t('public.reviews.ratingLabels.veryGood');
+    if (rating >= 3.5) return t('public.reviews.ratingLabels.good');
+    if (rating >= 2.5) return t('public.reviews.ratingLabels.fair');
+    return t('public.reviews.ratingLabels.poor');
   };
 
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-8">
-        <div className="text-white text-lg">Loading reviews...</div>
+        <div className="text-white text-lg">{t('public.reviews.loading')}</div>
       </div>
     );
   }
@@ -56,7 +58,7 @@ export function TourReviews({  }: TourReviewsProps) {
   if (error) {
     return (
       <div className="text-red-500 text-center py-8">
-        Error loading reviews: {error}
+        {t('public.reviews.errorLoading')}: {error}
       </div>
     );
   }
@@ -107,7 +109,7 @@ export function TourReviews({  }: TourReviewsProps) {
       {/* Lista de reviews */}
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-white">
-          Guest Reviews {totalReviews > 0 && `(${totalReviews})`}
+          {t('public.reviews.guestReviews', { count: totalReviews })}
         </h3>
         
         {reviews.length > 0 ? (
@@ -143,8 +145,8 @@ export function TourReviews({  }: TourReviewsProps) {
           ))
         ) : (
           <div className="bg-black/20 backdrop-blur-sm border border-gray-700/30 rounded-lg p-8 text-center">
-            <p className="text-gray-400 text-lg">No reviews yet</p>
-            <p className="text-gray-500 mt-2">Be the first to share your experience!</p>
+            <p className="text-gray-400 text-lg">{t('public.reviews.noReviewsYet')}</p>
+            <p className="text-gray-500 mt-2">{t('public.reviews.beFirst')}</p>
           </div>
         )}
       </div>
@@ -153,7 +155,7 @@ export function TourReviews({  }: TourReviewsProps) {
       {reviews.length > 3 && (
         <div className="text-center">
           <button className="px-6 py-3 bg-black/20 backdrop-blur-sm border border-gray-700/30 text-white rounded-lg hover:cursor-pointer hover:bg-black/30 transition-all duration-200">
-            Show all reviews ({totalReviews})
+            {t('public.reviews.showAllReviews', { total: totalReviews })}
           </button>
         </div>
       )}

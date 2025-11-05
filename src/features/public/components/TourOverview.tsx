@@ -5,7 +5,10 @@ interface TourOverviewProps {
   highlights?: string[];
 }
 
+import { useTranslation } from 'react-i18next';
+
 export function TourOverview({ description, includes, notIncludes, highlights }: TourOverviewProps) {
+  const { t } = useTranslation();
   const tourHighlights = highlights && highlights.length > 0 ? highlights : [];
 
   return (
@@ -20,7 +23,7 @@ export function TourOverview({ description, includes, notIncludes, highlights }:
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Tour Highlights */}
         <div className="bg-black/20 backdrop-blur-sm border border-gray-700/30 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-white mb-4">Tour Highlights</h3>
+          <h3 className="text-xl font-semibold text-white mb-4">{t('public.overview.highlightsTitle')}</h3>
           {tourHighlights.length > 0 ? (
             <ul className="space-y-3">
               {tourHighlights.map((highlight, index) => (
@@ -31,13 +34,13 @@ export function TourOverview({ description, includes, notIncludes, highlights }:
               ))}
             </ul>
           ) : (
-            <p className="text-gray-400">No hay highlights disponibles</p>
+            <p className="text-gray-400">{t('public.overview.noHighlights')}</p>
           )}
         </div>
 
         {/* What's Included */}
         <div className="bg-black/20 backdrop-blur-sm border border-gray-700/30 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-white mb-4">What's Included</h3>
+          <h3 className="text-xl font-semibold text-white mb-4">{t('public.overview.whatsIncluded')}</h3>
           
           {/* Incluye - Solo datos de Firebase */}
           {includes && includes.length > 0 ? (
@@ -52,13 +55,13 @@ export function TourOverview({ description, includes, notIncludes, highlights }:
               </ul>
             </div>
           ) : (
-            <p className="text-gray-400 mb-6">No hay información de qué incluye disponible</p>
+            <p className="text-gray-400 mb-6">{t('public.overview.noIncludes')}</p>
           )}
 
           {/* No incluye */}
           {notIncludes && notIncludes.length > 0 && (
             <div>
-              <h4 className="text-lg font-medium text-white mb-3">Not Included</h4>
+              <h4 className="text-lg font-medium text-white mb-3">{t('public.overview.notIncluded')}</h4>
               <ul className="space-y-2">
                 {notIncludes.map((item, index) => (
                   <li key={index} className="flex items-start">

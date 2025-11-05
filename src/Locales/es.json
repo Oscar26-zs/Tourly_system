@@ -138,6 +138,24 @@
       "yearsAgo": "hace {{count}} año",
       "showAllReviews": "Ver todas las reseñas ({{total}})"
     }
+    ,
+    "tourTabs": {
+      "overview": "Resumen",
+      "itinerary": "Itinerario",
+      "reviews": "Reseñas"
+    },
+    "overview": {
+      "highlightsTitle": "Aspectos destacados del tour",
+      "noHighlights": "No hay aspectos destacados disponibles",
+      "whatsIncluded": "Qué incluye",
+      "noIncludes": "No hay información disponible sobre lo que incluye",
+      "notIncluded": "No incluido"
+    },
+    "itinerary": {
+      "title": "Itinerario detallado",
+      "noItinerary": "No hay itinerario disponible",
+      "willBeProvided": "El cronograma detallado se proporcionará al reservar."
+    }
   },
   "sidebar": {
     "header": {

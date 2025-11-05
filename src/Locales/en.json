@@ -299,6 +299,24 @@
 			"yearsAgo": "{{count}} year ago",
 			"showAllReviews": "Show all reviews ({{total}})"
 		}
+		,
+		"tourTabs": {
+			"overview": "Overview",
+			"itinerary": "Itinerary",
+			"reviews": "Reviews"
+		},
+		"overview": {
+			"highlightsTitle": "Tour Highlights",
+			"noHighlights": "No highlights available",
+			"whatsIncluded": "What's Included",
+			"noIncludes": "No information about what's included available",
+			"notIncluded": "Not Included"
+		},
+		"itinerary": {
+			"title": "Detailed Itinerary",
+			"noItinerary": "No itinerary available",
+			"willBeProvided": "Detailed schedule will be provided upon booking."
+		}
 	},
 	"calendar": {
 		"prevMonth": "Previous month",

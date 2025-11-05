@@ -1,0 +1,12 @@
+{
+  "navbar": {
+    "becomeHost": "Conviértete en anfitrión",
+    "signUp": "Registrarse",
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "language": "Idioma",
+    "tourly": "Tourly",
+    "spanish": "Español",
+    "english": "Inglés"
+  }
+}

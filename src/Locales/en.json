@@ -1,0 +1,12 @@
+{
+  "navbar": {
+    "becomeHost": "Become a host",
+    "signUp": "Sign Up",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "language": "Language",
+    "tourly": "Tourly",
+    "spanish": "Spanish",
+    "english": "English"
+  }
+}

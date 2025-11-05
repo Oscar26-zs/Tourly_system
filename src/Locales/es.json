@@ -52,8 +52,31 @@
   },
   "validation": {
     "validating": "Validando..."
-  }
-  ,
+  },
+  "public": {
+    "hero": {
+      "title1": "Descubre lo asombroso",
+      "title2": "Tours & Experiencias",
+      "subtitle": "Encuentra experiencias locales únicas, tours guiados y aventuras alrededor del mundo. Reserva con confianza y crea recuerdos inolvidables."
+    },
+    "tourHeader": {
+      "perPerson": "por persona"
+    },
+    "tourGrid": {
+      "loadingTitle": "Tours Destacados",
+      "loadingSubtitle": "Descubre experiencias seleccionadas de todo el mundo",
+      "errorTitle": "Error al cargar tours",
+      "errorUnknown": "Error desconocido",
+      "retry": "Intentar nuevamente",
+      "found": "encontrados",
+      "in": "en",
+      "upTo": "(hasta {{hours}}h)",
+      "under": "(por debajo de ${{price}})",
+      "noMatchTitle": "Ningún tour coincide con tus filtros actuales.",
+      "noMatchSubtitle": "Intenta ajustar tus criterios de búsqueda o explora todos los tours disponibles.",
+      "noToursAvailable": "No hay tours disponibles en este momento."
+    }
+  },
   "sidebar": {
     "header": {
       "settings": "Ajustes",

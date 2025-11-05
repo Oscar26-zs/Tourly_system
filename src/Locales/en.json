@@ -214,6 +214,30 @@
 			"edit": "Edit"
 		}
 	},
+	"public": {
+		"hero": {
+			"title1": "Discover Amazing",
+			"title2": "Tours & Experiences",
+			"subtitle": "Find unique local experiences, guided tours, and adventures around the world. Book with confidence and create unforgettable memories."
+		},
+		"tourHeader": {
+			"perPerson": "per person"
+		},
+		"tourGrid": {
+			"loadingTitle": "Featured Tours",
+			"loadingSubtitle": "Discover handpicked experiences from around the world",
+			"errorTitle": "Error loading tours",
+			"errorUnknown": "Unknown error",
+			"retry": "Try again",
+			"found": "found",
+			"in": "in",
+			"upTo": "(up to {{hours}}h)",
+			"under": "(under ${{price}})",
+			"noMatchTitle": "No tours match your current filters.",
+			"noMatchSubtitle": "Try adjusting your search criteria or explore all available tours.",
+			"noToursAvailable": "No tours available right now."
+		}
+	},
 	"calendar": {
 		"prevMonth": "Previous month",
 		"nextMonth": "Next month"

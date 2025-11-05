@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 interface TourHeaderProps {
   title: string;
   location: string;
@@ -5,6 +7,8 @@ interface TourHeaderProps {
 }
 
 export function TourHeader({ title, location, price }: TourHeaderProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4 lg:gap-6">
       {/* Información del tour */}
@@ -29,7 +33,7 @@ export function TourHeader({ title, location, price }: TourHeaderProps) {
           ${price}
         </div>
         <div className="text-gray-400 text-sm lg:text-lg">
-          per person
+          {t('public.tourHeader.perPerson')}
         </div>
       </div>
     </div>

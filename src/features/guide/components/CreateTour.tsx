@@ -187,7 +187,7 @@ export default function GuideCreateTourSection({
                     onClick={() => removeItineraryItem(i)}
                     className="text-red-400"
                   >
-                    Remove
+                    {t('guide.createTour.removeStep')}
                   </button>
                 </div>
               </div>
@@ -295,7 +295,7 @@ export default function GuideCreateTourSection({
               onClick={addNoIncluye}
               className="px-3 py-2 bg-neutral-700 rounded text-white"
             >
-              Add
+              {t('guide.createTour.add')}
             </button>
           </div>
           <div className="flex flex-wrap gap-2 mt-2">
@@ -353,7 +353,7 @@ export default function GuideCreateTourSection({
             onClick={resetForm}
             className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded text-white"
           >
-            Reset
+            {t('guide.createTour.resetForm')}
           </button>
         </div>
       </form>

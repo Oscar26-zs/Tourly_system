@@ -92,10 +92,12 @@
     },
     "tourBooking": {
       "bookNowPrice": "Reservar ahora - ${{price}}",
+      "bookNowAria": "Reservar por ${{price}}",
       "cancel": "Cancelar"
     },
     "tourFeatures": {
-      "duration": "{{hours}} hora",
+      "duration": "{{count}} hora",
+      "duration_plural": "{{count}} horas",
       "upTo": "Hasta {{count}}",
       "transportation": "Transporte",
       "meetingPointTitle": "Punto de encuentro:"
@@ -111,7 +113,7 @@
       "defaultDuration": "1 hora?",
       "hours": "{{count}} hora",
       "maxPrice": "Precio máximo",
-      "enterMaxPrice": "Introduce el precio máximo",
+      "enterMaxPrice": "Introduce precio máximo",
       "searchTours": "Buscar tours",
       "clearFilters": "Borrar filtros",
       "popularDestinationsTitle": "Destinos Populares en Costa Rica",
@@ -269,7 +271,25 @@
     "removePhoto": "Eliminar foto",
     "photoFromGoogle": "✓ Foto obtenida desde Google. Puedes cambiarla si quieres.",
     "emailRequired": "El correo es obligatorio",
-    "invalidEmail": "Correo inválido"
+    "invalidEmail": "Correo inválido",
+    "slots": {
+      "noGuideSelected": "No hay guía seleccionada.",
+      "loading": "Cargando turnos...",
+      "loadError": "Error al cargar turnos",
+      "header": "Gestiona tus turnos",
+      "noSlots": "No hay turnos programados.",
+      "places": "plazas",
+      "available": "disponibles",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "start": "Inicio:",
+      "end": "Fin:",
+      "guideLabel": "Guía:",
+      "tourLabel": "Tour:",
+      "scheduleLabel": "Horario:",
+      "view": "Ver",
+      "edit": "Editar"
+    }
   },
   "calendar": {
     "prevMonth": "Mes anterior",

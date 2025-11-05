@@ -133,7 +133,7 @@ export default function SlotsList({ guideId }: { guideId?: string | null }) {
 
                   <div className="text-sm text-zinc-400 mt-0 leading-6">
                     <div>
-                      <strong className="text-zinc-300 block">Tour:</strong>
+                      <strong className="text-zinc-300 block">{t('guide.slots.tourLabel')}</strong>
                       {
                         (() => {
                           const tId = idFromRefOrPath((s as any).idTour);
@@ -142,7 +142,7 @@ export default function SlotsList({ guideId }: { guideId?: string | null }) {
                       }
                     </div>
                     <div className="mt-2">
-                      <strong className="text-zinc-300 block">Horario:</strong>
+                      <strong className="text-zinc-300 block">{t('guide.slots.scheduleLabel')}</strong>
                       <span className="text-zinc-300 block">{formatSlotRange((s as any).fechaHoraInicio, (s as any).fechaHoraFin)}</span>
                     </div>
                   </div>

@@ -210,6 +210,8 @@
 			"start": "Start:",
 			"end": "End:",
 			"guideLabel": "Guide:",
+			"tourLabel": "Tour:",
+			"scheduleLabel": "Schedule:",
 			"view": "View",
 			"edit": "Edit"
 		}
@@ -253,10 +255,12 @@
 		},
 		"tourBooking": {
 			"bookNowPrice": "Book now - ${{price}}",
+			"bookNowAria": "Book now for ${{price}}",
 			"cancel": "Cancel"
 		},
 		"tourFeatures": {
-			"duration": "{{hours}} hour",
+			"duration": "{{count}} hour",
+			"duration_plural": "{{count}} hours",
 			"upTo": "Up to {{count}}",
 			"transportation": "Transportation",
 			"meetingPointTitle": "Meeting point:"

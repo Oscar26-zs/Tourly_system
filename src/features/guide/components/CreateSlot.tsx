@@ -25,7 +25,7 @@ export default function AddSlotSection({
 
   const createSlot = useCreateSlot({
     onSuccess: (id) => {
-      setSuccess("Slot creado correctamente.");
+  setSuccess(t('guide.createSlot.createdSuccess'));
       setError(null);
       if (onCreated) onCreated(id);
       // opcional: limpiar formulario
@@ -36,7 +36,7 @@ export default function AddSlotSection({
       setActivo(true);
     },
     onError: (err: any) => {
-      setError(err?.message ?? "Error al crear el slot");
+      setError(err?.message ?? t('guide.createSlot.createError'));
       setSuccess(null);
     },
   });
@@ -51,25 +51,25 @@ export default function AddSlotSection({
 
     // validaciones básicas
     if (!fechaInicio || !fechaFin) {
-      setError("Por favor ingresa fecha/hora de inicio y fin.");
+      setError(t('guide.createSlot.validation.missingDates'));
       return;
     }
     const start = new Date(fechaInicio);
     const end = new Date(fechaFin);
     if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-      setError("Fechas inválidas.");
+      setError(t('guide.createSlot.validation.invalidDates'));
       return;
     }
     if (end <= start) {
-      setError("La fecha/hora de fin debe ser posterior a la de inicio.");
+      setError(t('guide.createSlot.validation.endAfterStart'));
       return;
     }
     if (capacidadMax === "" || Number(capacidadMax) <= 0) {
-      setError("Ingresa una capacidad máxima válida.");
+      setError(t('guide.createSlot.validation.invalidCapacity'));
       return;
     }
     if (asientosDisponibles === "" || Number(asientosDisponibles) < 0) {
-      setError("Ingresa asientos disponibles válidos.");
+      setError(t('guide.createSlot.validation.invalidSeats'));
       return;
     }
 

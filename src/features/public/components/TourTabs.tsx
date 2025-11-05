@@ -3,11 +3,14 @@ interface TourTabsProps {
   onTabChange: (tab: string) => void;
 }
 
+import { useTranslation } from 'react-i18next';
+
 export function TourTabs({ activeTab, onTabChange }: TourTabsProps) {
+  const { t } = useTranslation();
   const tabs = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'itinerary', label: 'Itinerary' },
-    { id: 'reviews', label: 'Reviews' }
+    { id: 'overview', label: t('public.tourTabs.overview') },
+    { id: 'itinerary', label: t('public.tourTabs.itinerary') },
+    { id: 'reviews', label: t('public.tourTabs.reviews') }
   ];
 
   return (

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 // import NumberFlow, { continuous, type Format } from '@number-flow/react';
 // import clsx from 'clsx';
 
@@ -8,6 +9,7 @@ const NumberFlow = ({ value, className }: { value: number; className?: string })
 );
 
 export default function StatsSection() {
+  const { t } = useTranslation();
   const [stats, setStats] = useState({
     tours: 0,
     countries: 0,
@@ -69,7 +71,7 @@ export default function StatsSection() {
           />
         </div>
         <div className="self-stretch text-center text-zinc-400 text-2xl font-medium font-poppins transition-colors duration-300 group-hover:text-zinc-300">
-          Tours available
+          {t('public.stats.toursAvailable')}
         </div>
       </div>
 
@@ -85,7 +87,7 @@ export default function StatsSection() {
           />
         </div>
         <div className="self-stretch text-center text-zinc-400 text-2xl font-medium font-poppins transition-colors duration-300 group-hover:text-zinc-300">
-          Countries
+          {t('public.stats.countries')}
         </div>
       </div>
 
@@ -101,7 +103,7 @@ export default function StatsSection() {
           />
         </div>
         <div className="self-stretch text-center text-zinc-400 text-2xl font-medium font-poppins transition-colors duration-300 group-hover:text-zinc-300">
-          Happy hosts
+          {t('public.stats.happyHosts')}
         </div>
       </div>
 
@@ -117,7 +119,7 @@ export default function StatsSection() {
           />
         </div>
         <div className="self-stretch text-center text-zinc-400 text-2xl font-medium font-poppins transition-colors duration-300 group-hover:text-zinc-300">
-          Happy Travelers
+          {t('public.stats.happyTravelers')}
         </div>
       </div>
     </div>

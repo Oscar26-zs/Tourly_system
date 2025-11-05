@@ -244,6 +244,13 @@
 			"upTo": "Up to {{count}}",
 			"bookNow": "Book now"
 		},
+		"imageGallery": {
+			"noImages": "No images available",
+			"altSingle": "Tour image",
+			"altMain": "Main tour image",
+			"altIndex": "Tour image {{index}}",
+			"moreCount": "+{{count}} more"
+		},
 		"tourBooking": {
 			"bookNowPrice": "Book now - ${{price}}",
 			"cancel": "Cancel"
@@ -253,6 +260,69 @@
 			"upTo": "Up to {{count}}",
 			"transportation": "Transportation",
 			"meetingPointTitle": "Meeting point:"
+		}
+		,
+		"search": {
+			"whereTo": "Where to?",
+			"clickToSee": "Click to see destinations",
+			"loadingLocations": "Loading locations...",
+			"availableLocations": "Available locations in Costa Rica",
+			"noLocationsFound": "No locations found matching \"{{query}}\"",
+			"durationLabel": "Duration?",
+			"defaultDuration": "1 hour?",
+			"hours": "{{count}} hour",
+			"maxPrice": "Max Price",
+			"enterMaxPrice": "Enter max price",
+			"searchTours": "Search Tours",
+			"clearFilters": "Clear Filters",
+			"popularDestinationsTitle": "Popular Destinations in Costa Rica",
+			"loadingDestinations": "Loading destinations...",
+			"noDestinationsAvailable": "No destinations available"
+		},
+		"stats": {
+			"toursAvailable": "Tours available",
+			"countries": "Countries",
+			"happyHosts": "Happy hosts",
+			"happyTravelers": "Happy Travelers"
+		},
+		"reviews": {
+			"loading": "Loading reviews...",
+			"errorLoading": "Error loading reviews",
+			"guestReviews": "Guest Reviews ({{count}})",
+			"noReviewsYet": "No reviews yet",
+			"beFirst": "Be the first to share your experience!",
+			"ratingLabels": {
+				"excellent": "Excellent",
+				"veryGood": "Very Good",
+				"good": "Good",
+				"fair": "Fair",
+				"poor": "Poor"
+			},
+			"today": "Today",
+			"oneDayAgo": "1 day ago",
+			"daysAgo": "{{count}} days ago",
+			"weeksAgo": "{{count}} week ago",
+			"monthsAgo": "{{count}} month ago",
+			"yearsAgo": "{{count}} year ago",
+			"showAllReviews": "Show all reviews ({{total}})"
+		}
+		,
+		"tourTabs": {
+			"overview": "Overview",
+			"itinerary": "Itinerary",
+			"reviews": "Reviews"
+		},
+		"overview": {
+			"highlightsTitle": "Tour Highlights",
+			"noHighlights": "No highlights available",
+			"whatsIncluded": "What's Included",
+			"noIncludes": "No information about what's included available",
+			"notIncluded": "Not Included"
+		},
+		"itinerary": {
+			"title": "Detailed Itinerary",
+			"noItinerary": "No itinerary available",
+			"willBeProvided": "Detailed schedule will be provided upon booking."
 		}
 	},
 	"calendar": {

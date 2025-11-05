@@ -9,14 +9,17 @@ interface TourItineraryProps {
   itinerary?: ItineraryItem[];
 }
 
+import { useTranslation } from 'react-i18next';
+
 export function TourItinerary({ itinerary }: TourItineraryProps) {
 
+  const { t } = useTranslation();
   const tourItinerary = itinerary && itinerary.length > 0 ? itinerary : [];
 
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-2xl font-bold text-white mb-6">Detailed Itinerary</h3>
+        <h3 className="text-2xl font-bold text-white mb-6">{t('public.itinerary.title')}</h3>
       </div>
 
       <div className="space-y-4">
@@ -48,8 +51,8 @@ export function TourItinerary({ itinerary }: TourItineraryProps) {
         
         {tourItinerary.length === 0 && (
           <div className="bg-black/20 backdrop-blur-sm border border-gray-700/30 rounded-lg p-8 text-center">
-            <p className="text-gray-400 text-lg">No itinerary available</p>
-            <p className="text-gray-500 mt-2">Detailed schedule will be provided upon booking.</p>
+            <p className="text-gray-400 text-lg">{t('public.itinerary.noItinerary')}</p>
+            <p className="text-gray-500 mt-2">{t('public.itinerary.willBeProvided')}</p>
           </div>
         )}
       </div>

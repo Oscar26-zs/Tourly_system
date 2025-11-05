@@ -43,4 +43,47 @@
     "signUp": "Sign Up",
     "anonymous": "User"
   }
+  ,
+  "toast": {
+    "bookingCreated": "Reservation created",
+    "bookingId": "ID: {{id}}",
+    "noTours": "No tours for this day",
+    "close": "Close notification"
+  },
+  "validation": {
+    "validating": "Validating..."
+  }
+  ,
+  "sidebar": {
+    "header": {
+      "settings": "Settings",
+      "dashboardGuide": "Dashboard Guide"
+    },
+    "items": {
+      "profile": "Profile",
+      "settings": "My Bookings",
+      "tours": "Tours",
+      "slots": "Slots"
+    },
+    "logout": "Log Out"
+  },
+  "profile": {
+    "personalInformation": "Personal Information",
+    "emailAddress": "Email address",
+    "phone": "Phone",
+    "gender": "Gender",
+    "memberSince": "Member since",
+    "description": "Description",
+    "notProvided": "Not provided",
+    "editProfile": "Edit Profile",
+    "status": {
+      "active": "Active account",
+      "inactive": "Inactive account"
+    },
+    "roles": {
+      "1": "Tourist",
+      "2": "Tour Guide",
+      "default": "User"
+    }
+  }
 }

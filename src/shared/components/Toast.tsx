@@ -1,11 +1,13 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type ToastMessage = { id: string; title?: string; description?: string; duration?: number };
 
 const ToastContext = createContext<{ show: (m: ToastMessage) => void } | null>(null);
 
 export function ToastProvider({ children }: { children: ReactNode }) {
+  const { t } = useTranslation();
   const [messages, setMessages] = useState<ToastMessage[]>([]);
 
   const show = (m: ToastMessage) => {
@@ -22,7 +24,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     const successHandler = (e: any) => {
       const reservationId = e?.detail?.reservationId;
       const id = `booking-${reservationId ?? Date.now()}`;
-      const msg: ToastMessage = { id, title: 'Reserva creada', description: reservationId ? `ID: ${reservationId}` : undefined, duration: 12000 };
+      const msg: ToastMessage = { id, title: t('toast.bookingCreated'), description: reservationId ? t('toast.bookingId', { id: reservationId }) : undefined, duration: 12000 };
       show(msg);
     };
 
@@ -33,7 +35,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 
       if (count === 0) {
         // exact message requested by the user
-        const msg: ToastMessage = { id, title: 'No hay tours para este dia', duration: 4000 };
+        const msg: ToastMessage = { id, title: t('toast.noTours'), duration: 4000 };
         show(msg);
         return;
       }
@@ -67,7 +69,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 {m.description && <div className="text-sm text-neutral-300">{m.description}</div>}
               </div>
               <div className="flex flex-col items-end">
-                <button aria-label="Cerrar notificación" onClick={() => remove(m.id)} className="ml-4 text-sm text-neutral-300">✕</button>
+                <button aria-label={t('toast.close')} onClick={() => remove(m.id)} className="ml-4 text-sm text-neutral-300">✕</button>
               </div>
             </div>
           </div>

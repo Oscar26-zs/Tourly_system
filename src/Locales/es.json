@@ -43,4 +43,14 @@
     "signUp": "Registrarse",
     "anonymous": "Usuario"
   }
+  ,
+  "toast": {
+    "bookingCreated": "Reserva creada",
+    "bookingId": "ID: {{id}}",
+    "noTours": "No hay tours para este día",
+    "close": "Cerrar notificación"
+  },
+  "validation": {
+    "validating": "Validando..."
+  }
 }

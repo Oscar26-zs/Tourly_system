@@ -1,5 +1,6 @@
 import { useCategories } from "../hooks/useCategories";
 import useCreateTourForm from "../hooks/useCreateTourForm";
+import { useTranslation } from 'react-i18next';
 
 export default function GuideCreateTourSection({
   guideId: guideIdProp,
@@ -21,41 +22,42 @@ export default function GuideCreateTourSection({
   } = useCreateTourForm({ guideId: guideIdProp, onCreated });
 
   const { data: categories = [], isLoading: categoriesLoading } = useCategories();
+  const { t } = useTranslation();
 
 
   return (
     <section className="max-w-3xl w-full mx-auto bg-neutral-900/95 p-6 rounded-lg shadow-lg">
-      <h2 className="text-xl font-semibold text-white mb-4">Create new tour</h2>
+  <h2 className="text-xl font-semibold text-white mb-4">{t('guide.createTour.title')}</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Title
+            {t('guide.createTour.titleLabel')}
           </label>
           <input
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
             className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-            placeholder="Tour title"
+              placeholder={t('guide.createTour.titlePlaceholder')}
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Description
+            {t('guide.createTour.descriptionLabel')}
           </label>
           <textarea
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
             className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700 h-28"
-            placeholder="Short description"
+              placeholder={t('guide.createTour.descriptionPlaceholder')}
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-white mb-1">
-              Price
+              {t('guide.createTour.priceLabel')}
             </label>
             <input
               type="number"
@@ -70,7 +72,7 @@ export default function GuideCreateTourSection({
 
           <div>
             <label className="block text-sm font-medium text-white mb-1">
-              Duration (minutes)
+              {t('guide.createTour.durationLabel')}
             </label>
             <input
               type="number"
@@ -87,7 +89,7 @@ export default function GuideCreateTourSection({
         {/* Highlights */}
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Highlights
+            {t('guide.createTour.highlightsLabel')}
           </label>
           <div className="flex items-center gap-2">
             <input
@@ -97,14 +99,14 @@ export default function GuideCreateTourSection({
                 e.key === "Enter" && (e.preventDefault(), addHighlight())
               }
               className="flex-1 px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-              placeholder="Add a highlight and press Enter or Add"
+              placeholder={t('guide.createTour.highlightsPlaceholder')}
             />
             <button
               type="button"
               onClick={addHighlight}
               className="px-3 py-2 bg-neutral-700 rounded text-white"
             >
-              Add
+              {t('guide.createTour.add')}
             </button>
           </div>
           <div className="flex flex-wrap gap-2 mt-2">
@@ -129,20 +131,20 @@ export default function GuideCreateTourSection({
         {/* Itinerary */}
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Itinerary (steps)
+            {t('guide.createTour.itineraryLabel')}
           </label>
           <div className="grid grid-cols-3 gap-2">
             <input
               value={itineraryTitle}
               onChange={(e) => setItineraryTitle(e.target.value)}
               className="col-span-2 px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-              placeholder="Step title"
+              placeholder={t('guide.createTour.itineraryStepTitle')}
             />
             <input
               value={itineraryDuration}
               onChange={(e) => setItineraryDuration(e.target.value)}
               className="px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-              placeholder="Duration"
+              placeholder={t('guide.createTour.itineraryDuration')}
             />
           </div>
           <div className="mt-2">
@@ -150,7 +152,7 @@ export default function GuideCreateTourSection({
               value={itineraryDescription}
               onChange={(e) => setItineraryDescription(e.target.value)}
               className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700 h-20"
-              placeholder="Step description (optional)"
+              placeholder={t('guide.createTour.itineraryDescriptionPlaceholder')}
             />
           </div>
           <div className="flex items-center gap-2 mt-2">
@@ -159,7 +161,7 @@ export default function GuideCreateTourSection({
               onClick={addItineraryItem}
               className="px-3 py-2 bg-neutral-700 rounded text-white"
             >
-              Add step
+              {t('guide.createTour.addStep')}
             </button>
           </div>
           <div className="mt-2 space-y-2">
@@ -195,7 +197,7 @@ export default function GuideCreateTourSection({
 
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            City
+            {t('guide.createTour.cityLabel')}
           </label>
           <input
             value={ciudad}
@@ -206,7 +208,7 @@ export default function GuideCreateTourSection({
 
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Meeting point
+            {t('guide.createTour.meetingPointLabel')}
           </label>
           <input
             value={puntoEncuentro}
@@ -216,7 +218,7 @@ export default function GuideCreateTourSection({
         </div>
 
         <div>
-    <label className="block text-sm font-medium text-white mb-1">Category</label>
+  <label className="block text-sm font-medium text-white mb-1">{t('guide.createTour.categoryLabel')}</label>
     <select
       value={categoriaId}
       onChange={(e) => setCategoriaId(e.target.value)}
@@ -229,13 +231,13 @@ export default function GuideCreateTourSection({
         </option>
       ))}
     </select>
-    {categoriesLoading && <div className="text-sm text-zinc-400 mt-1">Loading categories…</div>}
+    {categoriesLoading && <div className="text-sm text-zinc-400 mt-1">{t('guide.createTour.loadingCategories')}</div>}
   </div>
 
         {/* Includes / Not-Includes dynamic lists */}
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Includes
+            {t('guide.createTour.includesLabel')}
           </label>
           <div className="flex items-center gap-2">
             <input
@@ -245,14 +247,14 @@ export default function GuideCreateTourSection({
                 e.key === "Enter" && (e.preventDefault(), addIncluye())
               }
               className="flex-1 px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-              placeholder="Add an included feature and press Enter or Add"
+              placeholder={t('guide.createTour.includesPlaceholder')}
             />
             <button
               type="button"
               onClick={addIncluye}
               className="px-3 py-2 bg-neutral-700 rounded text-white"
             >
-              Add
+              {t('guide.createTour.add')}
             </button>
           </div>
           <div className="flex flex-wrap gap-2 mt-2">
@@ -276,7 +278,7 @@ export default function GuideCreateTourSection({
 
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Not included
+            {t('guide.createTour.notIncludedLabel')}
           </label>
           <div className="flex items-center gap-2">
             <input
@@ -286,7 +288,7 @@ export default function GuideCreateTourSection({
                 e.key === "Enter" && (e.preventDefault(), addNoIncluye())
               }
               className="flex-1 px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-              placeholder="Add a non-included item and press Enter or Add"
+              placeholder={t('guide.createTour.notIncludedPlaceholder')}
             />
             <button
               type="button"
@@ -316,8 +318,8 @@ export default function GuideCreateTourSection({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white mb-1">
-            Image
+            <label className="block text-sm font-medium text-white mb-1">
+            {t('guide.createTour.imageLabel')}
           </label>
           <div className="flex items-center gap-3">
             <input type="file" accept="image/*" onChange={handleFileChange} />
@@ -329,13 +331,13 @@ export default function GuideCreateTourSection({
               />
             )}
             {uploadingImage && (
-              <div className="text-sm text-zinc-300">Uploading image...</div>
+              <div className="text-sm text-zinc-300">{t('guide.createTour.uploadingImage')}</div>
             )}
           </div>
         </div>
 
-        {error && <div className="text-red-400">{error}</div>}
-        {success && <div className="text-green-400">{success}</div>}
+  {error && <div className="text-red-400">{error}</div>}
+  {success && <div className="text-green-400">{success}</div>}
 
         <div className="flex items-center gap-3">
           <button
@@ -343,7 +345,7 @@ export default function GuideCreateTourSection({
             disabled={uploadingImage}
             className="px-4 py-2 bg-green-600 hover:bg-green-500 rounded text-white disabled:opacity-60"
           >
-            {uploadingImage ? "Saving..." : "Create tour"}
+            {uploadingImage ? t('guide.createTour.saving') : t('guide.createTour.createTour')}
           </button>
 
           <button

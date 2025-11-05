@@ -1,21 +1,24 @@
+import { useTranslation } from 'react-i18next';
+
 export default function HeroSection() {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col items-center space-y-6 md:space-y-8 px-4">
       {/* Title */}
       <div className="w-full max-w-4xl flex flex-col justify-center items-center gap-2">
         <div className="text-center text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-inter leading-tight">
-          Discover Amazing
+          {t('public.hero.title1')}
         </div>
         <div className="text-center text-green-700 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-inter leading-tight">
-          Tours & Experiences
+          {t('public.hero.title2')}
         </div>
       </div>
 
       {/* Subtitle */}
       <div className="w-full max-w-4xl">
         <div className="text-center text-zinc-400 text-base sm:text-lg md:text-xl lg:text-2xl font-medium font-poppins leading-relaxed">
-          Find unique local experiences, guided tours, and adventures around the world. 
-          Book with confidence and create unforgettable memories.
+          {t('public.hero.subtitle')}
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTours } from '../hooks/useTours';
 import TourCard from './TourCard';
 import type { SearchFilters } from '../types/filters';
@@ -8,6 +9,7 @@ interface TourGridProps {
 }
 
 export default function TourGrid({ filters }: TourGridProps) {
+  const { t } = useTranslation();
   const { data: allTours = [], isLoading, error, refetch } = useTours();
 
   // Filtrar tours basándose en los filtros aplicados
@@ -45,10 +47,10 @@ export default function TourGrid({ filters }: TourGridProps) {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-inter font-bold text-white mb-4">
-              Featured Tours
+              {t('public.tourGrid.loadingTitle')}
             </h2>
             <p className="text-zinc-400 text-lg font-poppins">
-              Discover handpicked experiences from around the world
+              {t('public.tourGrid.loadingSubtitle')}
             </p>
           </div>
           
@@ -82,16 +84,16 @@ export default function TourGrid({ filters }: TourGridProps) {
         <div className="max-w-7xl mx-auto text-center">
           <div className="bg-red-900/20 border border-red-700/50 rounded-xl p-8">
             <h2 className="text-2xl font-inter font-bold text-red-400 mb-4">
-              Error al cargar tours
+              {t('public.tourGrid.errorTitle')}
             </h2>
             <p className="text-red-300 font-poppins mb-6">
-              {error instanceof Error ? error.message : 'Error desconocido'}
+              {error instanceof Error ? error.message : t('public.tourGrid.errorUnknown')}
             </p>
             <button 
               onClick={() => refetch()}
               className="bg-red-700 hover:bg-red-600 text-white font-inter font-medium py-2 px-6 rounded-lg transition-colors"
             >
-              Intentar nuevamente
+              {t('public.tourGrid.retry')}
             </button>
           </div>
         </div>
@@ -105,18 +107,18 @@ export default function TourGrid({ filters }: TourGridProps) {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-inter font-bold text-white mb-4">
-            Featured Tours
+            {t('public.tourGrid.loadingTitle')}
           </h2>
           <p className="text-zinc-400 text-lg font-poppins">
-            Discover handpicked experiences from around the world
+            {t('public.tourGrid.loadingSubtitle')}
           </p>
           {(filters.location || filters.duration || filters.maxPrice) && (
             <div className="mt-4 p-3 bg-neutral-800 border border-neutral-700 rounded-lg inline-block">
               <p className="text-green-400 text-sm">
-                {filteredTours.length} tour{filteredTours.length !== 1 ? 's' : ''} found
-                {filters.location && ` in ${filters.location}`}
-                {filters.duration && ` (up to ${filters.duration}h)`}
-                {filters.maxPrice && ` (under $${filters.maxPrice})`}
+                {filteredTours.length} {t('public.tourGrid.found')}
+                {filters.location && ` ${t('public.tourGrid.in')} ${filters.location}`}
+                {filters.duration && ` ${t('public.tourGrid.upTo', { hours: filters.duration })}`}
+                {filters.maxPrice && ` ${t('public.tourGrid.under', { price: filters.maxPrice })}`}
               </p>
             </div>
           )}
@@ -137,17 +139,17 @@ export default function TourGrid({ filters }: TourGridProps) {
           <div className="text-center py-12">
             <div className="bg-neutral-800 border border-neutral-700 rounded-xl p-8">
               <p className="text-zinc-400 text-lg font-poppins mb-4">
-                No tours match your current filters.
+                {t('public.tourGrid.noMatchTitle')}
               </p>
               <p className="text-zinc-500 text-sm">
-                Try adjusting your search criteria or explore all available tours.
+                {t('public.tourGrid.noMatchSubtitle')}
               </p>
             </div>
           </div>
         ) : (
           <div className="text-center py-12">
             <p className="text-zinc-400 text-lg font-poppins">
-              No hay tours disponibles en este momento.
+              {t('public.tourGrid.noToursAvailable')}
             </p>
           </div>
         )}

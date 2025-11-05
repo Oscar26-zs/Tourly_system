@@ -1,4 +1,5 @@
 import type { AnyFieldApi } from '@tanstack/react-form';
+import { useTranslation } from 'react-i18next';
 
 export function RegisterGuideStepOne({
   form,
@@ -15,6 +16,7 @@ export function RegisterGuideStepOne({
   handleContinueToPhase2: () => void;
   FieldInfo: React.FC<{ field: AnyFieldApi }>;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="space-y-8">
       {/* Google User Info Display */}
@@ -27,8 +29,8 @@ export function RegisterGuideStepOne({
               </svg>
             </div>
             <div>
-              <p className="text-green-400 font-medium">¡Connected to Google!</p>
-              <p className="text-green-300 text-sm">Basic information complete automatically</p>
+              <p className="text-green-400 font-medium">{t('guide.connectedTitle')}</p>
+              <p className="text-green-300 text-sm">{t('guide.connectedSubtitle')}</p>
             </div>
           </div>
         </div>
@@ -37,7 +39,7 @@ export function RegisterGuideStepOne({
         {/* Left Column - Profile Photo */}
         <div className="lg:col-span-1 flex flex-col items-center justify-start">
           <div className="w-full">
-            <h3 className="text-white font-medium mb-4 text-center">Profile Photo</h3>
+            <h3 className="text-white font-medium mb-4 text-center">{t('guide.profilePhoto')}</h3>
             <div className="flex flex-col items-center space-y-4">
               <div className="w-32 h-32 rounded-full border-2 border-white/20 overflow-hidden bg-white/10 flex items-center justify-center relative">
                 {photoPreview ? (
@@ -79,7 +81,7 @@ export function RegisterGuideStepOne({
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                         </svg>
-                        <span>{photoPreview ? 'Change profile photo' : 'Upload profile photo'}</span>
+                        <span>{photoPreview ? t('guide.changeProfilePhoto') : t('guide.uploadProfilePhoto')}</span>
                       </div>
                     </label>
                     {photoPreview && (
@@ -88,13 +90,13 @@ export function RegisterGuideStepOne({
                         onClick={() => handlePhotoChange(null, field)}
                         className="text-red-400 hover:text-red-300 text-sm underline"
                       >
-                        Remove Photo
+                        {t('guide.removePhoto')}
                       </button>
                     )}
-                    <p className="text-[#B3B3B3] text-xs text-center">Optional Profile Photo. JPG or PNG up to 5MB.</p>
+                    <p className="text-[#B3B3B3] text-xs text-center">{t('guide.optionalPhotoHint')}</p>
                     <FieldInfo field={field} />
                     {googleUserData && (
-                      <p className="text-green-400 text-xs text-center">✓ Photo obtained from Google. You can change it if you want.</p>
+                      <p className="text-green-400 text-xs text-center">{t('guide.photoFromGoogle')}</p>
                     )}
                   </>
                 )}
@@ -117,11 +119,11 @@ export function RegisterGuideStepOne({
                   Full Name <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
-                  <input
+          <input
                     id={field.name}
                     name={field.name}
                     className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-white placeholder-[#B3B3B3] focus:outline-none focus:border-[#20B2AA] focus:ring-1 focus:ring-[#20B2AA]/20 transition-all duration-200 text-sm"
-                    placeholder="Enter your full name"
+                    placeholder={t('guide.enterFullNamePlaceholder')}
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
@@ -140,7 +142,7 @@ export function RegisterGuideStepOne({
                   </div>
                 </div>
                 {googleUserData && (
-                  <p className="text-green-400 text-xs mt-1">✓ Full name obtained from Google</p>
+                  <p className="text-green-400 text-xs mt-1">{t('guide.fullNameFromGoogle')}</p>
                 )}
                 <FieldInfo field={field} />
               </div>
@@ -153,9 +155,9 @@ export function RegisterGuideStepOne({
             validators={{
               onChange: ({ value }: { value: string }) =>
                 !value
-                  ? 'The email is required'
+                  ? t('guide.emailRequired')
                   : !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value)
-                  ? 'Invalid email'
+                  ? t('guide.invalidEmail')
                   : undefined,
             }}
             children={(field: AnyFieldApi) => (
@@ -169,7 +171,7 @@ export function RegisterGuideStepOne({
                     name={field.name}
                     type="email"
                     className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-white placeholder-[#B3B3B3] focus:outline-none focus:border-[#20B2AA] focus:ring-1 focus:ring-[#20B2AA]/20 transition-all duration-200 text-sm"
-                    placeholder="Enter your email"
+                    placeholder={t('guide.enterEmailPlaceholder')}
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
@@ -188,7 +190,7 @@ export function RegisterGuideStepOne({
                   </div>
                 </div>
                 {googleUserData && (
-                  <p className="text-green-400 text-xs mt-1">✓ Email obtained from Google</p>
+                  <p className="text-green-400 text-xs mt-1">{t('guide.emailFromGoogle')}</p>
                 )}
                 <FieldInfo field={field} />
               </div>
@@ -208,7 +210,7 @@ export function RegisterGuideStepOne({
                 fontFamily: 'Inter, sans-serif',
               }}
             >
-              Continue
+              {t('guide.continue')}
             </button>
           </div>
         </div>

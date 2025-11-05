@@ -3,6 +3,7 @@ import { User, Mail, Phone, Calendar, Shield } from 'lucide-react';
 import { useUserProfileById } from '../hooks/useUserProfileById';
 import { useAuth } from '../../app/providers/useAuth';
 import { EditUserProfileSection } from './EditUserProfileSection';
+import { useTranslation } from 'react-i18next';
 
 interface UserProfileSectionProps {
   className?: string;
@@ -12,6 +13,7 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
   const { user } = useAuth();
   const { data: userProfile, isLoading, error, isError, refetch } = useUserProfileById(user?.uid || '');
   const [isEditing, setIsEditing] = useState(false);
+  const { t } = useTranslation();
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -61,9 +63,9 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
     return (
       <div className={`space-y-6 ${className}`}>
         <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-6 text-center">
-          <h3 className="text-lg font-semibold text-red-400 mb-2">Error loading profile</h3>
+          <h3 className="text-lg font-semibold text-red-400 mb-2">{t('profile.errorLoading')}</h3>
           <p className="text-red-300 text-sm">
-            {error?.message || 'Could not load user information'}
+            {error?.message || t('profile.couldNotLoad')}
           </p>
         </div>
       </div>
@@ -71,8 +73,8 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
   }
 
   const formatDate = (date: Date | undefined) => {
-    if (!date) return 'Not available';
-    return date.toLocaleDateString('en-US', {
+    if (!date) return t('profile.notProvided');
+    return date.toLocaleDateString(undefined, {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
@@ -81,9 +83,9 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
 
   const getRoleLabel = (roleId: number) => {
     switch (roleId) {
-      case 1: return 'Tourist';
-      case 2: return 'Tour Guide';
-      default: return 'User';
+      case 1: return t('profile.roles.1');
+      case 2: return t('profile.roles.2');
+      default: return t('profile.roles.default');
     }
   };
 
@@ -110,19 +112,19 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
           </div>
         </div>
         
-        <div className="space-y-1">
+          <div className="space-y-1">
           <h2 className="text-2xl font-bold text-white">{userProfile.nombreCompleto}</h2>
           <p className="text-green-400 font-medium">{getRoleLabel(userProfile.idRol)}</p>
           <div className="flex items-center gap-2 text-sm text-neutral-400">
             <Shield className="w-4 h-4" />
-            <span>{userProfile.activo ? 'Active account' : 'Inactive account'}</span>
+            <span>{userProfile.activo ? t('profile.status.active') : t('profile.status.inactive')}</span>
           </div>
         </div>
       </div>
 
       {/* Información del perfil */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-white mb-4">Personal Information</h3>
+  <h3 className="text-lg font-semibold text-white mb-4">{t('profile.personalInformation')}</h3>
         
         {/* Email */}
         <div className="bg-neutral-800/50 rounded-lg p-4 border border-neutral-700/50">
@@ -131,7 +133,7 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
               <Mail className="w-5 h-5 text-blue-400" />
             </div>
             <div className="flex-1">
-              <label className="text-sm text-neutral-400">Email address</label>
+              <label className="text-sm text-neutral-400">{t('profile.emailAddress')}</label>
               <p className="text-white font-medium">{userProfile.email}</p>
             </div>
           </div>
@@ -144,9 +146,9 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
               <Phone className="w-5 h-5 text-green-400" />
             </div>
             <div className="flex-1">
-              <label className="text-sm text-neutral-400">Phone</label>
+              <label className="text-sm text-neutral-400">{t('profile.phone')}</label>
               <p className="text-white font-medium">
-                {userProfile.telefono || 'Not provided'}
+                {userProfile.telefono || t('profile.notProvided')}
               </p>
             </div>
           </div>
@@ -159,7 +161,7 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
               <User className="w-5 h-5 text-purple-400" />
             </div>
             <div className="flex-1">
-              <label className="text-sm text-neutral-400">Gender</label>
+              <label className="text-sm text-neutral-400">{t('profile.gender')}</label>
               <p className="text-white font-medium">{userProfile.genero}</p>
             </div>
           </div>
@@ -173,7 +175,7 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
                 <Calendar className="w-5 h-5 text-orange-400" />
               </div>
               <div className="flex-1">
-                <label className="text-sm text-neutral-400">Member since</label>
+                <label className="text-sm text-neutral-400">{t('profile.memberSince')}</label>
                 <p className="text-white font-medium">{formatDate(userProfile.fechaCreacion)}</p>
               </div>
             </div>
@@ -183,7 +185,7 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
         {/* Descripción */}
         {userProfile.descripcion && (
           <div className="bg-neutral-800/50 rounded-lg p-4 border border-neutral-700/50">
-            <label className="text-sm text-neutral-400 block mb-2">Description</label>
+            <label className="text-sm text-neutral-400 block mb-2">{t('profile.description')}</label>
             <p className="text-white leading-relaxed">{userProfile.descripcion}</p>
           </div>
         )}
@@ -196,7 +198,7 @@ export default function UserProfileSection({ className = '' }: UserProfileSectio
           className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center gap-2"
         >
           <User className="w-4 h-4" />
-          Edit Profile
+          {t('profile.editProfile')}
         </button>
       </div>
     </div>

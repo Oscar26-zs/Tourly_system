@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface TourBookingButtonsProps {
   price: number;
@@ -8,6 +9,7 @@ interface TourBookingButtonsProps {
 }
 
 export function TourBookingButtons({ price, onBookNow, onCancel, slotId }: TourBookingButtonsProps) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleBook = () => {
@@ -29,16 +31,16 @@ export function TourBookingButtons({ price, onBookNow, onCancel, slotId }: TourB
           onClick={handleBook}
           className="flex-1 bg-green-700 hover:bg-green-600 text-white font-inter font-medium py-4 px-6 hover:cursor-pointer rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-green-700/30 hover:scale-[1.02] active:scale-[0.98] text-lg"
         >
-          Book now - ${price}
+          {t('public.tourBooking.bookNowPrice', { price })}
 
         </button>
         
         {onCancel && (
-          <button
+            <button
             onClick={onCancel}
             className="flex-1 bg-transparent border-2 border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 text-lg"
           >
-            Cancel
+            {t('public.tourBooking.cancel')}
           </button>
         )}
       </div>

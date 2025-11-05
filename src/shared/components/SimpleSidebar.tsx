@@ -2,6 +2,7 @@ import React from 'react';
 import { User, BookCheck, MapPin,  LogOut } from 'lucide-react';
 import { logoutService } from '../../services/logoutService';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface SidebarItem {
   id: string;
@@ -24,17 +25,18 @@ export default function SimpleSidebar({
   onLogout
 }: SimpleSidebarProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   // Items para la vista pública (mantener comportamiento actual)
   const publicItems: SidebarItem[] = [
     {
       id: 'profile',
-      label: 'Profile',
+      label: t('sidebar.items.profile'),
       icon: <User className="w-5 h-5" />,
       active: activeItem === 'profile'
     },
     {
       id: 'settings',
-      label: 'My Bookings',
+      label: t('sidebar.items.settings'),
       icon: <BookCheck className="w-5 h-5" />,
       active: activeItem === 'settings'
     },
@@ -44,13 +46,13 @@ export default function SimpleSidebar({
   const guideMainItems: SidebarItem[] = [
     {
       id: 'tours',
-      label: 'Tours',
+      label: t('sidebar.items.tours'),
       icon: <MapPin className="w-5 h-5" />,
       active: activeItem === 'tours'
     },
     {
       id: 'slots',
-      label: 'Slots',
+      label: t('sidebar.items.slots'),
       icon: <BookCheck className="w-5 h-5" />,
       active: activeItem === 'slots'
     },
@@ -71,7 +73,7 @@ export default function SimpleSidebar({
       {/* Sidebar Header */}
       <div className="p-6 border-b border-green-700/20">
         <h2 className="text-lg font-semibold">
-          {variant === 'guide' ? 'Dashboard Guide' : 'Settings'}
+          {variant === 'guide' ? t('sidebar.header.dashboardGuide') : t('sidebar.header.settings')}
         </h2>
       </div>
 
@@ -119,14 +121,14 @@ export default function SimpleSidebar({
       </div>
 
       {/* Bottom area: sólo en vista guía mostrar perfil y cerrar sesión */}
-      {variant === 'guide' && (
+          {variant === 'guide' && (
         <div className="p-4 border-t border-green-700/20">
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-neutral-300 hover:bg-red-600/10 hover:text-white transition-colors duration-200"
           >
             <LogOut className="w-5 h-5" />
-            <span className="text-sm font-medium">Log Out</span>
+            <span className="text-sm font-medium">{t('sidebar.logout')}</span>
           </button>
         </div>
       )}

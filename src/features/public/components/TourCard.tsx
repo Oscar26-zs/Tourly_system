@@ -2,6 +2,7 @@ import { MapPin, Clock, Users, Star } from 'lucide-react';
 import type { Tour } from '../types/tour';
 import { useSlotsByTour } from '../hooks/useSlotByTourId';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface TourCardProps {
   tour: Tour;
@@ -9,6 +10,7 @@ interface TourCardProps {
 }
 
 export default function TourCard({ tour, onBookNow }: TourCardProps) {
+  const { t } = useTranslation();
   // Hook para obtener slots del tour
   const { data: slots = [], isLoading: slotsLoading } = useSlotsByTour(tour.id);
   const navigate = useNavigate();
@@ -55,7 +57,7 @@ export default function TourCard({ tour, onBookNow }: TourCardProps) {
         {/* Ubicación */}
         <div className="flex items-center text-zinc-400 text-sm font-poppins">
           <MapPin className="w-4 h-4 mr-2 text-green-700" />
-          <span>{tour.ciudad}, Costa Rica</span>
+          <span>{tour.ciudad}, {t('public.tourCard.country')}</span>
         </div>
 
         {/* Título */}
@@ -78,9 +80,9 @@ export default function TourCard({ tour, onBookNow }: TourCardProps) {
           <div className="flex items-center text-zinc-400 font-poppins">
             <Users className="w-4 h-4 mr-1 text-green-700" />
             {slotsLoading ? (
-              <span className="animate-pulse">Loading...</span>
+              <span className="animate-pulse">{t('public.tourCard.loading')}</span>
             ) : (
-              <span>Up to {getMaxCapacity()}</span>
+              <span>{t('public.tourCard.upTo', { count: getMaxCapacity() })}</span>
             )}
           </div>
         </div>
@@ -101,7 +103,7 @@ export default function TourCard({ tour, onBookNow }: TourCardProps) {
             <div className="text-zinc-400 text-sm font-poppins line-through">
               ${Math.round(tour.precio * 1.3)}
             </div>
-            <div className="text-zinc-400 text-sm font-poppins">per person</div>
+            <div className="text-zinc-400 text-sm font-poppins">{t('public.tourHeader.perPerson')}</div>
           </div>
         </div>
 
@@ -110,7 +112,7 @@ export default function TourCard({ tour, onBookNow }: TourCardProps) {
           onClick={handleBookNow}
           className="w-full bg-green-700 hover:bg-green-600 text-white font-inter font-medium py-3 px-4 hover:cursor-pointer rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-green-700/30 hover:scale-[1.02] active:scale-[0.98]"
         >
-          Book now
+          {t('public.tourCard.bookNow')}
         </button>
       </div>
     </div>

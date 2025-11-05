@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../app/providers/useAuth';
 import { logoutService } from '../../services/logoutService';
+import i18n from '../../app/config/i18n';
 
 export function useNavbar() {
   const navigate = useNavigate();
@@ -80,7 +81,14 @@ export function useNavbar() {
   };
 
   const handleLanguageChange = (language: string) => {
-    console.log(`Cambiar a ${language}`);
+    // Accept either language code or readable name (e.g. 'Español' | 'English')
+    if (!language) return;
+    const l = language.toLowerCase();
+    let code = language;
+    if (l === 'español' || l === 'spanish' || l === 'es' || l === 'es-') code = 'es';
+    if (l === 'english' || l === 'inglés' || l === 'in English' || l === 'en') code = 'en';
+
+    i18n.changeLanguage(code).catch((e) => console.error('changeLanguage error', e));
     setIsLanguageOpen(false);
     setIsMenuOpen(false);
   };

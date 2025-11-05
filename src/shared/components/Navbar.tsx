@@ -1,31 +1,31 @@
-import { Globe, User, Menu, X, LogOut, LogIn, Languages, UserPlus } from 'lucide-react';
+import { Globe, User, Menu, X, LogOut, LogIn, UserPlus } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 import UserDropdown from './UserDropdown';
 import { useNavbar } from '../hooks/useNavbar';
 
 // ...existing code...
 
 export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: boolean }) {
+  const { t } = useTranslation();
   const {
     // Estados
     isMenuOpen,
-    isLanguageOpen,
     isDropdownOpen,
     user,
     isHostDropdownOpen,
     
-    // Handlers
-    handleBecomeHost,
+  // Handlers
+  handleBecomeHost,
     handleGoHome,
     handleLogin,
     handleLogout,
-    handleLanguageChange,
     handleHostRegister,
     handleHostLogin,
     
-    // Toggle functions
-    toggleMenu,
-    toggleLanguage,
-    toggleDropdown,
+  // Toggle functions
+  toggleMenu,
+  toggleDropdown,
     
     // Utility functions
     getUserName,
@@ -40,13 +40,13 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
       <div className="w-full max-w-7xl flex justify-between items-center">
         
   {/* Logo - Become a host button (Desktop) */}
-  {!hideBecomeHost && (
+      {!hideBecomeHost && (
     <div className="hidden md:flex justify-center items-center gap-1 relative">
       <button 
         onClick={handleBecomeHost}
         className="text-white text-xl lg:text-2xl font-medium font-inter hover:text-green-400 hover:cursor-pointer hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 cursor-pointer px-2 py-1 rounded-md"
       >
-        Become a host
+        {t('navbar.becomeHost')}
       </button>
       {/* Host dropdown for desktop */}
       {/* The dropdown will be positioned relative to this container */}
@@ -58,7 +58,7 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
               className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
             >
               <UserPlus className="w-4 h-4 text-green-700" />
-              <span>Sign Up</span>
+              <span>{t('navbar.signUp')}</span>
             </div>
 
             <div
@@ -66,7 +66,7 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
               className="px-4 py-3 text-white hover:bg-green-700/20 cursor-pointer flex items-center gap-3"
             >
               <LogIn className="w-4 h-4 text-green-700" />
-              <span>Log In</span>
+              <span>{t('navbar.signIn')}</span>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
             <Globe className="w-6 h-6 md:w-7 md:h-7 text-green-700 absolute top-1 left-1 hover:text-green-500 transition-colors duration-200" />
           </div>
           <button className="text-white text-xl md:text-2xl font-medium font-inter hover:cursor-pointer hover:text-green-400 transition-colors duration-200">
-            Tourly
+            {t('navbar.tourly')}
           </button>
         </div>
 
@@ -89,7 +89,10 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
           <div className="w-6 h-6 relative cursor-pointer hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 p-1 rounded-md">
             <Globe className="w-6 h-6 relative text-white cursor-pointer hover:text-green-400 transition-colors duration-200" />
           </div>
-          
+
+          {/* Language selector (desktop) */}
+          <LanguageSwitcher variant="compact" className="mr-2" />
+
           {/* User Dropdown Button */}
           <div className="relative">
             <button
@@ -105,7 +108,7 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
                 <User className="w-6 h-6" />
               )}
             </button>
-            
+
             <UserDropdown 
               isOpen={isDropdownOpen} 
               onClose={() => setIsDropdownOpen(false)} 
@@ -135,7 +138,7 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
                 onClick={handleBecomeHost}
                 className="text-left text-white hover:text-green-400 hover:bg-green-700/10 transition-all duration-200 px-4 py-3 rounded-md"
               >
-                Become a host
+                {t('navbar.becomeHost')}
               </button>
             )}
 
@@ -146,7 +149,7 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
                 className="w-full flex items-center gap-3 text-left text-white hover:text-green-400 hover:bg-green-700/10 transition-all duration-200 px-4 py-3 rounded-md"
               >
                 <UserPlus className="w-4 h-4" />
-                <span>Registrarse</span>
+                <span>{t('navbar.signUp')}</span>
               </button>
 
               <button
@@ -154,7 +157,7 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
                 className="w-full flex items-center gap-3 text-left text-white hover:text-green-400 hover:bg-green-700/10 transition-all duration-200 px-4 py-3 rounded-md"
               >
                 <LogIn className="w-4 h-4" />
-                <span>Iniciar Sesión</span>
+                <span>{t('navbar.signIn')}</span>
               </button>
             </div>
 
@@ -173,7 +176,7 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
                   className="w-full flex items-center gap-3 text-left text-white hover:text-red-400 hover:bg-red-600/10 transition-all duration-200 px-4 py-3 rounded-md"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Sign out</span>
+                  <span>{t('navbar.signOut')}</span>
                 </button>
               </div>
             ) : (
@@ -182,38 +185,15 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
                 className="w-full flex items-center gap-3 text-left text-white hover:text-green-400 hover:bg-green-700/10 transition-all duration-200 px-4 py-3 rounded-md"
               >
                 <LogIn className="w-4 h-4" />
-                <span>Sign in</span>
+                <span>{t('navbar.signIn')}</span>
               </button>
             )}
 
             <div className="border-t border-neutral-700/30 my-2"></div>
 
-            {/* Language Section */}
-            <div className="relative">
-              <button
-                onClick={toggleLanguage}
-                className="w-full flex items-center gap-3 text-left text-white hover:text-green-400 hover:bg-green-700/10 transition-all duration-200 px-4 py-3 rounded-md"
-              >
-                <Languages className="w-4 h-4" />
-                <span>Language</span>
-              </button>
-              
-              {isLanguageOpen && (
-                <div className="ml-4 mt-2 space-y-1">
-                  <button
-                    onClick={() => handleLanguageChange('Español')}
-                    className="w-full text-left text-zinc-300 hover:text-white hover:bg-neutral-700/30 transition-all duration-200 px-4 py-2 rounded-md text-sm"
-                  >
-                    🇪🇸 Spanish
-                  </button>
-                  <button
-                    onClick={() => handleLanguageChange('English')}
-                    className="w-full text-left text-zinc-300 hover:text-white hover:bg-neutral-700/30 transition-all duration-200 px-4 py-2 rounded-md text-sm"
-                  >
-                    🇺🇸 English
-                  </button>
-                </div>
-              )}
+            {/* Language selector (mobile) - inline switcher */}
+            <div className="w-full">
+              <LanguageSwitcher variant="full" className="w-full" />
             </div>
           </div>
         </div>

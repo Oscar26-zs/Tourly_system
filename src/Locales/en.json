@@ -237,6 +237,23 @@
 			"noMatchSubtitle": "Try adjusting your search criteria or explore all available tours.",
 			"noToursAvailable": "No tours available right now."
 		}
+		,
+		"tourCard": {
+			"country": "Costa Rica",
+			"loading": "Loading...",
+			"upTo": "Up to {{count}}",
+			"bookNow": "Book now"
+		},
+		"tourBooking": {
+			"bookNowPrice": "Book now - ${{price}}",
+			"cancel": "Cancel"
+		},
+		"tourFeatures": {
+			"duration": "{{hours}} hour",
+			"upTo": "Up to {{count}}",
+			"transportation": "Transportation",
+			"meetingPointTitle": "Meeting point:"
+		}
 	},
 	"calendar": {
 		"prevMonth": "Previous month",

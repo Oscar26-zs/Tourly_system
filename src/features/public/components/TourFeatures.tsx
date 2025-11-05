@@ -6,12 +6,15 @@ interface TourFeaturesProps {
   meetingPoint: string;
 }
 
+import { useTranslation } from 'react-i18next';
+
 export function TourFeatures({ 
   rating, 
   duration, 
   capacity, 
   meetingPoint
 }: TourFeaturesProps) {
+  const { t } = useTranslation();
   // Convertir duración de minutos a horas
   const durationInHours = duration >= 60 ? Math.round(duration / 60) : 1;
   
@@ -32,7 +35,7 @@ export function TourFeatures({
           <svg className="w-5 h-5 sm:w-6 sm:h-6 text-green-700 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
           </svg>
-          <span className="text-white font-medium text-base sm:text-lg">{durationInHours} hour{durationInHours !== 1 ? 's' : ''}</span>
+          <span className="text-white font-medium text-base sm:text-lg">{t('public.tourFeatures.duration', { hours: durationInHours })}{durationInHours !== 1 ? 's' : ''}</span>
         </div>
 
         {/* Capacidad */}
@@ -40,7 +43,7 @@ export function TourFeatures({
           <svg className="w-5 h-5 sm:w-6 sm:h-6 text-green-700 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
           </svg>
-          <span className="text-white font-medium text-base sm:text-lg">Up to {capacity}</span>
+          <span className="text-white font-medium text-base sm:text-lg">{t('public.tourFeatures.upTo', { count: capacity })}</span>
         </div>
 
         {/* Transporte */}
@@ -48,14 +51,14 @@ export function TourFeatures({
           <svg className="w-5 h-5 sm:w-6 sm:h-6 text-green-700 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
           </svg>
-          <span className="text-white font-medium text-base sm:text-lg">Transportation</span>
+          <span className="text-white font-medium text-base sm:text-lg">{t('public.tourFeatures.transportation')}</span>
         </div>
       </div>
 
       {/* Punto de encuentro */}
       {meetingPoint && meetingPoint !== 'Por definir' && (
         <div className="pt-2">
-          <h3 className="text-white font-semibold text-base sm:text-lg mb-3">Punto de encuentro:</h3>
+          <h3 className="text-white font-semibold text-base sm:text-lg mb-3">{t('public.tourFeatures.meetingPointTitle')}</h3>
           <p className="text-gray-300 text-sm sm:text-base">{meetingPoint}</p>
         </div>
       )}

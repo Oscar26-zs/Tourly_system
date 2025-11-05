@@ -26,7 +26,23 @@
       "itineraryStepTitle": "Step title",
       "itineraryDuration": "Duration",
       "itineraryDescriptionPlaceholder": "Step description (optional)",
-      "addStep": "Add step"
+      "addStep": "Add step",
+      "title": "Create a tour",
+      "cityLabel": "City",
+      "meetingPointLabel": "Meeting point",
+      "categoryLabel": "Category",
+      "selectCategory": "Select category",
+      "loadingCategories": "Loading categories...",
+      "includesLabel": "Includes",
+      "includesPlaceholder": "Add an included feature and press Enter or Add",
+      "notIncludedLabel": "Not included",
+      "notIncludedPlaceholder": "Add a non-included item and press Enter or Add",
+      "imageLabel": "Image",
+      "uploadingImage": "Uploading image...",
+      "saving": "Saving...",
+      "createTour": "Create tour",
+      "removeStep": "Remove",
+      "resetForm": "Reset form"
     },
     "editTour": {
       "header": "Edit tour"
@@ -79,7 +95,13 @@
       "loading": "Loading...",
       "upTo": "Up to {{count}}"
     },
+    "tourDetail": {
+      "loading": "Loading tour...",
+      "errorLoading": "Error loading tour: {{message}}",
+      "notFound": "Tour with ID \"{{id}}\" not found"
+    },
     "booking": {
+      "errorTitle": "Error",
       "selectDate": "Select a date",
       "loadingDates": "Loading available dates...",
       "errorLoadingDates": "Error loading dates",
@@ -102,6 +124,24 @@
       "cancel": "Cancel",
       "bookingInProgress": "Booking...",
       "reserveNow": "Reserve now"
+    }
+    ,
+    "login": {
+      "subtitle": "Sign in with your Tourly account",
+      "signInWithGoogle": "Continue with Google",
+      "signingInWithGoogle": "Signing in with Google..."
+    },
+    "registerTourist": {
+      "title": "Become a Tourist",
+      "subtitle": "Register to join Tourly as a tourist",
+      "progress": {
+        "basicInfo": "Basic Information",
+        "profileDetails": "Profile details"
+      },
+      "alreadyHaveAccount": "Already have an account?",
+      "signIn": "Sign In",
+      "areYouAGuide": "Are you a guide?",
+      "registerHere": "Register here"
     }
   }
 }

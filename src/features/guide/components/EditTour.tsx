@@ -231,7 +231,7 @@ export default function GuideEditTourSection({
                     onClick={() => removeItineraryItem(i)}
                     className="text-red-400"
                   >
-                    Remove
+                    {t('guide.createTour.removeStep')}
                   </button>
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default function GuideEditTourSection({
 
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            City
+            {t('guide.createTour.cityLabel')}
           </label>
           <input
             value={ciudad}
@@ -252,7 +252,7 @@ export default function GuideEditTourSection({
 
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Meeting point
+            {t('guide.createTour.meetingPointLabel')}
           </label>
           <input
             value={puntoEncuentro}
@@ -262,26 +262,26 @@ export default function GuideEditTourSection({
         </div>
 
       <div>
-    <label className="block text-sm font-medium text-white mb-1">Category</label>
+    <label className="block text-sm font-medium text-white mb-1">{t('guide.createTour.categoryLabel')}</label>
     <select
       value={categoriaId}
       onChange={(e) => setCategoriaId(e.target.value)}
       className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
     >
-      <option value="">Select category</option>
+        <option value="">{t('guide.createTour.selectCategory')}</option>
       {categories.map((c) => (
         <option key={c.id} value={c.id}>
           {c.nombreCategoria}
         </option>
       ))}
     </select>
-    {categoriesLoading && <div className="text-sm text-zinc-400 mt-1">Loading categories…</div>}
+      {categoriesLoading && <div className="text-sm text-zinc-400 mt-1">{t('guide.createTour.loadingCategories')}</div>}
   </div>
 
         {/* Includes / Not-Includes dynamic lists */}
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Includes
+            {t('guide.createTour.includesLabel')}
           </label>
           <div className="flex items-center gap-2">
             <input
@@ -291,14 +291,14 @@ export default function GuideEditTourSection({
                 e.key === "Enter" && (e.preventDefault(), addIncluye())
               }
               className="flex-1 px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-              placeholder="Add an included feature and press Enter or Add"
+              placeholder={t('guide.createTour.includesPlaceholder')}
             />
             <button
               type="button"
               onClick={addIncluye}
               className="px-3 py-2 bg-neutral-700 rounded text-white"
             >
-              Add
+              {t('guide.createTour.add')}
             </button>
           </div>
           <div className="flex flex-wrap gap-2 mt-2">

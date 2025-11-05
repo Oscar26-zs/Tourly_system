@@ -223,10 +223,10 @@ export default function BookingFormPage() {
           <div className="min-h-screen flex items-center justify-center p-4 pt-24">
             <div className="w-full max-w-md">
               <div className="bg-red-900/20 border border-red-700/30 rounded-2xl p-8 text-center">
-                <h1 className="text-2xl font-bold text-white mb-2">Error</h1>
+                <h1 className="text-2xl font-bold text-white mb-2">{t('public.booking.errorTitle')}</h1>
                 <p className="text-neutral-300 mb-4">{error.message}</p>
                 <div className="flex justify-center">
-                  <button onClick={() => navigate(-1)} className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg">Volver</button>
+                  <button onClick={() => navigate(-1)} className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg">{t('public.booking.backButton')}</button>
                 </div>
               </div>
             </div>

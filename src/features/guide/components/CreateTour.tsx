@@ -218,20 +218,20 @@ export default function GuideCreateTourSection({
         </div>
 
         <div>
-  <label className="block text-sm font-medium text-white mb-1">{t('guide.createTour.categoryLabel')}</label>
-    <select
-      value={categoriaId}
-      onChange={(e) => setCategoriaId(e.target.value)}
-      className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-    >
-      <option value="">Select category</option>
+      <label className="block text-sm font-medium text-white mb-1">{t('guide.createTour.categoryLabel')}</label>
+        <select
+          value={categoriaId}
+          onChange={(e) => setCategoriaId(e.target.value)}
+          className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
+        >
+          <option value="">{t('guide.createTour.selectCategory')}</option>
       {categories.map((c) => (
         <option key={c.id} value={c.id}>
           {c.nombreCategoria}
         </option>
       ))}
     </select>
-    {categoriesLoading && <div className="text-sm text-zinc-400 mt-1">{t('guide.createTour.loadingCategories')}</div>}
+        {categoriesLoading && <div className="text-sm text-zinc-400 mt-1">{t('guide.createTour.loadingCategories')}</div>}
   </div>
 
         {/* Includes / Not-Includes dynamic lists */}

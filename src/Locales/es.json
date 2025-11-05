@@ -44,6 +44,7 @@
       "cityLabel": "Ciudad",
       "meetingPointLabel": "Punto de encuentro",
       "categoryLabel": "Categoría",
+  "selectCategory": "Selecciona categoría",
       "loadingCategories": "Cargando categorías…",
       "includesLabel": "Incluye",
       "includesPlaceholder": "Añade un elemento incluido y presiona Enter o Añadir",
@@ -162,6 +163,11 @@
       "loading": "Cargando...",
       "upTo": "Hasta {{count}}"
     },
+    "tourDetail": {
+      "loading": "Cargando tour...",
+      "errorLoading": "Error al cargar el tour: {{message}}",
+      "notFound": "Tour con ID \"{{id}}\" no encontrado"
+    },
     "imageGallery": {
       "noImages": "No hay imágenes disponibles",
       "altSingle": "Imagen del tour",
@@ -244,6 +250,7 @@
     },
     "booking": {
       "selectDate": "Selecciona una fecha",
+      "errorTitle": "Error",
       "loadingDates": "Cargando fechas disponibles...",
       "errorLoadingDates": "Error al cargar las fechas",
       "noDatesAvailable": "No hay fechas disponibles en este momento.",
@@ -265,6 +272,26 @@
       "cancel": "Cancelar",
       "bookingInProgress": "Reservando...",
       "reserveNow": "Reservar ahora"
+    }
+    ,
+    "login": {
+      "subtitle": "Accede con tu cuenta de Tourly",
+      "signInWithGoogle": "Continuar con Google",
+      "signingInWithGoogle": "Iniciando con Google..."
+    }
+    ,
+    "registerTourist": {
+      "title": "Conviértete en turista",
+      "subtitle": "Regístrate para unirte a Tourly como turista"
+    ,
+    "progress": {
+      "basicInfo": "Información básica",
+      "profileDetails": "Detalles del perfil"
+    },
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "signIn": "Iniciar sesión",
+    "areYouAGuide": "¿Eres guía?",
+    "registerHere": "Regístrate aquí"
     }
   },
   "calendar": {

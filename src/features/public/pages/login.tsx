@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { auth } from "../../../app/config/firebase";
+import { useTranslation } from 'react-i18next';
 import { getUserData } from "../../../services/userService";
 import { Navbar } from '../../../shared/components';
 
 export default function Login() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [error, setError] = useState("");
@@ -174,9 +176,9 @@ export default function Login() {
               </svg>
             </div>
             <h1 className="text-3xl font-bold text-white mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
-              Iniciar sesión
+              {t('navbar.signIn')}
             </h1>
-            <p className="text-[#B3B3B3] text-base">Accede con tu cuenta de Tourly</p>
+            <p className="text-[#B3B3B3] text-base">{t('public.login.subtitle')}</p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -202,7 +204,7 @@ export default function Login() {
               />
             </div>
             {/* Google Sign-In Button */}
-            <div className="pt-1">
+                <div className="pt-1">
               <button
                 type="button"
                 onClick={handleGoogleSignIn}
@@ -220,7 +222,7 @@ export default function Login() {
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                   </svg>
                 )}
-                <span>{isGoogleLoading ? 'Iniciando con Google...' : 'Continuar con Google'}</span>
+                <span>{isGoogleLoading ? t('public.login.signingInWithGoogle') : t('public.login.signInWithGoogle')}</span>
               </button>
             </div>
             <button

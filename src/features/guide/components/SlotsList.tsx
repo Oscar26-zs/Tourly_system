@@ -1,16 +1,86 @@
 import { useSlotsByGuide } from "../services/getSlotsByGuide";
 import type { Slot } from "../../public/types/slot";
 import { useTranslation } from 'react-i18next';
+import { useEffect, useMemo, useState } from 'react';
+import { db } from '../../../app/config/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 export default function SlotsList({ guideId }: { guideId?: string | null }) {
   const { data: slots = [], isLoading, isError, error } = useSlotsByGuide(guideId ?? undefined);
   const { t } = useTranslation();
 
-  const formatDate = (iso?: string) => {
-    if (!iso) return "—";
-    const d = new Date(iso);
-    return d.toLocaleString();
+  const parseToDate = (v: any): Date | null => {
+    if (!v) return null;
+    if (typeof v === 'object') {
+      if (typeof v.toDate === 'function') return v.toDate();
+      if ('seconds' in v) return new Date((v.seconds as number) * 1000);
+    }
+    if (typeof v === 'number') return new Date(v);
+    if (typeof v === 'string') return new Date(v);
+    return null;
   };
+
+  const formatSlotRange = (startRaw: any, endRaw: any) => {
+    const start = parseToDate(startRaw);
+    const end = parseToDate(endRaw);
+    if (!start && !end) return '—';
+    if (start && end) {
+      const sameDay = start.toDateString() === end.toDateString();
+      const day = start.toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
+      const startTime = start.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      const endTime = end.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      return sameDay ? `${day} · ${startTime}–${endTime}` : `${start.toLocaleString()} — ${end.toLocaleString()}`;
+    }
+    if (start) return `${start.toLocaleDateString(undefined, { day: 'numeric', month: 'short' })} · ${start.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}`;
+    if (end) return `${end.toLocaleDateString(undefined, { day: 'numeric', month: 'short' })} · ${end.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}`;
+    return '—';
+  };
+
+  // helper: extract id from DocumentReference or path-like string
+  const idFromRefOrPath = (v: any) => {
+    if (!v) return '';
+    if (typeof v === 'object' && typeof v.id === 'string') return v.id;
+    if (typeof v === 'string') {
+      const parts = v.split('/').filter(Boolean);
+      return parts.length ? parts[parts.length - 1] : v;
+    }
+    return '';
+  };
+
+  // state to cache tour titles by tourId
+  const [tourTitles, setTourTitles] = useState<Record<string, string>>({});
+
+  // Collect unique tour ids from slots
+  const tourIds = useMemo(() => {
+    return Array.from(new Set(slots.map((s: any) => idFromRefOrPath((s as any).idTour)).filter(Boolean)));
+  }, [slots]);
+
+  // Fetch tour titles for tourIds that are missing
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      const missing = tourIds.filter(id => id && !tourTitles[id]);
+      if (missing.length === 0) return;
+      const updates: Record<string, string> = {};
+      for (const id of missing) {
+        try {
+          const ref = doc(db, 'tours', id);
+          const snap = await getDoc(ref);
+          if (snap.exists()) {
+            const data: any = snap.data();
+            updates[id] = data.titulo ?? data.title ?? data.name ?? `Tour ${id}`;
+          } else {
+            updates[id] = `Tour ${id}`;
+          }
+        } catch (e) {
+          updates[id] = `Tour ${id}`;
+        }
+      }
+      if (!mounted) return;
+      setTourTitles(prev => ({ ...prev, ...updates }));
+    })();
+    return () => { mounted = false; };
+  }, [tourIds]);
 
   const guideDisplay = (s: any) => {
     // Prefer a stored guide name if available, else show the guide doc id or dash
@@ -63,12 +133,17 @@ export default function SlotsList({ guideId }: { guideId?: string | null }) {
 
                   <div className="text-sm text-zinc-400 mt-0 leading-6">
                     <div>
-                      <strong className="text-zinc-300 block">{t('guide.slots.start')}</strong>
-                      <span className="text-zinc-300 block">{formatDate((s as any).fechaHoraInicio)}</span>
+                      <strong className="text-zinc-300 block">Tour:</strong>
+                      {
+                        (() => {
+                          const tId = idFromRefOrPath((s as any).idTour);
+                          return <span className="text-zinc-300 block">{tourTitles[tId] ?? (tId || '—')}</span>;
+                        })()
+                      }
                     </div>
                     <div className="mt-2">
-                      <strong className="text-zinc-300 block">{t('guide.slots.end')}</strong>
-                      <span className="text-zinc-300 block">{formatDate((s as any).fechaHoraFin)}</span>
+                      <strong className="text-zinc-300 block">Horario:</strong>
+                      <span className="text-zinc-300 block">{formatSlotRange((s as any).fechaHoraInicio, (s as any).fechaHoraFin)}</span>
                     </div>
                   </div>
 

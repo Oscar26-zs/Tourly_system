@@ -1,89 +1,221 @@
+
 {
-  "navbar": {
-    "becomeHost": "Become a host",
-    "signUp": "Sign Up",
-    "signIn": "Sign in",
-    "signOut": "Sign out",
-    "language": "Language",
-    "tourly": "Tourly",
-    "spanish": "Spanish",
-    "english": "English"
-  }
-  ,
-  "footer": {
-    "description": "Discover amazing tours and experiences around the world. Book with confidence and create unforgettable memories.",
-    "popularDestinations": "Popular Destinations",
-    "destinations": {
-      "guanacaste": "Guanacaste",
-      "limon": "Limon",
-      "puntarenas": "Puntarenas",
-      "manuelAntonio": "Manuel Antonio",
-      "monteverde": "Monteverde"
-    },
-    "support": "Support",
-    "supportItems": {
-      "helpCenter": "Help Center",
-      "contactUs": "Contact Us",
-      "cancellationPolicy": "Cancellation Policy",
-      "safetyGuidelines": "Safety Guidelines",
-      "termsOfService": "Terms of Service"
-    },
-    "stayUpdated": "Stay Updated",
-    "newsletter": {
-      "text": "Get the latest deals and travel inspiration delivered to your inbox.",
-      "placeholder": "Enter your email",
-      "subscribe": "Subscribe"
-    },
-    "copyright": "© {{year}} Tourly. All rights reserved."
-  },
-  "user": {
-    "profile": "Profile",
-    "logOut": "Log Out",
-    "logIn": "Log In",
-    "signUp": "Sign Up",
-    "anonymous": "User"
-  }
-  ,
-  "toast": {
-    "bookingCreated": "Reservation created",
-    "bookingId": "ID: {{id}}",
-    "noTours": "No tours for this day",
-    "close": "Close notification"
-  },
-  "validation": {
-    "validating": "Validating..."
-  }
-  ,
-  "sidebar": {
-    "header": {
-      "settings": "Settings",
-      "dashboardGuide": "Dashboard Guide"
-    },
-    "items": {
-      "profile": "Profile",
-      "settings": "My Bookings",
-      "tours": "Tours",
-      "slots": "Slots"
-    },
-    "logout": "Log Out"
-  },
-  "profile": {
-    "personalInformation": "Personal Information",
-    "emailAddress": "Email address",
-    "phone": "Phone",
-    "gender": "Gender",
-    "memberSince": "Member since",
-    "description": "Description",
-    "notProvided": "Not provided",
-    "editProfile": "Edit Profile",
-    "status": {
-      "active": "Active account",
-      "inactive": "Inactive account"
-    },
-    "roles": {
-      "1": "Tourist",
-      "2": "Tour Guide",
-      "default": "User"
-    }
-  }
+	"navbar": {
+		"becomeHost": "Become a host",
+		"signUp": "Sign Up",
+		"signIn": "Sign in",
+		"signOut": "Sign out",
+		"language": "Language",
+		"tourly": "Tourly",
+		"spanish": "Spanish",
+		"english": "English"
+	},
+	"footer": {
+		"description": "Discover amazing tours and experiences around the world. Book with confidence and create unforgettable memories.",
+		"popularDestinations": "Popular Destinations",
+		"destinations": {
+			"guanacaste": "Guanacaste",
+			"limon": "Limon",
+			"puntarenas": "Puntarenas",
+			"manuelAntonio": "Manuel Antonio",
+			"monteverde": "Monteverde"
+		},
+		"support": "Support",
+		"supportItems": {
+			"helpCenter": "Help Center",
+			"contactUs": "Contact Us",
+			"cancellationPolicy": "Cancellation Policy",
+			"safetyGuidelines": "Safety Guidelines",
+			"termsOfService": "Terms of Service"
+		},
+		"stayUpdated": "Stay Updated",
+		"newsletter": {
+			"text": "Get the latest deals and travel inspiration delivered to your inbox.",
+			"placeholder": "Enter your email",
+			"subscribe": "Subscribe"
+		},
+		"copyright": "© {{year}} Tourly. All rights reserved."
+	},
+	"user": {
+		"profile": "Profile",
+		"logOut": "Log Out",
+		"logIn": "Log In",
+		"signUp": "Sign Up",
+		"anonymous": "User"
+	},
+	"toast": {
+		"bookingCreated": "Reservation created",
+		"bookingId": "ID: {{id}}",
+		"noTours": "No tours for this day",
+		"close": "Close notification"
+	},
+	"validation": {
+		"validating": "Validating..."
+	},
+	"sidebar": {
+		"header": {
+			"settings": "Settings",
+			"dashboardGuide": "Dashboard Guide"
+		},
+		"items": {
+			"profile": "Profile",
+			"settings": "My Bookings",
+			"tours": "Tours",
+			"slots": "Slots"
+		},
+		"logout": "Log Out"
+	},
+	"profile": {
+		"personalInformation": "Personal Information",
+		"emailAddress": "Email address",
+		"phone": "Phone",
+		"gender": "Gender",
+		"memberSince": "Member since",
+		"description": "Description",
+		"notProvided": "Not provided",
+		"editProfile": "Edit Profile",
+		"editProfileInformation": "Edit Profile Information",
+		"picture": "Profile Picture",
+		"pictureUploadHint": "Click the camera icon to upload a new picture",
+		"fullNamePlaceholder": "Enter your full name",
+		"phonePlaceholder": "Enter your phone number",
+		"genderPlaceholder": "Select gender",
+		"genderOptions": {
+			"male": "Male",
+			"female": "Female",
+			"other": "Other"
+		},
+		"descriptionPlaceholder": "Tell us about yourself...",
+		"saveChanges": "Save Changes",
+		"saving": "Saving...",
+		"updateSuccess": "Profile updated successfully!",
+		"updateFailed": "Failed to update profile",
+		"updateError": "An unexpected error occurred",
+		"status": {
+			"active": "Active account",
+			"inactive": "Inactive account"
+		},
+		"roles": {
+			"1": "Tourist",
+			"2": "Tour Guide",
+			"default": "User"
+		}
+	},
+	"bookings": {
+		"header": "My Bookings",
+		"description": "Here you can view and manage all your tour bookings.",
+		"stats": {
+			"totalBookings": "Total Bookings",
+			"confirmed": "Confirmed",
+			"cancelled": "Cancelled",
+			"totalSpent": "Total Spent"
+		},
+		"card": {
+			"booking": "Booking #{{id}}",
+			"bookingDate": "Booking Date",
+			"guests": "Guests",
+			"guestLabel": "person|people",
+			"totalAmount": "Total Amount",
+			"pricePerPerson": "Price per Person",
+			"created": "Created",
+			"tourId": "Tour ID: {{id}}",
+			"slotId": "Slot ID: {{id}}"
+		},
+		"noBookingsTitle": "No bookings yet",
+		"noBookingsText": "You haven't made any tour bookings yet. Start exploring our amazing tours!",
+		"buttons": {
+			"cancelBooking": "Cancel Booking",
+			"browseTours": "Browse Tours"
+		},
+		"status": {
+			"confirmed": "Confirmed",
+			"pending": "Pending",
+			"cancelled": "Cancelled",
+			"completed": "Completed"
+		}
+	},
+	"bookingsToast": {
+		"cancelledTitle": "Booking Cancelled",
+		"cancelledDesc": "Booking #{{id}} has been cancelled successfully",
+		"cancelErrorTitle": "Error Cancelling Booking",
+		"cancelErrorDesc": "There was an error cancelling your booking. Please try again."
+	},
+	"guide": {
+		"connectedTitle": "Connected to Google!",
+		"connectedSubtitle": "Basic information complete automatically",
+		"profilePhoto": "Profile Photo",
+		"changeProfilePhoto": "Change profile photo",
+		"uploadProfilePhoto": "Upload profile photo",
+		"optionalPhotoHint": "Optional Profile Photo. JPG or PNG up to 5MB.",
+		"fullNameRequired": "Full name is required",
+		"enterFullNamePlaceholder": "Enter your full name",
+		"fullNameFromGoogle": "✓ Full name obtained from Google",
+		"enterEmailPlaceholder": "Enter your email",
+		"emailFromGoogle": "✓ Email obtained from Google",
+		"continue": "Continue",
+		"removePhoto": "Remove Photo",
+		"photoFromGoogle": "✓ Photo obtained from Google. You can change it if you want.",
+		"emailRequired": "The email is required",
+		"invalidEmail": "Invalid email",
+		"createTour": {
+			"title": "Create new tour",
+			"titleLabel": "Title",
+			"titlePlaceholder": "Tour title",
+			"descriptionLabel": "Description",
+			"descriptionPlaceholder": "Short description",
+			"priceLabel": "Price",
+			"durationLabel": "Duration (minutes)",
+			"highlightsLabel": "Highlights",
+			"highlightsPlaceholder": "Add a highlight and press Enter or Add",
+			"add": "Add",
+			"itineraryLabel": "Itinerary (steps)",
+			"itineraryStepTitle": "Step title",
+			"itineraryDuration": "Duration",
+			"itineraryDescriptionPlaceholder": "Step description (optional)",
+			"addStep": "Add step",
+			"cityLabel": "City",
+			"meetingPointLabel": "Meeting point",
+			"categoryLabel": "Category",
+			"loadingCategories": "Loading categories…",
+			"includesLabel": "Includes",
+			"includesPlaceholder": "Add an included feature and press Enter or Add",
+			"notIncludedLabel": "Not included",
+			"notIncludedPlaceholder": "Add a non-included item and press Enter or Add",
+			"imageLabel": "Image",
+			"uploadingImage": "Uploading image...",
+			"saving": "Saving...",
+			"createTour": "Create tour"
+		},
+		"createSlot": {
+			"title": "Add slot",
+			"startLabel": "Start date & time",
+			"endLabel": "End date & time",
+			"capacityLabel": "Max capacity",
+			"availableSeatsLabel": "Available seats",
+			"active": "Active",
+			"saving": "Saving...",
+			"createSlot": "Create slot",
+			"cancel": "Cancel"
+		},
+		"slots": {
+			"noGuideSelected": "No guide selected.",
+			"loading": "Loading slots...",
+			"loadError": "Error loading slots",
+			"header": "Manage your tour slots",
+			"noSlots": "No slots scheduled.",
+			"places": "places",
+			"available": "available",
+			"active": "Active",
+			"inactive": "Inactive",
+			"start": "Start:",
+			"end": "End:",
+			"guideLabel": "Guide:",
+			"view": "View",
+			"edit": "Edit"
+		}
+	},
+	"calendar": {
+		"prevMonth": "Previous month",
+		"nextMonth": "Next month"
+	}
 }

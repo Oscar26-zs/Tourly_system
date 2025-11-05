@@ -4,12 +4,14 @@ import { useUserBookings, useCancelBooking } from '../hooks/useUserBookings';
 import type { BookingStatus, UserBooking } from '../types';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../components/Toast';
+import { useTranslation } from 'react-i18next';
 
 const UserBookingsSection = () => {
   const { user } = useAuth();
   const { data: bookings, isLoading, error, isError } = useUserBookings(user?.uid || '');
   const navigate = useNavigate();
   const toast = useToast();
+  const { t, i18n } = useTranslation();
 
   // Estados de carga
   if (isLoading) {
@@ -37,10 +39,8 @@ const UserBookingsSection = () => {
       <div className="max-w-4xl mx-auto p-6">
         <div className="bg-red-900/20 border border-red-700/30 rounded-lg p-6 text-center">
           <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-red-400 mb-2">Error loading bookings</h3>
-          <p className="text-neutral-400 mb-4">
-            Could not load your booking information. Please try again.
-          </p>
+          <h3 className="text-lg font-semibold text-red-400 mb-2">{t('bookings.header')}</h3>
+          <p className="text-neutral-400 mb-4">{t('bookings.description')}</p>
           <p className="text-sm text-red-400">{error?.message}</p>
         </div>
       </div>
@@ -65,18 +65,12 @@ const UserBookingsSection = () => {
 
   // Función para formatear el estado
   const formatStatus = (status: BookingStatus) => {
-    const statusMap = {
-      confirmed: 'Confirmed',
-      pending: 'Pending',
-      cancelled: 'Cancelled',
-      completed: 'Completed'
-    };
-    return statusMap[status] || status;
+    return t(`bookings.status.${status}` as any) ?? status;
   };
 
   // Función para formatear fecha
   const formatDate = (date: Date) => {
-    return date.toLocaleDateString('en-US', {
+    return date.toLocaleDateString(i18n.language || undefined, {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -96,18 +90,18 @@ const UserBookingsSection = () => {
 
       try {
         await cancelBooking(bookingId, user.uid);
-        
+
         toast.show({
           id: `cancel-${bookingId}`,
-          title: 'Booking Cancelled',
-          description: `Booking #${bookingId} has been cancelled successfully`,
+          title: t('bookingsToast.cancelledTitle'),
+          description: t('bookingsToast.cancelledDesc', { id: bookingId }),
           duration: 5000
         });
       } catch (error) {
         toast.show({
           id: `error-${bookingId}`,
-          title: 'Error Cancelling Booking',
-          description: 'There was an error cancelling your booking. Please try again.',
+          title: t('bookingsToast.cancelErrorTitle'),
+          description: t('bookingsToast.cancelErrorDesc'),
           duration: 5000
         });
         console.error('Error:', error);
@@ -119,7 +113,7 @@ const UserBookingsSection = () => {
         <div className="flex justify-between items-start mb-4">
           <div>
             <h3 className="text-xl font-semibold text-white mb-2">
-              Booking #{booking.id || booking.idReserva || 'Unknown'}
+              {t('bookings.card.booking', { id: booking.id || booking.idReserva || 'Unknown' })}
             </h3>
             <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium border ${getStatusStyle(booking.estado)}`}>
               {formatStatus(booking.estado)}
@@ -127,7 +121,7 @@ const UserBookingsSection = () => {
           </div>
           <div className="text-right">
             <p className="text-2xl font-bold text-green-400">${booking.precioTotal}</p>
-            <p className="text-sm text-neutral-400">Total Amount</p>
+            <p className="text-sm text-neutral-400">{t('bookings.card.totalAmount')}</p>
           </div>
         </div>
 
@@ -135,7 +129,7 @@ const UserBookingsSection = () => {
           <div className="flex items-center text-neutral-300">
             <Calendar className="h-5 w-5 text-green-500 mr-3" />
             <div>
-              <p className="font-medium">Booking Date</p>
+              <p className="font-medium">{t('bookings.card.bookingDate')}</p>
               <p className="text-sm text-neutral-400">{formatDate(booking.fechaReserva)}</p>
             </div>
           </div>
@@ -143,15 +137,15 @@ const UserBookingsSection = () => {
           <div className="flex items-center text-neutral-300">
             <Users className="h-5 w-5 text-blue-500 mr-3" />
             <div>
-              <p className="font-medium">Guests</p>
-              <p className="text-sm text-neutral-400">{booking.peopleCount ?? 0} person{(booking.peopleCount ?? 0) !== 1 ? 's' : ''}</p>
+              <p className="font-medium">{t('bookings.card.guests')}</p>
+              <p className="text-sm text-neutral-400">{booking.peopleCount ?? 0} {t('bookings.card.guestLabel', { count: booking.peopleCount ?? 0 })}</p>
             </div>
           </div>
 
           <div className="flex items-center text-neutral-300">
             <DollarSign className="h-5 w-5 text-yellow-500 mr-3" />
             <div>
-              <p className="font-medium">Price per Person</p>
+              <p className="font-medium">{t('bookings.card.pricePerPerson')}</p>
               <p className="text-sm text-neutral-400">${booking.precioUnitario}</p>
             </div>
           </div>
@@ -159,7 +153,7 @@ const UserBookingsSection = () => {
           <div className="flex items-center text-neutral-300">
             <Clock className="h-5 w-5 text-purple-500 mr-3" />
             <div>
-              <p className="font-medium">Created</p>
+              <p className="font-medium">{t('bookings.card.created')}</p>
               <p className="text-sm text-neutral-400">{formatDate(booking.fechaCreacion)}</p>
             </div>
           </div>
@@ -168,8 +162,8 @@ const UserBookingsSection = () => {
         <div className="pt-4 border-t border-neutral-700">
           <div className="flex justify-between items-center">
             <div className="text-sm text-neutral-400">
-              <p>Tour ID: {booking.idTour}</p>
-              <p>Slot ID: {booking.idSlot}</p>
+              <p>{t('bookings.card.tourId', { id: booking.idTour })}</p>
+              <p>{t('bookings.card.slotId', { id: booking.idSlot })}</p>
             </div>
             <div className="flex gap-2">
               {booking.estado !== 'cancelled' && (
@@ -177,7 +171,7 @@ const UserBookingsSection = () => {
                   onClick={handleCancelBooking}
                   className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
                 >
-                  Cancel Booking
+                  {t('bookings.buttons.cancelBooking')}
                 </button>
               )}
             </div>
@@ -190,35 +184,33 @@ const UserBookingsSection = () => {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="mb-6">
-        <h2 className="text-3xl font-bold text-white mb-2">My Bookings</h2>
-        <p className="text-neutral-400">
-          Here you can view and manage all your tour bookings.
-        </p>
+        <h2 className="text-3xl font-bold text-white mb-2">{t('bookings.header')}</h2>
+        <p className="text-neutral-400">{t('bookings.description')}</p>
       </div>
 
       {bookings && bookings.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div className="bg-neutral-800/50 rounded-lg p-4 text-center">
             <p className="text-2xl font-bold text-white">{bookings.length}</p>
-            <p className="text-sm text-neutral-400">Total Bookings</p>
+            <p className="text-sm text-neutral-400">{t('bookings.stats.totalBookings')}</p>
           </div>
           <div className="bg-neutral-800/50 rounded-lg p-4 text-center">
             <p className="text-2xl font-bold text-green-400">
               {bookings.filter(b => b.estado === 'confirmed').length}
             </p>
-            <p className="text-sm text-neutral-400">Confirmed</p>
+            <p className="text-sm text-neutral-400">{t('bookings.stats.confirmed')}</p>
           </div>
            <div className="bg-neutral-800/50 rounded-lg p-4 text-center">
             <p className="text-2xl font-bold text-red-400">
               {bookings.filter(b => b.estado === 'cancelled').length}
             </p>
-            <p className="text-sm text-neutral-400">Cancelled</p>
+            <p className="text-sm text-neutral-400">{t('bookings.stats.cancelled')}</p>
           </div>
           <div className="bg-neutral-800/50 rounded-lg p-4 text-center">
             <p className="text-2xl font-bold text-green-400">
               ${bookings.reduce((total, booking) => total + booking.total, 0)}
             </p>
-            <p className="text-sm text-neutral-400">Total Spent</p>
+            <p className="text-sm text-neutral-400">{t('bookings.stats.totalSpent')}</p>
           </div>
         </div>
       )}
@@ -232,15 +224,13 @@ const UserBookingsSection = () => {
       ) : (
         <div className="bg-neutral-800/50 rounded-lg p-12 text-center">
           <MapPin className="h-16 w-16 text-neutral-500 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-white mb-2">No bookings yet</h3>
-          <p className="text-neutral-400 mb-6">
-            You haven't made any tour bookings yet. Start exploring our amazing tours!
-          </p>
+          <h3 className="text-xl font-semibold text-white mb-2">{t('bookings.noBookingsTitle')}</h3>
+          <p className="text-neutral-400 mb-6">{t('bookings.noBookingsText')}</p>
           <button
             className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors"
             onClick={() => navigate('/')}
           >
-            Browse Tours
+            {t('bookings.buttons.browseTours')}
           </button>
         </div>
       )}

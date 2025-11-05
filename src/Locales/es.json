@@ -53,4 +53,116 @@
   "validation": {
     "validating": "Validando..."
   }
+  ,
+  "sidebar": {
+    "header": {
+      "settings": "Ajustes",
+      "dashboardGuide": "Panel del Guía"
+    },
+    "items": {
+      "profile": "Perfil",
+      "settings": "Mis Reservas",
+      "tours": "Tours",
+      "slots": "Turnos"
+    },
+    "logout": "Cerrar sesión"
+  },
+  "profile": {
+    "personalInformation": "Información Personal",
+    "emailAddress": "Correo electrónico",
+    "phone": "Teléfono",
+    "gender": "Género",
+    "memberSince": "Miembro desde",
+    "description": "Descripción",
+    "notProvided": "No proporcionado",
+    "editProfile": "Editar perfil",
+    "editProfileInformation": "Editar información del perfil",
+    "picture": "Foto de perfil",
+    "pictureUploadHint": "Haz clic en el icono de la cámara para subir una nueva foto",
+    "fullNamePlaceholder": "Introduce tu nombre completo",
+    "phonePlaceholder": "Introduce tu número de teléfono",
+    "genderPlaceholder": "Selecciona género",
+    "genderOptions": {
+      "male": "Hombre",
+      "female": "Mujer",
+      "other": "Otro"
+    },
+    "descriptionPlaceholder": "Cuéntanos sobre ti...",
+    "saveChanges": "Guardar cambios",
+    "saving": "Guardando...",
+    "updateSuccess": "¡Perfil actualizado con éxito!",
+    "updateFailed": "Error al actualizar el perfil",
+    "updateError": "Ocurrió un error inesperado",
+    "status": {
+      "active": "Cuenta activa",
+      "inactive": "Cuenta inactiva"
+    },
+    "roles": {
+      "1": "Turista",
+      "2": "Guía turístico",
+      "default": "Usuario"
+    }
+  },
+  "bookings": {
+    "header": "Mis Reservas",
+    "description": "Aquí puedes ver y gestionar todas tus reservas de tours.",
+    "stats": {
+      "totalBookings": "Reservas Totales",
+      "confirmed": "Confirmadas",
+      "cancelled": "Canceladas",
+      "totalSpent": "Total gastado"
+    },
+    "card": {
+      "booking": "Reserva #{{id}}",
+      "bookingDate": "Fecha de la reserva",
+      "guests": "Personas",
+      "guestLabel": "persona|personas",
+      "totalAmount": "Total",
+      "pricePerPerson": "Precio por persona",
+      "created": "Creado",
+      "tourId": "ID del tour: {{id}}",
+      "slotId": "ID del turno: {{id}}"
+    },
+    "noBookingsTitle": "Aún no tienes reservas",
+    "noBookingsText": "Aún no has hecho ninguna reserva de tour. ¡Comienza a explorar nuestros increíbles tours!",
+    "buttons": {
+      "cancelBooking": "Cancelar reserva",
+      "browseTours": "Explorar tours"
+    },
+    "status": {
+      "confirmed": "Confirmada",
+      "pending": "Pendiente",
+      "cancelled": "Cancelada",
+      "completed": "Completada"
+    }
+  },
+  "bookingsToast": {
+    "cancelledTitle": "Reserva cancelada",
+    "cancelledDesc": "La reserva #{{id}} ha sido cancelada exitosamente",
+    "cancelErrorTitle": "Error al cancelar la reserva",
+    "cancelErrorDesc": "Hubo un error al cancelar tu reserva. Por favor inténtalo de nuevo."
+  },
+  "guide": {
+    "connectedTitle": "¡Conectado a Google!",
+    "connectedSubtitle": "Información básica completada automáticamente",
+    "profilePhoto": "Foto de perfil",
+    "changeProfilePhoto": "Cambiar foto de perfil",
+    "uploadProfilePhoto": "Subir foto de perfil",
+    "optionalPhotoHint": "Foto de perfil opcional. JPG o PNG hasta 5MB.",
+    "fullNameRequired": "El nombre completo es obligatorio",
+    "enterFullNamePlaceholder": "Introduce tu nombre completo",
+    "fullNameFromGoogle": "✓ Nombre completo obtenido desde Google",
+    "enterEmailPlaceholder": "Introduce tu correo",
+    "emailFromGoogle": "✓ Correo obtenido desde Google",
+    "continue": "Continuar"
+    ,
+    "removePhoto": "Eliminar foto",
+    "photoFromGoogle": "✓ Foto obtenida desde Google. Puedes cambiarla si quieres.",
+    "emailRequired": "El correo es obligatorio",
+    "invalidEmail": "Correo inválido"
+  },
+  "calendar": {
+    "prevMonth": "Mes anterior",
+    "nextMonth": "Mes siguiente"
+  }
 }

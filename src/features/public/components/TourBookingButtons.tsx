@@ -29,6 +29,7 @@ export function TourBookingButtons({ price, onBookNow, onCancel, slotId }: TourB
       <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={handleBook}
+          aria-label={t('public.tourBooking.bookNowAria', { price })}
           className="flex-1 bg-green-700 hover:bg-green-600 text-white font-inter font-medium py-4 px-6 hover:cursor-pointer rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-green-700/30 hover:scale-[1.02] active:scale-[0.98] text-lg"
         >
           {t('public.tourBooking.bookNowPrice', { price })}

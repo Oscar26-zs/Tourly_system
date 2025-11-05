@@ -1,6 +1,7 @@
 // ...existing code...
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import type { Tour } from "../../public/types/tour";
 import { useGuideTours } from "../hooks/useToursByGuide";
 import TourListItem from "./ui/TourListItem";
@@ -10,6 +11,7 @@ import CreateSlot from "./CreateSlot";
 export default function GuideToursSection({ guideId, onCreate }: { guideId?: string | null; onCreate?: () => void }) {
   const navigate = useNavigate();
   const { data: tours = [], isLoading, isError, error, refetch } = useGuideTours(guideId);
+  const { t } = useTranslation();
 
   // show up to 9 tours (3 columns x 3 rows)
   const visibleTours = (tours || []).slice(0, 9);
@@ -52,7 +54,7 @@ export default function GuideToursSection({ guideId, onCreate }: { guideId?: str
   return (
     <section>
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold">Mis Tours</h2>
+        <h2 className="text-xl font-semibold">{t('guide.tours.header')}</h2>
         <div className="flex gap-2">
           <button
             onClick={() => {
@@ -61,19 +63,19 @@ export default function GuideToursSection({ guideId, onCreate }: { guideId?: str
             }}
             className="px-3 py-1 bg-green-700 text-white rounded-md hover:bg-green-600"
           >
-            Crear tour
+            {t('guide.tours.createButton')}
           </button>
         </div>
       </div>
 
-      {isLoading && <div>Cargando tours...</div>}
-      {isError && <div className="text-red-400">{(error as Error)?.message || "Error cargando tours"}</div>}
+      {isLoading && <div>{t('guide.tours.loading')}</div>}
+      {isError && <div className="text-red-400">{(error as Error)?.message || t('guide.tours.errorLoading')}</div>}
 
       {/* Lista de tours */}
       <div className="space-y-4">
         {visibleTours.length === 0 && !isLoading && (
           <div className="text-zinc-400 text-center py-8">
-            No tienes tours creados todavía.
+            {t('guide.tours.noTours')}
           </div>
         )}
 

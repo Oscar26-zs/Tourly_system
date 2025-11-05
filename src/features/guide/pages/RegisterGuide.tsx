@@ -4,6 +4,7 @@ import { useRegisterGuide } from '../hooks/useRegisterGuide';
 import { RegisterGuideStepOne } from '../components/RegisterGuideStepOne';
 import { RegisterGuideStepTwo } from '../components/RegisterGuideStepTwo';
 import { Navbar } from '../../../shared/components';
+import { useTranslation } from 'react-i18next';
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -48,6 +49,8 @@ export default function RegisterGuide() {
     handleGoogleRegister,
   } = registerGuideLogic;
 
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#1E1E1E' }}>
       <Navbar />
@@ -62,9 +65,9 @@ export default function RegisterGuide() {
             </svg>
           </div>
           <h1 className="text-3xl font-bold text-white mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
-            Become a <span style={{ color: '#228B22' }}>Tour Guide</span>
+            {t('guide.register.title')}
           </h1>
-          <p className="text-[#B3B3B3] text-base">Register to share your tours and experiences</p>
+          <p className="text-[#B3B3B3] text-base">{t('guide.register.subtitle')}</p>
           
           {/* Progress Indicator */}
           <div className="flex justify-center items-center mt-6 space-x-4">
@@ -77,7 +80,7 @@ export default function RegisterGuide() {
                 1
               </div>
               <span className={`ml-2 text-sm ${currentPhase >= 1 ? 'text-[#228B22]' : 'text-[#B3B3B3]'}`}>
-                Basic Information
+                {t('guide.register.progress.basicInfo')}
               </span>
             </div>
             <div className={`w-8 h-0.5 ${currentPhase >= 2 ? 'bg-[#228B22]' : 'bg-white/20'}`}></div>
@@ -90,7 +93,7 @@ export default function RegisterGuide() {
                 2
               </div>
               <span className={`ml-2 text-sm ${currentPhase >= 2 ? 'text-[#228B22]' : 'text-[#B3B3B3]'}`}>
-                Profile details
+                {t('guide.register.progress.profileDetails')}
               </span>
             </div>
           </div>
@@ -154,21 +157,21 @@ export default function RegisterGuide() {
                         <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                       </svg>
                     )}
-                    <span>{isGoogleLoading ? 'Signing in with Google...' : 'Sign in with Google'}</span>
+                    <span>{isGoogleLoading ? t('guide.register.google.signing') : t('guide.register.google.signIn')}</span>
                   </button>
                 </div>
               )}
               <p className="text-[#B3B3B3] text-sm mb-3">
-                Already have an account?
+                {t('guide.register.alreadyHaveAccount')}
               </p>
               <div className="space-y-2">
                 <a href="/login" className="block text-[#228B22] hover:underline font-bold text-sm">
-                  Sign In
+                  {t('guide.register.signIn')}
                 </a>
                 <div className="flex items-center justify-center space-x-2 text-xs text-[#B3B3B3]">
-                  <span>Are you a tourist?</span>
+                  <span>{t('guide.register.areYouTourist')}</span>
                   <a href="/registerTourist" className="text-[#228B22] hover:underline font-bold">
-                    Register here
+                    {t('guide.register.registerTourist')}
                   </a>
                 </div>
               </div>

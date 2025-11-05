@@ -69,37 +69,37 @@ export default function GuideEditTourSection({
 
   return (
     <section className="max-w-3xl w-full mx-auto bg-neutral-900/95 p-6 rounded-lg shadow-lg">
-      <h2 className="text-xl font-semibold text-white mb-4">Edit tour</h2>
+  <h2 className="text-xl font-semibold text-white mb-4">{t('guide.editTour.header')}</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Title
+            {t('guide.createTour.titleLabel')}
           </label>
           <input
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
             className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-            placeholder="Tour title"
+            placeholder={t('guide.createTour.titlePlaceholder')}
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Description
+            {t('guide.createTour.descriptionLabel')}
           </label>
           <textarea
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
             className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700 h-28"
-            placeholder="Short description"
+            placeholder={t('guide.createTour.descriptionPlaceholder')}
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-white mb-1">
-              Price
+              {t('guide.createTour.priceLabel')}
             </label>
             <input
               type="number"
@@ -114,7 +114,7 @@ export default function GuideEditTourSection({
 
           <div>
             <label className="block text-sm font-medium text-white mb-1">
-              Duration (minutes)
+              {t('guide.createTour.durationLabel')}
             </label>
             <input
               type="number"
@@ -133,7 +133,7 @@ export default function GuideEditTourSection({
         {/* Highlights */}
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Highlights
+            {t('guide.createTour.highlightsLabel')}
           </label>
           <div className="flex items-center gap-2">
             <input
@@ -143,14 +143,14 @@ export default function GuideEditTourSection({
                 e.key === "Enter" && (e.preventDefault(), addHighlight())
               }
               className="flex-1 px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-              placeholder="Add a highlight and press Enter or Add"
+              placeholder={t('guide.createTour.highlightsPlaceholder')}
             />
             <button
               type="button"
               onClick={addHighlight}
               className="px-3 py-2 bg-neutral-700 rounded text-white"
             >
-              Add
+              {t('guide.createTour.add')}
             </button>
           </div>
           <div className="flex flex-wrap gap-2 mt-2">
@@ -175,20 +175,20 @@ export default function GuideEditTourSection({
         {/* Itinerary */}
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Itinerary (steps)
+            {t('guide.createTour.itineraryLabel')}
           </label>
           <div className="grid grid-cols-3 gap-2">
             <input
               value={itineraryTitle}
               onChange={(e) => setItineraryTitle(e.target.value)}
               className="col-span-2 px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-              placeholder="Step title"
+              placeholder={t('guide.createTour.itineraryStepTitle')}
             />
             <input
               value={itineraryDuration}
               onChange={(e) => setItineraryDuration(e.target.value)}
               className="px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700"
-              placeholder="Duration"
+              placeholder={t('guide.createTour.itineraryDuration')}
             />
           </div>
           <div className="mt-2">
@@ -196,7 +196,7 @@ export default function GuideEditTourSection({
               value={itineraryDescription}
               onChange={(e) => setItineraryDescription(e.target.value)}
               className="w-full px-3 py-2 bg-neutral-800 text-white rounded border border-neutral-700 h-20"
-              placeholder="Step description (optional)"
+              placeholder={t('guide.createTour.itineraryDescriptionPlaceholder')}
             />
           </div>
           <div className="flex items-center gap-2 mt-2">
@@ -205,7 +205,7 @@ export default function GuideEditTourSection({
               onClick={addItineraryItem}
               className="px-3 py-2 bg-neutral-700 rounded text-white"
             >
-              Add step
+              {t('guide.createTour.addStep')}
             </button>
           </div>
           <div className="mt-2 space-y-2">

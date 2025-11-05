@@ -24,10 +24,10 @@ export default function TourCard({ tour, onBookNow }: TourCardProps) {
 
   const formatDuration = (minutes: number) => {
     if (minutes < 60) {
-      return `${minutes} min`;
+      return t('public.tourCard.minutes', { count: minutes });
     }
     const hours = Math.floor(minutes / 60);
-    return `${hours} hour${hours > 1 ? 's' : ''}`;
+    return t('public.tourCard.hours', { count: hours });
   };
 
   const formatPrice = (price: number) => {

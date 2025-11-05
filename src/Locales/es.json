@@ -1,57 +1,134 @@
 {
   "navbar": {
     "becomeHost": "Conviértete en anfitrión",
-    "signUp": "Registrarse",
+    "signUp": "Regístrate",
     "signIn": "Iniciar sesión",
     "signOut": "Cerrar sesión",
     "language": "Idioma",
     "tourly": "Tourly",
     "spanish": "Español",
     "english": "Inglés"
-  }
-  ,
-  "footer": {
-    "description": "Descubre tours y experiencias asombrosas alrededor del mundo. Reserva con confianza y crea recuerdos inolvidables.",
-    "popularDestinations": "Destinos Populares",
-    "destinations": {
-      "guanacaste": "Guanacaste",
-      "limon": "Limón",
-      "puntarenas": "Puntarenas",
-      "manuelAntonio": "Manuel Antonio",
-      "monteverde": "Monteverde"
-    },
-    "support": "Soporte",
-    "supportItems": {
-      "helpCenter": "Centro de Ayuda",
-      "contactUs": "Contáctanos",
-      "cancellationPolicy": "Política de Cancelación",
-      "safetyGuidelines": "Guías de Seguridad",
-      "termsOfService": "Términos del Servicio"
-    },
-    "stayUpdated": "Mantente al día",
-    "newsletter": {
-      "text": "Recibe las últimas ofertas e inspiración de viajes en tu bandeja de entrada.",
-      "placeholder": "Introduce tu correo",
-      "subscribe": "Suscribirse"
-    },
-    "copyright": "© {{year}} Tourly. Todos los derechos reservados."
   },
-  "user": {
-    "profile": "Perfil",
-    "logOut": "Cerrar sesión",
-    "logIn": "Iniciar sesión",
-    "signUp": "Registrarse",
-    "anonymous": "Usuario"
-  }
-  ,
-  "toast": {
-    "bookingCreated": "Reserva creada",
-    "bookingId": "ID: {{id}}",
-    "noTours": "No hay tours para este día",
-    "close": "Cerrar notificación"
-  },
-  "validation": {
-    "validating": "Validando..."
+  "guide": {
+    "connectedTitle": "¡Conectado a Google!",
+    "connectedSubtitle": "Información básica completada automáticamente",
+    "profilePhoto": "Foto de perfil",
+    "changeProfilePhoto": "Cambiar foto de perfil",
+    "uploadProfilePhoto": "Subir foto de perfil",
+    "optionalPhotoHint": "Foto de perfil opcional. JPG o PNG hasta 5MB.",
+    "fullNameRequired": "El nombre completo es obligatorio",
+    "enterFullNamePlaceholder": "Introduce tu nombre completo",
+    "fullNameFromGoogle": "✓ Nombre completo obtenido desde Google",
+    "enterEmailPlaceholder": "Introduce tu correo",
+    "emailFromGoogle": "✓ Correo obtenido desde Google",
+    "continue": "Continuar",
+    "removePhoto": "Eliminar foto",
+    "photoFromGoogle": "✓ Foto obtenida desde Google. Puedes cambiarla si quieres.",
+    "emailRequired": "El correo es obligatorio",
+    "invalidEmail": "Correo inválido",
+    "createTour": {
+      "titleLabel": "Título",
+      "titlePlaceholder": "Título del tour",
+      "descriptionLabel": "Descripción",
+      "descriptionPlaceholder": "Descripción breve",
+      "priceLabel": "Precio",
+      "durationLabel": "Duración (minutos)",
+      "highlightsLabel": "Aspectos destacados",
+      "highlightsPlaceholder": "Añade un aspecto destacado y presiona Enter o Añadir",
+      "add": "Añadir",
+      "itineraryLabel": "Itinerario (pasos)",
+      "itineraryStepTitle": "Título del paso",
+      "itineraryDuration": "Duración",
+      "itineraryDescriptionPlaceholder": "Descripción del paso (opcional)",
+      "addStep": "Añadir paso",
+      "cityLabel": "Ciudad",
+      "meetingPointLabel": "Punto de encuentro",
+      "categoryLabel": "Categoría",
+      "loadingCategories": "Cargando categorías…",
+      "includesLabel": "Incluye",
+      "includesPlaceholder": "Añade un elemento incluido y presiona Enter o Añadir",
+      "notIncludedLabel": "No incluido",
+      "notIncludedPlaceholder": "Añade un elemento no incluido y presiona Enter o Añadir",
+      "imageLabel": "Imagen",
+      "uploadingImage": "Subiendo imagen...",
+      "saving": "Guardando...",
+      "createTour": "Crear tour",
+      "removeStep": "Eliminar",
+      "resetForm": "Restablecer formulario"
+    },
+    "editTour": {
+      "header": "Editar tour"
+    },
+    "createSlot": {
+      "title": "Agregar turno",
+      "startLabel": "Fecha y hora de inicio",
+      "endLabel": "Fecha y hora de fin",
+      "capacityLabel": "Capacidad máxima",
+      "availableSeatsLabel": "Asientos disponibles",
+      "active": "Activo",
+      "saving": "Guardando...",
+      "createSlot": "Crear turno",
+      "cancel": "Cancelar",
+      "createdSuccess": "Turno creado con éxito",
+      "createError": "Error creando el turno",
+      "validation": {
+        "missingDates": "Las fechas de inicio y fin son requeridas",
+        "invalidDates": "Fechas inválidas",
+        "endAfterStart": "La fecha de fin debe ser posterior a la de inicio",
+        "invalidCapacity": "Capacidad inválida",
+        "invalidSeats": "Asientos inválidos"
+      }
+    },
+    "slots": {
+      "noGuideSelected": "No hay guía seleccionada.",
+      "loading": "Cargando turnos...",
+      "loadError": "Error al cargar turnos",
+      "header": "Gestiona tus turnos",
+      "noSlots": "No hay turnos programados.",
+      "places": "plazas",
+      "available": "disponibles",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "start": "Inicio:",
+      "end": "Fin:",
+      "guideLabel": "Guía:",
+      "tourLabel": "Tour:",
+      "scheduleLabel": "Horario:",
+      "view": "Ver",
+      "edit": "Editar"
+    },
+    "tours": {
+      "header": "Mis Tours",
+      "createButton": "Crear tour",
+      "loading": "Cargando tours...",
+      "errorLoading": "Error al cargar los tours",
+      "noTours": "Aún no has creado tours."
+    },
+    "register": {
+      "title": "Conviértete en guía turístico",
+      "subtitle": "Regístrate para compartir tus tours y experiencias",
+      "progress": {
+        "basicInfo": "Información básica",
+        "profileDetails": "Detalles del perfil"
+      },
+      "stepOf": "Paso {{current}} de {{total}}",
+      "google": {
+        "signing": "Iniciando sesión con Google...",
+        "signIn": "Inicia sesión con Google"
+      },
+      "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+      "signIn": "Iniciar sesión",
+      "areYouTourist": "¿Eres turista?",
+      "registerTourist": "Regístrate aquí"
+    },
+    "page": {
+      "loading": "Cargando...",
+      "noAccess": "No tienes acceso a esta página.",
+      "configTitle": "Configuración",
+      "configDescription": "Aquí van las opciones de configuración del guía.",
+      "profileTitle": "Perfil",
+      "profileDescription": "Información del perfil del guía."
+    }
   },
   "public": {
     "hero": {
@@ -75,13 +152,15 @@
       "noMatchTitle": "Ningún tour coincide con tus filtros actuales.",
       "noMatchSubtitle": "Intenta ajustar tus criterios de búsqueda o explora todos los tours disponibles.",
       "noToursAvailable": "No hay tours disponibles en este momento."
-    }
-    ,
+    },
     "tourCard": {
+      "minutes": "{{count}} min",
+      "hours": "{{count}} hora",
+      "hours_plural": "{{count}} horas",
+      "bookNow": "Reservar ahora",
       "country": "Costa Rica",
       "loading": "Cargando...",
-      "upTo": "Hasta {{count}}",
-      "bookNow": "Reservar ahora"
+      "upTo": "Hasta {{count}}"
     },
     "imageGallery": {
       "noImages": "No hay imágenes disponibles",
@@ -92,15 +171,16 @@
     },
     "tourBooking": {
       "bookNowPrice": "Reservar ahora - ${{price}}",
+      "bookNowAria": "Reservar por ${{price}}",
       "cancel": "Cancelar"
     },
     "tourFeatures": {
-      "duration": "{{hours}} hora",
+      "duration": "{{count}} hora",
+      "duration_plural": "{{count}} horas",
       "upTo": "Hasta {{count}}",
       "transportation": "Transporte",
       "meetingPointTitle": "Punto de encuentro:"
-    }
-    ,
+    },
     "search": {
       "whereTo": "¿A dónde?",
       "clickToSee": "Haz clic para ver destinos",
@@ -111,7 +191,7 @@
       "defaultDuration": "1 hora?",
       "hours": "{{count}} hora",
       "maxPrice": "Precio máximo",
-      "enterMaxPrice": "Introduce el precio máximo",
+      "enterMaxPrice": "Introduce precio máximo",
       "searchTours": "Buscar tours",
       "clearFilters": "Borrar filtros",
       "popularDestinationsTitle": "Destinos Populares en Costa Rica",
@@ -144,8 +224,7 @@
       "monthsAgo": "hace {{count}} mes",
       "yearsAgo": "hace {{count}} año",
       "showAllReviews": "Ver todas las reseñas ({{total}})"
-    }
-    ,
+    },
     "tourTabs": {
       "overview": "Resumen",
       "itinerary": "Itinerario",
@@ -162,7 +241,79 @@
       "title": "Itinerario detallado",
       "noItinerary": "No hay itinerario disponible",
       "willBeProvided": "El cronograma detallado se proporcionará al reservar."
+    },
+    "booking": {
+      "selectDate": "Selecciona una fecha",
+      "loadingDates": "Cargando fechas disponibles...",
+      "errorLoadingDates": "Error al cargar las fechas",
+      "noDatesAvailable": "No hay fechas disponibles en este momento.",
+      "slotsAvailable": "Turnos disponibles",
+      "noSlotsForDay": "No hay turnos para el día seleccionado.",
+      "reserveButton": "Reservar",
+      "backButton": "Atrás",
+      "loadingSlotInfo": "Cargando información del turno",
+      "pleaseWait": "Por favor espera...",
+      "reserveYourSpot": "Reserva tu lugar",
+      "slotLabel": "Turno",
+      "capacity": "Capacidad",
+      "availableSeats": "Lugares disponibles",
+      "fullNameLabel": "Nombre completo",
+      "emailLabel": "Correo electrónico",
+      "phoneLabel": "Teléfono (opcional)",
+      "peopleCountLabel": "Número de personas",
+      "notesLabel": "Notas (opcional)",
+      "cancel": "Cancelar",
+      "bookingInProgress": "Reservando...",
+      "reserveNow": "Reservar ahora"
     }
+  },
+  "calendar": {
+    "prevMonth": "Mes anterior",
+    "nextMonth": "Mes siguiente"
+  },
+  "footer": {
+    "description": "Descubre tours y experiencias asombrosas alrededor del mundo. Reserva con confianza y crea recuerdos inolvidables.",
+    "popularDestinations": "Destinos Populares",
+    "destinations": {
+      "guanacaste": "Guanacaste",
+      "limon": "Limón",
+      "puntarenas": "Puntarenas"
+    },
+    "locations": {
+      "manuelAntonio": "Manuel Antonio",
+      "monteverde": "Monteverde"
+    },
+    "support": "Soporte",
+    "supportItems": {
+      "helpCenter": "Centro de Ayuda",
+      "contactUs": "Contáctanos",
+      "cancellationPolicy": "Política de Cancelación",
+      "safetyGuidelines": "Guías de Seguridad",
+      "termsOfService": "Términos del Servicio"
+    },
+    "stayUpdated": "Mantente al día",
+    "newsletter": {
+      "text": "Recibe las últimas ofertas e inspiración de viajes en tu bandeja de entrada.",
+      "placeholder": "Introduce tu correo",
+      "subscribe": "Suscribirse"
+    },
+    "copyright": "© {{year}} Tourly. Todos los derechos reservados."
+  },
+  "user": {
+    "profile": "Perfil",
+    "logOut": "Cerrar sesión",
+    "logIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "anonymous": "Usuario"
+  },
+  "toast": {
+    "bookingCreated": "Reserva creada",
+    "bookingId": "ID: {{id}}",
+    "noTours": "No hay tours para este día",
+    "close": "Cerrar notificación"
+  },
+  "validation": {
+    "validating": "Validando..."
   },
   "sidebar": {
     "header": {
@@ -251,28 +402,5 @@
     "cancelledDesc": "La reserva #{{id}} ha sido cancelada exitosamente",
     "cancelErrorTitle": "Error al cancelar la reserva",
     "cancelErrorDesc": "Hubo un error al cancelar tu reserva. Por favor inténtalo de nuevo."
-  },
-  "guide": {
-    "connectedTitle": "¡Conectado a Google!",
-    "connectedSubtitle": "Información básica completada automáticamente",
-    "profilePhoto": "Foto de perfil",
-    "changeProfilePhoto": "Cambiar foto de perfil",
-    "uploadProfilePhoto": "Subir foto de perfil",
-    "optionalPhotoHint": "Foto de perfil opcional. JPG o PNG hasta 5MB.",
-    "fullNameRequired": "El nombre completo es obligatorio",
-    "enterFullNamePlaceholder": "Introduce tu nombre completo",
-    "fullNameFromGoogle": "✓ Nombre completo obtenido desde Google",
-    "enterEmailPlaceholder": "Introduce tu correo",
-    "emailFromGoogle": "✓ Correo obtenido desde Google",
-    "continue": "Continuar"
-    ,
-    "removePhoto": "Eliminar foto",
-    "photoFromGoogle": "✓ Foto obtenida desde Google. Puedes cambiarla si quieres.",
-    "emailRequired": "El correo es obligatorio",
-    "invalidEmail": "Correo inválido"
-  },
-  "calendar": {
-    "prevMonth": "Mes anterior",
-    "nextMonth": "Mes siguiente"
   }
 }

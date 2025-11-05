@@ -147,7 +147,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
           </div>
 
           {/* Price */}
-          <div className="w-full lg:w-48 flex flex-col justify-start items-start gap-2.5">
+          <div className="w-full lg:w-72 flex flex-col justify-start items-start gap-2.5">
             <div className="self-stretch text-white text-xl lg:text-2xl font-medium font-inter flex items-center gap-2">
               {t('public.search.maxPrice')}
               {priceInput.trim() && (
@@ -161,7 +161,7 @@ export default function SearchSection({ onFiltersChange }: SearchSectionProps) {
                 value={priceInput}
                 onChange={handlePriceChange}
                 placeholder={t('public.search.enterMaxPrice')}
-                className="flex-1 bg-transparent text-white text-lg lg:text-xl font-light font-poppins placeholder-zinc-400 outline-none"
+                className="flex-1 min-w-0 bg-transparent text-white text-lg lg:text-xl font-light font-poppins placeholder-zinc-400 outline-none"
               />
             </div>
           </div>

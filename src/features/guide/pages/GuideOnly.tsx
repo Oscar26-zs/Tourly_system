@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { getAuth } from "firebase/auth";
 import { SimpleSidebar, Navbar } from "../../../shared/components";
 import { useAuthState } from "../../../shared/hooks/useAuthState";
@@ -14,6 +15,7 @@ type User = {
 
 export default function GuideOnly() {
   const [activeItem, setActiveItem] = useState('tours');
+  const { t } = useTranslation();
 
   const { user, loading } = useAuthState() as { user: User | null, loading: boolean };
 
@@ -27,9 +29,9 @@ export default function GuideOnly() {
 
   console.log('GuideOnly -> resolved guideId:', guideId);
 
-  if (loading) return <div>Cargando...</div>;
+  if (loading) return <div>{t('guide.page.loading')}</div>;
   if (!user) return <Navigate to="/login" />;
-  if (user.idRol !== 2) return <div>No tienes acceso a esta página.</div>;
+  if (user.idRol !== 2) return <div>{t('guide.page.noAccess')}</div>;
 
   const handleItemClick = (itemId: string) => {
     setActiveItem(itemId);
@@ -60,15 +62,15 @@ export default function GuideOnly() {
 
               {activeItem === 'config' && (
                 <section>
-                  <h2 className="text-lg font-medium mb-2">Configuración</h2>
-                  <div className="text-zinc-400">Aquí van las opciones de configuración del guía.</div>
+                  <h2 className="text-lg font-medium mb-2">{t('guide.page.configTitle')}</h2>
+                  <div className="text-zinc-400">{t('guide.page.configDescription')}</div>
                 </section>
               )}
 
               {activeItem === 'profile' && (
                 <section>
-                  <h2 className="text-lg font-medium mb-2">Perfil</h2>
-                  <div className="text-zinc-400">Información del perfil del guía.</div>
+                  <h2 className="text-lg font-medium mb-2">{t('guide.page.profileTitle')}</h2>
+                  <div className="text-zinc-400">{t('guide.page.profileDescription')}</div>
                 </section>
               )}
             </div>

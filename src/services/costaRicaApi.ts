@@ -8,7 +8,7 @@ import type {
   CostaRicaLocation 
 } from '../shared/types/costaRica';
 
-const BASE_URL = 'https://api-geo-cr.vercel.app';
+const BASE_URL = import.meta.env.VITE_API_GEO_CR_URL;
 
 // Función auxiliar para hacer requests
 async function apiRequest<T>(endpoint: string): Promise<T> {

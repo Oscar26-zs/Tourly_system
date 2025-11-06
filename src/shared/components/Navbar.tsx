@@ -1,4 +1,4 @@
-import { Globe, User, Menu, X, LogOut, LogIn, UserPlus } from 'lucide-react';
+import { User, Menu, X, LogOut, LogIn, UserPlus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
 import UserDropdown from './UserDropdown';
@@ -76,9 +76,6 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
 
         {/* Navigation Links - Home button (Always visible) */}
         <div className="flex justify-start items-center cursor-pointer hover:cursor-pointer hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 px-2 py-1 rounded-md" onClick={handleGoHome}>
-          <div className="w-8 h-8 md:w-9 md:h-9 relative">
-            <Globe className="w-6 h-6 md:w-7 md:h-7 text-green-700 absolute top-1 left-1 hover:text-green-500 transition-colors duration-200" />
-          </div>
           <button className="text-white text-xl md:text-2xl font-medium font-inter hover:cursor-pointer hover:text-green-400 transition-colors duration-200">
             {t('navbar.tourly')}
           </button>
@@ -86,9 +83,7 @@ export default function Navbar({ hideBecomeHost = false }: { hideBecomeHost?: bo
 
         {/* Desktop User Actions */}
         <div className="hidden md:flex justify-start items-center gap-3.5">
-          <div className="w-6 h-6 relative cursor-pointer hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-200 p-1 rounded-md">
-            <Globe className="w-6 h-6 relative text-white cursor-pointer hover:text-green-400 transition-colors duration-200" />
-          </div>
+          {/* globe icon removed */}
 
           {/* Language selector (desktop) */}
           <LanguageSwitcher variant="compact" className="mr-2" />

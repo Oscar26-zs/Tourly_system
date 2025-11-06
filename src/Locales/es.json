@@ -55,7 +55,8 @@
       "imageLabel": "Imagen",
       "uploadingImage": "Subiendo imagen...",
       "saving": "Guardando...",
-      "createTour": "Crear tour",
+        "createTour": "Crear tour",
+        "previewAlt": "Vista previa",
       "removeStep": "Eliminar",
       "resetForm": "Restablecer formulario"
     },
@@ -100,6 +101,20 @@
       "scheduleLabel": "Horario:",
       "view": "Ver",
       "edit": "Editar"
+    },
+    "ui": {
+      "untitledTour": "Tour sin título",
+      "noImage": "Sin imagen",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "perPerson": "/ persona",
+      "upcomingBookings": "Próximas reservas ({{count}})",
+      "personSingular": "persona",
+      "personPlural": "personas",
+      "edit": "Editar",
+      "deactivate": "Desactivar",
+      "activate": "Activar",
+      "addSlot": "Agregar turno"
     },
     "tours": {
       "header": "Mis Tours",
@@ -364,8 +379,12 @@
   },
   "common": {
     "optional": "opcional",
-    "and": "y"
+    "and": "y",
+    "close": "Cerrar",
+    "loadingShort": "...",
+    "remove": "Eliminar"
   },
+  
   "sidebar": {
     "header": {
       "settings": "Ajustes",

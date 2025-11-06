@@ -41,6 +41,7 @@
       "uploadingImage": "Uploading image...",
       "saving": "Saving...",
       "createTour": "Create tour",
+      "previewAlt": "Preview",
       "removeStep": "Remove",
       "resetForm": "Reset form"
     },
@@ -53,6 +54,21 @@
       "tourLabel": "Tour:",
       "scheduleLabel": "Schedule:",
       "tourFallback": "Tour {{id}}"
+    }
+    ,
+    "ui": {
+      "untitledTour": "Untitled tour",
+      "noImage": "No image",
+      "active": "Active",
+      "inactive": "Inactive",
+      "perPerson": "/ person",
+      "upcomingBookings": "Upcoming bookings ({{count}})",
+      "personSingular": "person",
+      "personPlural": "people",
+      "edit": "Edit",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "addSlot": "Add slot"
     }
     ,
     "tours": {
@@ -161,6 +177,7 @@
   }
   ,
   "validation": {
+    "validating": "Validating...",
     "phoneRequired": "Phone number is required",
     "genderRequired": "Please select a gender",
     "passwordRequired": "Password is required",
@@ -170,7 +187,10 @@
   },
   "common": {
     "optional": "optional",
-    "and": "and"
+    "and": "and",
+    "close": "Close",
+    "loadingShort": "...",
+    "remove": "Remove"
   }
 }
 

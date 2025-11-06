@@ -1,4 +1,5 @@
 import { useForm } from '@tanstack/react-form';
+import { useTranslation } from 'react-i18next';
 import type { AnyFieldApi } from '@tanstack/react-form';
 import { useRegisterTourist } from '../hooks/useRegisterTourist';
 import { RegisterGuideStepOne } from '../../guide/components/RegisterGuideStepOne';
@@ -17,6 +18,7 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
 }
 
 export default function TouristRegister() {
+  const { t } = useTranslation();
   const form = useForm({
     defaultValues: {
       nombreCompleto: '',
@@ -62,9 +64,9 @@ export default function TouristRegister() {
             </svg>
           </div>
           <h1 className="text-3xl font-bold text-white mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
-            Become a Tourist
+            {t('public.registerTourist.title')}
           </h1>
-          <p className="text-[#B3B3B3] text-base">Register to join Tourly as a tourist</p>
+          <p className="text-[#B3B3B3] text-base">{t('public.registerTourist.subtitle')}</p>
           
           {/* Progress Indicator */}
           <div className="flex justify-center items-center mt-6 space-x-4">
@@ -77,7 +79,7 @@ export default function TouristRegister() {
                 1
               </div>
               <span className={`ml-2 text-sm ${currentPhase >= 1 ? 'text-[#228B22]' : 'text-[#B3B3B3]'}`}>
-                Basic Information
+                {t('public.registerTourist.progress.basicInfo')}
               </span>
             </div>
             <div className={`w-8 h-0.5 ${currentPhase >= 2 ? 'bg-[#228B22]' : 'bg-white/20'}`}></div>
@@ -90,7 +92,7 @@ export default function TouristRegister() {
                 2
               </div>
               <span className={`ml-2 text-sm ${currentPhase >= 2 ? 'text-[#228B22]' : 'text-[#B3B3B3]'}`}>
-                Profile details
+                {t('public.registerTourist.progress.profileDetails')}
               </span>
             </div>
           </div>
@@ -154,21 +156,21 @@ export default function TouristRegister() {
                         <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                       </svg>
                     )}
-                    <span>{isGoogleLoading ? 'Signing in with Google...' : 'Sign in with Google'}</span>
+                    <span>{isGoogleLoading ? t('guide.register.google.signing') : t('guide.register.google.signIn')}</span>
                   </button>
                 </div>
               )}
               <p className="text-[#B3B3B3] text-sm mb-3">
-                Already have an account?
+                {t('public.registerTourist.alreadyHaveAccount')}
               </p>
               <div className="space-y-2">
                 <a href="/login" className="block text-[#228B22] hover:underline font-bold text-sm">
-                  Sign In
+                  {t('public.registerTourist.signIn')}
                 </a>
                 <div className="flex items-center justify-center space-x-2 text-xs text-[#B3B3B3]">
-                  <span>Are you a guide?</span>
+                  <span>{t('public.registerTourist.areYouAGuide')}</span>
                   <a href="/registerGuide" className="text-[#228B22] hover:underline font-bold">
-                    Register here
+                    {t('public.registerTourist.registerHere')}
                   </a>
                 </div>
               </div>

@@ -111,12 +111,12 @@ export function RegisterGuideStepOne({
             name="nombreCompleto"
             validators={{
               onChange: ({ value }: { value: string }) =>
-                !value ? 'Full name is required' : undefined,
+                !value ? t('guide.fullNameRequired') : undefined,
             }}
             children={(field: AnyFieldApi) => (
               <div>
                 <label htmlFor={field.name} className="block text-white font-medium mb-2 text-sm">
-                  Full Name <span className="text-red-400">*</span>
+                  {t('guide.fullNameLabel')} <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
           <input
@@ -163,7 +163,7 @@ export function RegisterGuideStepOne({
             children={(field: AnyFieldApi) => (
               <div>
                 <label htmlFor={field.name} className="block text-white font-medium mb-2 text-sm">
-                  Email <span className="text-red-400">*</span>
+                  {t('guide.emailLabel')} <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
                   <input

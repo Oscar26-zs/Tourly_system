@@ -10,9 +10,11 @@ import { TourReviews } from '../components/TourReviews';
 import { TourBookingButtons } from '../components/TourBookingButtons';
 import { TourFeatures } from '../components/TourFeatures';
 import { Navbar, Footer } from '../../../shared/components';
+import { useTranslation } from 'react-i18next';
 
 export function TourDetailPage() {
   const { tourId } = useParams<{ tourId: string }>();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('overview');
   
   const { data: tour, isLoading, error } = useTourById(tourId || '');
@@ -20,7 +22,7 @@ export function TourDetailPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900">
-        <div className="text-white text-xl">Cargando tour...</div>
+        <div className="text-white text-xl">{t('public.tourDetail.loading')}</div>
       </div>
     );
   }
@@ -28,7 +30,7 @@ export function TourDetailPage() {
   if (error) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900">
-        <div className="text-red-500 text-xl">Error al cargar el tour: {error.message}</div>
+        <div className="text-red-500 text-xl">{t('public.tourDetail.errorLoading', { message: error.message })}</div>
       </div>
     );
   }
@@ -37,7 +39,7 @@ export function TourDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900">
         <div className="text-white text-xl">
-          Tour con ID "{tourId}" no encontrado
+          {t('public.tourDetail.notFound', { id: tourId })}
         </div>
       </div>
     );

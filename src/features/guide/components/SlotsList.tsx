@@ -68,12 +68,12 @@ export default function SlotsList({ guideId }: { guideId?: string | null }) {
           const snap = await getDoc(ref);
           if (snap.exists()) {
             const data: any = snap.data();
-            updates[id] = data.titulo ?? data.title ?? data.name ?? `Tour ${id}`;
+            updates[id] = data.titulo ?? data.title ?? data.name ?? t('guide.slots.tourFallback', { id });
           } else {
-            updates[id] = `Tour ${id}`;
+            updates[id] = t('guide.slots.tourFallback', { id });
           }
         } catch (e) {
-          updates[id] = `Tour ${id}`;
+          updates[id] = t('guide.slots.tourFallback', { id });
         }
       }
       if (!mounted) return;

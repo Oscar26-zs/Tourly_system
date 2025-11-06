@@ -17,9 +17,11 @@
     "uploadProfilePhoto": "Subir foto de perfil",
     "optionalPhotoHint": "Foto de perfil opcional. JPG o PNG hasta 5MB.",
     "fullNameRequired": "El nombre completo es obligatorio",
+  "fullNameLabel": "Nombre completo",
     "enterFullNamePlaceholder": "Introduce tu nombre completo",
     "fullNameFromGoogle": "✓ Nombre completo obtenido desde Google",
     "enterEmailPlaceholder": "Introduce tu correo",
+  "emailLabel": "Correo electrónico",
     "emailFromGoogle": "✓ Correo obtenido desde Google",
     "continue": "Continuar",
     "removePhoto": "Eliminar foto",
@@ -44,6 +46,7 @@
       "cityLabel": "Ciudad",
       "meetingPointLabel": "Punto de encuentro",
       "categoryLabel": "Categoría",
+  "selectCategory": "Selecciona categoría",
       "loadingCategories": "Cargando categorías…",
       "includesLabel": "Incluye",
       "includesPlaceholder": "Añade un elemento incluido y presiona Enter o Añadir",
@@ -93,6 +96,7 @@
       "end": "Fin:",
       "guideLabel": "Guía:",
       "tourLabel": "Tour:",
+      "tourFallback": "Tour {{id}}",
       "scheduleLabel": "Horario:",
       "view": "Ver",
       "edit": "Editar"
@@ -119,7 +123,18 @@
       "alreadyHaveAccount": "¿Ya tienes una cuenta?",
       "signIn": "Iniciar sesión",
       "areYouTourist": "¿Eres turista?",
-      "registerTourist": "Regístrate aquí"
+    "registerTourist": "Regístrate aquí",
+    "back": "Atrás",
+    "passwordLabel": "Contraseña",
+    "passwordCreateHint": "Crea una contraseña para futuros inicios de sesión",
+    "enterPasswordPlaceholder": "Introduce tu contraseña",
+    "passwordNote": "Necesaria para futuras sesiones sin Google",
+    "termsIntro": "Acepto los",
+    "termsOfService": "Términos de servicio",
+    "privacyPolicy": "Política de privacidad",
+    "termsSuffix": "de Tourly. Entiendo que mi información será usada para crear mi perfil de guía.",
+    "creatingAccount": "Creando cuenta...",
+    "createGuideAccount": "Crear cuenta de guía"
     },
     "page": {
       "loading": "Cargando...",
@@ -161,6 +176,11 @@
       "country": "Costa Rica",
       "loading": "Cargando...",
       "upTo": "Hasta {{count}}"
+    },
+    "tourDetail": {
+      "loading": "Cargando tour...",
+      "errorLoading": "Error al cargar el tour: {{message}}",
+      "notFound": "Tour con ID \"{{id}}\" no encontrado"
     },
     "imageGallery": {
       "noImages": "No hay imágenes disponibles",
@@ -244,6 +264,7 @@
     },
     "booking": {
       "selectDate": "Selecciona una fecha",
+      "errorTitle": "Error",
       "loadingDates": "Cargando fechas disponibles...",
       "errorLoadingDates": "Error al cargar las fechas",
       "noDatesAvailable": "No hay fechas disponibles en este momento.",
@@ -265,6 +286,26 @@
       "cancel": "Cancelar",
       "bookingInProgress": "Reservando...",
       "reserveNow": "Reservar ahora"
+    }
+    ,
+    "login": {
+      "subtitle": "Accede con tu cuenta de Tourly",
+      "signInWithGoogle": "Continuar con Google",
+      "signingInWithGoogle": "Iniciando con Google..."
+    }
+    ,
+    "registerTourist": {
+      "title": "Conviértete en turista",
+      "subtitle": "Regístrate para unirte a Tourly como turista"
+    ,
+    "progress": {
+      "basicInfo": "Información básica",
+      "profileDetails": "Detalles del perfil"
+    },
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "signIn": "Iniciar sesión",
+    "areYouAGuide": "¿Eres guía?",
+    "registerHere": "Regístrate aquí"
     }
   },
   "calendar": {
@@ -313,7 +354,17 @@
     "close": "Cerrar notificación"
   },
   "validation": {
-    "validating": "Validando..."
+    "validating": "Validando...",
+    "phoneRequired": "El número de teléfono es obligatorio",
+    "genderRequired": "Por favor selecciona un género",
+    "passwordRequired": "La contraseña es obligatoria",
+    "passwordMin": "La contraseña debe tener al menos {{min}} caracteres",
+    "descriptionTooLong": "La descripción es demasiado larga (máx. {{max}} caracteres)",
+    "acceptTerms": "Debes aceptar los términos y la política de privacidad"
+  },
+  "common": {
+    "optional": "opcional",
+    "and": "y"
   },
   "sidebar": {
     "header": {

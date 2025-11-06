@@ -44,12 +44,15 @@
       "removeStep": "Remove",
       "resetForm": "Reset form"
     },
+    "fullNameLabel": "Full Name",
+    "emailLabel": "Email",
     "editTour": {
       "header": "Edit tour"
     },
     "slots": {
       "tourLabel": "Tour:",
-      "scheduleLabel": "Schedule:"
+      "scheduleLabel": "Schedule:",
+      "tourFallback": "Tour {{id}}"
     }
     ,
     "tours": {
@@ -75,6 +78,18 @@
       "signIn": "Sign In",
       "areYouTourist": "Are you a tourist?",
       "registerTourist": "Register here"
+      ,
+      "back": "Back",
+      "passwordLabel": "Password",
+      "passwordCreateHint": "Create a password for future logins",
+      "enterPasswordPlaceholder": "Enter your password",
+      "passwordNote": "Necessary for future sessions without Google",
+      "termsIntro": "I accept the",
+      "termsOfService": "Terms of Service",
+      "privacyPolicy": "Privacy Policy",
+      "termsSuffix": "of Tourly. I understand that my information will be used to create my tour guide profile.",
+      "creatingAccount": "Creating account...",
+      "createGuideAccount": "Create Guide Account"
     },
     "page": {
       "loading": "Loading...",
@@ -143,6 +158,19 @@
       "areYouAGuide": "Are you a guide?",
       "registerHere": "Register here"
     }
+  }
+  ,
+  "validation": {
+    "phoneRequired": "Phone number is required",
+    "genderRequired": "Please select a gender",
+    "passwordRequired": "Password is required",
+    "passwordMin": "Password must be at least {{min}} characters",
+    "descriptionTooLong": "Description is too long (max {{max}} characters)",
+    "acceptTerms": "You must accept the terms and privacy policy"
+  },
+  "common": {
+    "optional": "optional",
+    "and": "and"
   }
 }
 

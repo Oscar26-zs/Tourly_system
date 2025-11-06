@@ -1,4 +1,5 @@
 import type { AnyFieldApi } from '@tanstack/react-form';
+import { useTranslation } from 'react-i18next';
 
 export function RegisterGuideStepTwo({
   form,
@@ -15,11 +16,12 @@ export function RegisterGuideStepTwo({
   handleBackToPhase1: () => void;
   FieldInfo: React.FC<{ field: AnyFieldApi }>;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="space-y-6">
       {/* Back Button */}
       <div className="flex items-center justify-between mb-6">
-        <button
+          <button
           type="button"
           onClick={handleBackToPhase1}
           className="flex items-center space-x-2 text-[#B3B3B3] hover:text-white transition-colors"
@@ -27,9 +29,9 @@ export function RegisterGuideStepTwo({
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          <span>Back</span>
+          <span>{t('guide.register.back')}</span>
         </button>
-        <div className="text-[#B3B3B3] text-sm">Step 2 of 2</div>
+        <div className="text-[#B3B3B3] text-sm">{t('guide.register.stepOf', { current: 2, total: 2 })}</div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Phone Field */}
@@ -37,19 +39,19 @@ export function RegisterGuideStepTwo({
           name="telefono"
           validators={{
             onChange: ({ value }: { value: string }) =>
-              !value ? 'Phone is required' : undefined,
+              !value ? t('validation.phoneRequired') : undefined,
           }}
           children={(field: AnyFieldApi) => (
             <div>
               <label htmlFor={field.name} className="block text-white font-medium mb-2 text-sm">
-                Phone <span className="text-red-400">*</span>
+                {t('profile.phone')} <span className="text-red-400">*</span>
               </label>
               <div className="relative">
                 <input
                   id={field.name}
                   name={field.name}
                   className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-white placeholder-[#B3B3B3] focus:outline-none focus:border-[#20B2AA] focus:ring-1 focus:ring-[#20B2AA]/20 transition-all duration-200 text-sm"
-                  placeholder="Enter your phone number"
+                  placeholder={t('profile.phonePlaceholder')}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
@@ -69,12 +71,12 @@ export function RegisterGuideStepTwo({
           name="genero"
           validators={{
             onChange: ({ value }: { value: string }) =>
-              !value ? 'Gender is required' : undefined,
+              !value ? t('validation.genderRequired') : undefined,
           }}
           children={(field: AnyFieldApi) => (
             <div>
               <label htmlFor={field.name} className="block text-white font-medium mb-2 text-sm">
-                Gender <span className="text-red-400">*</span>
+                {t('profile.gender')} <span className="text-red-400">*</span>
               </label>
               <div className="relative">
                 <select
@@ -85,10 +87,10 @@ export function RegisterGuideStepTwo({
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                 >
-                  <option value="" className="bg-[#1E1E1E] text-[#B3B3B3]">Choose gender</option>
-                  <option value="Masculino" className="bg-[#1E1E1E] text-white">Male</option>
-                  <option value="Femenino" className="bg-[#1E1E1E] text-white">Female</option>
-                  <option value="Otro" className="bg-[#1E1E1E] text-white">Other</option>
+                  <option value="" className="bg-[#1E1E1E] text-[#B3B3B3]">{t('profile.genderPlaceholder')}</option>
+                  <option value="Masculino" className="bg-[#1E1E1E] text-white">{t('profile.genderOptions.male')}</option>
+                  <option value="Femenino" className="bg-[#1E1E1E] text-white">{t('profile.genderOptions.female')}</option>
+                  <option value="Otro" className="bg-[#1E1E1E] text-white">{t('profile.genderOptions.other')}</option>
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                   <svg className="w-4 h-4 text-[#B3B3B3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,15 +108,15 @@ export function RegisterGuideStepTwo({
           validators={{
             onChange: ({ value }: { value: string }) =>
               !value
-                ? 'Password is required'
+                ? t('validation.passwordRequired')
                 : value.length < 8
-                ? 'Password must be at least 8 characters'
+                ? t('validation.passwordMin')
                 : undefined,
           }}
           children={(field: AnyFieldApi) => (
             <div className="md:col-span-2">
-              <label htmlFor={field.name} className="block text-white font-medium mb-2 text-sm">
-                Password <span className="text-red-400">*</span>
+                  <label htmlFor={field.name} className="block text-white font-medium mb-2 text-sm">
+                {t('guide.register.passwordLabel')} <span className="text-red-400">*</span>
               </label>
               <div className="relative">
                 <input
@@ -122,7 +124,7 @@ export function RegisterGuideStepTwo({
                   name={field.name}
                   type={showPassword ? "text" : "password"}
                   className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 pr-10 text-white placeholder-[#B3B3B3] focus:outline-none focus:border-[#20B2AA] focus:ring-1 focus:ring-[#20B2AA]/20 transition-all duration-200 text-sm"
-                  placeholder={googleUserData ? "Create a password for future logins" : "Enter your password"}
+                  placeholder={googleUserData ? t('guide.register.passwordCreateHint') : t('guide.register.enterPasswordPlaceholder')}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
@@ -145,7 +147,7 @@ export function RegisterGuideStepTwo({
                 </button>
               </div>
               {googleUserData && (
-                <p className="text-[#B3B3B3] text-xs mt-1">Necessary for future sessions without Google</p>
+                <p className="text-[#B3B3B3] text-xs mt-1">{t('guide.register.passwordNote')}</p>
               )}
               <FieldInfo field={field} />
             </div>
@@ -156,18 +158,18 @@ export function RegisterGuideStepTwo({
           name="descripcion"
           validators={{
             onChange: ({ value }: { value?: string }) =>
-              value && value.length > 200 ? 'Description too long (maximum 200 characters)' : undefined,
+              value && value.length > 200 ? t('validation.descriptionTooLong') : undefined,
           }}
           children={(field: AnyFieldApi) => (
             <div className="md:col-span-2">
               <label htmlFor={field.name} className="block text-white font-medium mb-2 text-sm">
-                Description (optional)
+                {t('profile.description')} ({t('common.optional')})
               </label>
               <textarea
                 id={field.name}
                 name={field.name}
                 className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-white placeholder-[#B3B3B3] focus:outline-none focus:border-[#20B2AA] focus:ring-1 focus:ring-[#20B2AA]/20 transition-all duration-200 text-sm resize-none"
-                placeholder="Tell us a bit about yourself and your experience as a tour guide (max 200 characters)"
+                placeholder={t('profile.descriptionPlaceholder')}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
@@ -185,9 +187,9 @@ export function RegisterGuideStepTwo({
         {/* Terms Checkbox */}
         <form.Field
           name="acceptTerms"
-          validators={{
+            validators={{
             onChange: ({ value }: { value: boolean }) =>
-              !value ? 'You must accept the terms and conditions' : undefined,
+              !value ? t('validation.acceptTerms') : undefined,
           }}
           children={(field: AnyFieldApi) => (
             <div className="md:col-span-2">
@@ -203,16 +205,16 @@ export function RegisterGuideStepTwo({
                   style={{ accentColor: '#228B22' }}
                 />
                 <div className="flex-1">
-                  <label htmlFor={field.name} className="text-white text-sm leading-6">
-                    I accept the{' '}
+                    <label htmlFor={field.name} className="text-white text-sm leading-6">
+                    {t('guide.register.termsIntro')}{' '}
                     <a href="#" className="text-[#228B22] hover:underline font-medium">
-                      Terms of Service
+                      {t('guide.register.termsOfService')}
                     </a>
-                    {' '}and the{' '}
+                    {' '}{t('common.and')}{' '}
                     <a href="#" className="text-[#228B22] hover:underline font-medium">
-                      Privacy Policy
+                      {t('guide.register.privacyPolicy')}
                     </a>{' '}
-                    of Tourly. I understand that my information will be used to create my tour guide profile.
+                    {t('guide.register.termsSuffix')}
                   </label>
                 </div>
               </div>
@@ -245,12 +247,12 @@ export function RegisterGuideStepTwo({
                 disabled={!canSubmit} 
               >
                 {isSubmitting ? (
-                  <div className="flex items-center justify-center space-x-2">
+                    <div className="flex items-center justify-center space-x-2">
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Creating account...</span>
+                    <span>{t('guide.register.creatingAccount')}</span>
                   </div>
                 ) : (
-                  'Create Guide Account'
+                  t('guide.register.createGuideAccount')
                 )}
               </button>
             )}

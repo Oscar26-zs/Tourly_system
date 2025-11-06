@@ -120,7 +120,18 @@
       "alreadyHaveAccount": "¿Ya tienes una cuenta?",
       "signIn": "Iniciar sesión",
       "areYouTourist": "¿Eres turista?",
-      "registerTourist": "Regístrate aquí"
+    "registerTourist": "Regístrate aquí",
+    "back": "Atrás",
+    "passwordLabel": "Contraseña",
+    "passwordCreateHint": "Crea una contraseña para futuros inicios de sesión",
+    "enterPasswordPlaceholder": "Introduce tu contraseña",
+    "passwordNote": "Necesaria para futuras sesiones sin Google",
+    "termsIntro": "Acepto los",
+    "termsOfService": "Términos de servicio",
+    "privacyPolicy": "Política de privacidad",
+    "termsSuffix": "de Tourly. Entiendo que mi información será usada para crear mi perfil de guía.",
+    "creatingAccount": "Creando cuenta...",
+    "createGuideAccount": "Crear cuenta de guía"
     },
     "page": {
       "loading": "Cargando...",
@@ -340,7 +351,17 @@
     "close": "Cerrar notificación"
   },
   "validation": {
-    "validating": "Validando..."
+    "validating": "Validando...",
+    "phoneRequired": "El número de teléfono es obligatorio",
+    "genderRequired": "Por favor selecciona un género",
+    "passwordRequired": "La contraseña es obligatoria",
+    "passwordMin": "La contraseña debe tener al menos {{min}} caracteres",
+    "descriptionTooLong": "La descripción es demasiado larga (máx. {{max}} caracteres)",
+    "acceptTerms": "Debes aceptar los términos y la política de privacidad"
+  },
+  "common": {
+    "optional": "opcional",
+    "and": "y"
   },
   "sidebar": {
     "header": {

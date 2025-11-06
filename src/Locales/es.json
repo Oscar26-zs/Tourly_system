@@ -29,6 +29,7 @@
     "emailRequired": "El correo es obligatorio",
     "invalidEmail": "Correo inválido",
     "createTour": {
+      "title": "Crear tour",
       "titleLabel": "Título",
       "titlePlaceholder": "Título del tour",
       "descriptionLabel": "Descripción",

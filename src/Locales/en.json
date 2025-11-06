@@ -31,6 +31,7 @@
     "emailRequired": "Email is required",
     "invalidEmail": "Invalid email",
     "createTour": {
+      "title": "Create tour",
       "titleLabel": "Title",
       "titlePlaceholder": "Tour title",
       "descriptionLabel": "Description",

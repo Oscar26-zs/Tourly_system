@@ -119,6 +119,7 @@ export default function GuideCreateTourSection({
                 <button
                   type="button"
                   onClick={() => removeHighlight(i)}
+                  aria-label={t('common.remove')}
                   className="text-xs text-red-400"
                 >
                   ×
@@ -185,6 +186,7 @@ export default function GuideCreateTourSection({
                   <button
                     type="button"
                     onClick={() => removeItineraryItem(i)}
+                    aria-label={t('common.remove')}
                     className="text-red-400"
                   >
                     {t('guide.createTour.removeStep')}
@@ -267,6 +269,7 @@ export default function GuideCreateTourSection({
                 <button
                   type="button"
                   onClick={() => removeIncluye(i)}
+                  aria-label={t('common.remove')}
                   className="text-xs text-red-400"
                 >
                   ×
@@ -308,6 +311,7 @@ export default function GuideCreateTourSection({
                 <button
                   type="button"
                   onClick={() => removeNoIncluye(i)}
+                  aria-label={t('common.remove')}
                   className="text-xs text-red-400"
                 >
                   ×
@@ -326,7 +330,7 @@ export default function GuideCreateTourSection({
             {previewUrl && (
               <img
                 src={previewUrl}
-                alt="preview"
+                alt={t('guide.createTour.previewAlt')}
                 className="w-24 h-16 object-cover rounded-md border"
               />
             )}

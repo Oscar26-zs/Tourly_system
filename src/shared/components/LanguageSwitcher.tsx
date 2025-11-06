@@ -16,7 +16,7 @@ export default function LanguageSwitcher({
   variant?: 'compact' | 'full';
   className?: string;
 }) {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -45,7 +45,7 @@ export default function LanguageSwitcher({
       >
         <Languages className="w-4 h-4" />
         {variant === 'full' ? (
-          <span className="text-sm hidden sm:inline">{current.flag} {current.label}</span>
+          <span className="text-sm hidden sm:inline">{current.flag} { (current.code === 'es' ? t('navbar.spanish') : current.code === 'en' ? t('navbar.english') : current.label) }</span>
         ) : (
           <span className="text-sm hidden md:inline">{current.code.toUpperCase()}</span>
         )}
@@ -62,7 +62,7 @@ export default function LanguageSwitcher({
                 role="menuitem"
               >
                 <span className="mr-2">{l.flag}</span>
-                {l.label}
+                { (l.code === 'es' ? t('navbar.spanish') : l.code === 'en' ? t('navbar.english') : l.label) }
               </button>
             ))}
           </div>

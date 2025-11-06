@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getCombinedLocations, filterCostaRicaLocations } from '../../services/costaRicaApi';
 import type { CostaRicaLocation } from '../types/costaRica';
 
@@ -16,6 +17,7 @@ export function useCostaRicaLocations(): UseCostaRicaLocationsResult {
   const [filteredLocations, setFilteredLocations] = useState<CostaRicaLocation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   // Cargar todas las ubicaciones al montar el componente
   useEffect(() => {
@@ -37,13 +39,13 @@ export function useCostaRicaLocations(): UseCostaRicaLocationsResult {
         
         // En caso de error, usar ubicaciones de fallback
         const fallbackLocations: CostaRicaLocation[] = [
-          { id: 'fallback-1', name: 'San José', type: 'provincia', fullName: 'San José, Costa Rica' },
-          { id: 'fallback-2', name: 'Alajuela', type: 'provincia', fullName: 'Alajuela, Costa Rica' },
-          { id: 'fallback-3', name: 'Cartago', type: 'provincia', fullName: 'Cartago, Costa Rica' },
-          { id: 'fallback-4', name: 'Heredia', type: 'provincia', fullName: 'Heredia, Costa Rica' },
-          { id: 'fallback-5', name: 'Guanacaste', type: 'provincia', fullName: 'Guanacaste, Costa Rica' },
-          { id: 'fallback-6', name: 'Puntarenas', type: 'provincia', fullName: 'Puntarenas, Costa Rica' },
-          { id: 'fallback-7', name: 'Limón', type: 'provincia', fullName: 'Limón, Costa Rica' },
+          { id: 'fallback-1', name: t('costaRica.provinces.sanJose'), type: 'provincia', fullName: `${t('costaRica.provinces.sanJose')}, Costa Rica` },
+          { id: 'fallback-2', name: t('costaRica.provinces.alajuela'), type: 'provincia', fullName: `${t('costaRica.provinces.alajuela')}, Costa Rica` },
+          { id: 'fallback-3', name: t('costaRica.provinces.cartago'), type: 'provincia', fullName: `${t('costaRica.provinces.cartago')}, Costa Rica` },
+          { id: 'fallback-4', name: t('costaRica.provinces.heredia'), type: 'provincia', fullName: `${t('costaRica.provinces.heredia')}, Costa Rica` },
+          { id: 'fallback-5', name: t('costaRica.provinces.guanacaste'), type: 'provincia', fullName: `${t('costaRica.provinces.guanacaste')}, Costa Rica` },
+          { id: 'fallback-6', name: t('costaRica.provinces.puntarenas'), type: 'provincia', fullName: `${t('costaRica.provinces.puntarenas')}, Costa Rica` },
+          { id: 'fallback-7', name: t('costaRica.provinces.limon'), type: 'provincia', fullName: `${t('costaRica.provinces.limon')}, Costa Rica` },
         ];
         
         setLocations(fallbackLocations);
@@ -73,7 +75,14 @@ export function useCostaRicaLocations(): UseCostaRicaLocationsResult {
 
     // Si no hay provincias cargadas, usar fallback
     if (popularProvinces.length === 0) {
-      return ['San José', 'Alajuela', 'Cartago', 'Heredia', 'Guanacaste', 'Puntarenas'];
+      return [
+        t('costaRica.provinces.sanJose'),
+        t('costaRica.provinces.alajuela'),
+        t('costaRica.provinces.cartago'),
+        t('costaRica.provinces.heredia'),
+        t('costaRica.provinces.guanacaste'),
+        t('costaRica.provinces.puntarenas'),
+      ];
     }
 
     return popularProvinces;

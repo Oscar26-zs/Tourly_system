@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../app/providers/useAuth';
 import { logoutService } from '../../services/logoutService';
@@ -11,6 +12,7 @@ export function useNavbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isHostDropdownOpen, setIsHostDropdownOpen] = useState(false);
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   const handleBecomeHost = () => {
     // If user is logged in, send them straight to the guide dashboard.
@@ -77,7 +79,7 @@ export function useNavbar() {
   const getUserName = () => {
     if (user?.displayName) return user.displayName;
     if (user?.email) return user.email.split('@')[0];
-    return 'Usuario';
+    return t('user.anonymous');
   };
 
   const handleLanguageChange = (language: string) => {

@@ -4,14 +4,15 @@ import type { Tour } from "../../../public/types/tour";
 import { useToggleTourStatus } from "../../hooks/useToggleTourStatus";
 import { getUpcomingBookingsByTour, type UpcomingBooking } from "../../services/getUpcomingBookings";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from 'react-i18next';
 
 interface TourListItemProps {
   tour: Tour;
   onEdit: () => void;
   onAddSlot: () => void; // nuevo prop opcional
 }
-
 export default function TourListItem({ tour, onEdit, onAddSlot }: TourListItemProps) {
+  const { t } = useTranslation();
   const toggleStatus = useToggleTourStatus();
   const [isToggling, setIsToggling] = useState(false);
 
@@ -37,7 +38,7 @@ export default function TourListItem({ tour, onEdit, onAddSlot }: TourListItemPr
   };
 
   // Soporte para campos en español e inglés
-  const title = (tour as any).title || tour.titulo || "Tour sin título";
+  const title = (tour as any).title || tour.titulo || t('guide.ui.untitledTour');
   const description = (tour as any).description || tour.descripcion || "";
   const price = (tour as any).price ?? tour.precio ?? 0;
   const images = (tour as any).images || tour.imagenes || [];
@@ -68,7 +69,7 @@ export default function TourListItem({ tour, onEdit, onAddSlot }: TourListItemPr
             />
           ) : (
             <div className="w-full h-full bg-neutral-700 flex items-center justify-center text-zinc-400">
-              Sin imagen
+              {t('guide.ui.noImage')}
             </div>
           )}
         </div>
@@ -93,7 +94,7 @@ export default function TourListItem({ tour, onEdit, onAddSlot }: TourListItemPr
                       : "bg-red-900/40 text-red-300 border border-red-700"
                   }`}
                 >
-                  {tour.Activo ? "Activo" : "Inactivo"}
+                  {tour.Activo ? t('guide.ui.active') : t('guide.ui.inactive')}
                 </span>
               </div>
             </div>
@@ -101,14 +102,14 @@ export default function TourListItem({ tour, onEdit, onAddSlot }: TourListItemPr
             {/* Precio */}
             <div className="mb-3">
               <span className="text-2xl font-bold text-green-400">${price}</span>
-              <span className="text-sm text-zinc-400 ml-1">/ persona</span>
+              <span className="text-sm text-zinc-400 ml-1">{t('guide.ui.perPerson')}</span>
             </div>
 
             {/* Próximas reservas */}
             {upcomingBookings.length > 0 && (
               <div className="mb-3">
                 <h4 className="text-xs font-semibold text-zinc-400 uppercase mb-2">
-                  Próximas reservas ({upcomingBookings.length})
+                  {t('guide.ui.upcomingBookings', { count: upcomingBookings.length })}
                 </h4>
                 <div className="space-y-1">
                   {upcomingBookings.map((booking) => (
@@ -130,8 +131,7 @@ export default function TourListItem({ tour, onEdit, onAddSlot }: TourListItemPr
                         />
                       </svg>
                       <span>
-                        {formatDate(booking.tourDate)} - {booking.numberOfPeople}{" "}
-                        {booking.numberOfPeople === 1 ? "persona" : "personas"}
+                        {formatDate(booking.tourDate)} - {booking.numberOfPeople} {booking.numberOfPeople === 1 ? t('guide.ui.personSingular') : t('guide.ui.personPlural')}
                       </span>
                     </div>
                   ))}
@@ -146,7 +146,7 @@ export default function TourListItem({ tour, onEdit, onAddSlot }: TourListItemPr
               onClick={onEdit}
               className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors font-medium"
             >
-              Editar
+              {t('guide.ui.edit')}
             </button>
 
 
@@ -159,14 +159,14 @@ export default function TourListItem({ tour, onEdit, onAddSlot }: TourListItemPr
                   : "bg-green-600 hover:bg-green-500 text-white"
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
-              {isToggling ? "..." : tour.Activo ? "Desactivar" : "Activar"}
+              {isToggling ? t('common.loadingShort') : tour.Activo ? t('guide.ui.deactivate') : t('guide.ui.activate')}
             </button>
             {/* Nuevo botón Agregar slot */}
             <button
               onClick={onAddSlot}
               className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors font-medium"
             >
-              Agregar turno
+              {t('guide.ui.addSlot')}
             </button>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../app/config/firebase";
+import i18n from '../app/config/i18n';
 
 /**
  * Envía un email de recuperación de contraseña al usuario
@@ -15,18 +16,18 @@ export const resetPassword = async (email: string): Promise<void> => {
       handleCodeInApp: true // El código se manejará en nuestra aplicación
     });
   } catch (error: any) {
-    // Manejo específico de errores de Firebase
+    // Manejo específico de errores de Firebase — usar traducciones definidas en locales
     switch (error.code) {
       case 'auth/user-not-found':
-        throw new Error("No existe una cuenta con este correo electrónico");
+        throw new Error(i18n.t('services.resetPassword.noAccount'));
       case 'auth/invalid-email':
-        throw new Error("Formato de correo electrónico inválido");
+        throw new Error(i18n.t('services.resetPassword.invalidEmail'));
       case 'auth/too-many-requests':
-        throw new Error("Demasiadas solicitudes. Inténtalo más tarde");
+        throw new Error(i18n.t('services.resetPassword.tooManyRequests'));
       case 'auth/network-request-failed':
-        throw new Error("Error de conexión. Verifica tu internet");
+        throw new Error(i18n.t('services.resetPassword.networkError'));
       default:
-        throw new Error(`Error al enviar el email: ${error.message || 'Inténtalo más tarde'}`);
+        throw new Error(i18n.t('services.resetPassword.genericError', { message: error.message || i18n.t('services.resetPassword.tryLater') }));
     }
   }
 };

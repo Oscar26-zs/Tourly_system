@@ -70,11 +70,12 @@ export default function BookingFormPage() {
       peopleCount: 1,
       notes: '',
     },
-  onSubmit: async ({ value }) => {
+    onSubmit: async ({ value }) => {
       // validaciones adicionales
       if (!slot) throw new Error('Slot is required');
-      if (value.peopleCount <= 0) throw new Error('peopleCount debe ser mayor a 0');
-      if (value.peopleCount > availableSeats) throw new Error('peopleCount exceeds available seats');
+      if (!slot) throw new Error(t('public.booking.slotRequired'));
+      if (value.peopleCount <= 0) throw new Error(t('public.booking.peopleCountMin'));
+      if (value.peopleCount > availableSeats) throw new Error(t('public.booking.peopleCountNotEnoughSeats'));
 
       const payload = {
         fullName: value.fullName,
@@ -253,7 +254,7 @@ export default function BookingFormPage() {
               <form onSubmit={(e) => { e.preventDefault(); form.handleSubmit(); }} className="space-y-4">
                 {/* fullName */}
                 <div>
-                  <form.Field name="fullName" validators={{ onChange: ({ value }) => !value ? 'Nombre completo es requerido' : undefined }}>
+                  <form.Field name="fullName" validators={{ onChange: ({ value }) => !value ? t('public.booking.fullNameRequired') : undefined }}>
                     {(field: any) => (
                       <>
                         <label className="block text-white mb-2 text-sm">{t('public.booking.fullNameLabel')}</label>
@@ -267,7 +268,7 @@ export default function BookingFormPage() {
 
                 {/* email */}
                 <div>
-                  <form.Field name="email" validators={{ onChange: ({ value }) => !value ? 'Email es requerido' : !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value) ? 'Email invalido' : undefined }}>
+                  <form.Field name="email" validators={{ onChange: ({ value }) => !value ? t('public.booking.emailRequired') : !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value) ? t('public.booking.emailInvalid') : undefined }}>
                     {(field: any) => (
                       <>
                         <label className="block text-white mb-2 text-sm">{t('public.booking.emailLabel')}</label>
@@ -295,8 +296,8 @@ export default function BookingFormPage() {
                 <div>
                   <form.Field name="peopleCount" validators={{ onChange: ({ value }) => {
                     const n = Number(value);
-                    if (!n || n <= 0) return 'Debe ser mayor a 0';
-                    if (slot && n > availableSeats) return 'No hay suficientes asientos disponibles';
+                    if (!n || n <= 0) return t('public.booking.peopleCountMin');
+                    if (slot && n > availableSeats) return t('public.booking.peopleCountNotEnoughSeats');
                     return undefined;
                   }}}>
                     {(field: any) => (
@@ -312,7 +313,7 @@ export default function BookingFormPage() {
 
                 {/* notes */}
                 <div>
-                  <form.Field name="notes" validators={{ onChange: ({ value }) => value && value.length > 500 ? 'Máximo 500 caracteres' : undefined }}>
+                  <form.Field name="notes" validators={{ onChange: ({ value }) => value && value.length > 500 ? t('public.booking.notesMaxLength') : undefined }}>
                     {(field: any) => (
                       <>
                         <label className="block text-white mb-2 text-sm">{t('public.booking.notesLabel')}</label>

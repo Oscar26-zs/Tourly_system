@@ -36,19 +36,19 @@ export default function Login() {
 
     // Validaciones básicas
     if (!email.trim()) {
-      setError("Por favor ingresa tu correo electrónico");
+      setError(t('public.login.errors.emailRequired'));
       setLoading(false);
       return;
     }
 
     if (!contrasena.trim()) {
-      setError("Por favor ingresa tu contraseña");
+      setError(t('public.login.errors.passwordRequired'));
       setLoading(false);
       return;
     }
 
     if (contrasena.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres");
+      setError(t('public.login.errors.passwordMinLength'));
       setLoading(false);
       return;
     }
@@ -66,7 +66,7 @@ export default function Login() {
       const userData = await getUserData(userCredential.user);
       
       if (!userData) {
-        setError("Error al obtener datos del usuario. Inténtalo de nuevo.");
+        setError(t('public.login.errors.fetchUserFailed'));
         setLoading(false);
         return;
       }
@@ -79,35 +79,35 @@ export default function Login() {
       } else if (userData.idRol === 1) {
         navigate("/");
       } else {
-        setError("Rol no permitido.");
+        setError(t('public.login.errors.roleNotAllowed'));
       }
     } catch (error: any) {
       
       // Manejo específico de errores de Firebase
       switch (error.code) {
         case 'auth/user-not-found':
-          setError("No existe una cuenta con este correo electrónico");
+          setError(t('public.login.errors.userNotFound'));
           break;
         case 'auth/wrong-password':
-          setError("Contraseña incorrecta");
+          setError(t('public.login.errors.wrongPassword'));
           break;
         case 'auth/invalid-email':
-          setError("Formato de correo electrónico inválido");
+          setError(t('public.login.errors.invalidEmailFormat'));
           break;
         case 'auth/user-disabled':
-          setError("Esta cuenta ha sido deshabilitada");
+          setError(t('public.login.errors.userDisabled'));
           break;
         case 'auth/too-many-requests':
-          setError("Demasiados intentos fallidos. Inténtalo más tarde");
+          setError(t('public.login.errors.tooManyRequests'));
           break;
         case 'auth/network-request-failed':
-          setError("Error de conexión. Verifica tu internet");
+          setError(t('public.login.errors.networkError'));
           break;
         case 'auth/invalid-credential':
-          setError("Credenciales inválidas. Verifica tu correo y contraseña");
+          setError(t('public.login.errors.invalidCredential'));
           break;
         default:
-          setError(`Error de autenticación: ${error.message || 'Credenciales incorrectas'}`);
+          setError(error.message ? `${t('public.login.errors.authError')}: ${error.message}` : t('public.login.errors.authFallback'));
       }
     }
     setLoading(false);
@@ -182,10 +182,10 @@ export default function Login() {
           </div>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-white font-medium mb-2 text-sm">Correo electrónico</label>
+              <label className="block text-white font-medium mb-2 text-sm">{t('public.login.emailLabel')}</label>
               <input
                 type="email"
-                placeholder="Correo"
+                placeholder={t('public.login.emailPlaceholder')}
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
@@ -193,10 +193,10 @@ export default function Login() {
               />
             </div>
             <div>
-              <label className="block text-white font-medium mb-2 text-sm">Contraseña</label>
+              <label className="block text-white font-medium mb-2 text-sm">{t('public.login.passwordLabel')}</label>
               <input
                 type="password"
-                placeholder="Contraseña"
+                placeholder={t('public.login.passwordPlaceholder')}
                 value={contrasena}
                 onChange={e => setContrasena(e.target.value)}
                 required
@@ -235,7 +235,7 @@ export default function Login() {
                 fontFamily: 'Inter, sans-serif'
               }}
             >
-              {loading ? "Ingresando..." : "Ingresar"}
+              {loading ? t('public.login.loading') : t('public.login.signInButton')}
             </button>
             {success && (
               <div className="text-green-400 text-center text-sm bg-green-500/10 border border-green-500/20 rounded-lg p-3 mt-4">
@@ -248,7 +248,7 @@ export default function Login() {
                 to="/forgot-password" 
                 className="text-[#20B2AA] hover:text-[#17a2a2] text-sm font-medium transition-colors duration-200"
               >
-                ¿Olvidaste tu contraseña?
+                {t('public.login.forgotPassword')}
               </Link>
             </div>
           </form>

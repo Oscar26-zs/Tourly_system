@@ -301,12 +301,44 @@
       "cancel": "Cancelar",
       "bookingInProgress": "Reservando...",
       "reserveNow": "Reservar ahora"
+    ,
+    "fullNameRequired": "El nombre completo es requerido",
+    "emailRequired": "El correo es requerido",
+    "emailInvalid": "Correo inválido",
+    "peopleCountMin": "Debe ser mayor a 0",
+    "peopleCountNotEnoughSeats": "No hay suficientes asientos disponibles",
+    "notesMaxLength": "Máximo 500 caracteres",
+    "slotRequired": "El turno es requerido"
     }
     ,
     "login": {
       "subtitle": "Accede con tu cuenta de Tourly",
       "signInWithGoogle": "Continuar con Google",
       "signingInWithGoogle": "Iniciando con Google..."
+      ,
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "Correo",
+      "passwordLabel": "Contraseña",
+      "passwordPlaceholder": "Contraseña",
+      "loading": "Ingresando...",
+      "signInButton": "Ingresar",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "errors": {
+        "emailRequired": "Por favor ingresa tu correo electrónico",
+        "passwordRequired": "Por favor ingresa tu contraseña",
+        "passwordMinLength": "La contraseña debe tener al menos 6 caracteres",
+        "fetchUserFailed": "Error al obtener datos del usuario. Inténtalo de nuevo.",
+        "roleNotAllowed": "Rol no permitido.",
+        "userNotFound": "No existe una cuenta con este correo electrónico",
+        "wrongPassword": "Contraseña incorrecta",
+        "invalidEmailFormat": "Formato de correo electrónico inválido",
+        "userDisabled": "Esta cuenta ha sido deshabilitada",
+        "tooManyRequests": "Demasiados intentos fallidos. Inténtalo más tarde",
+        "networkError": "Error de conexión. Verifica tu internet",
+        "invalidCredential": "Credenciales inválidas. Verifica tu correo y contraseña",
+        "authError": "Error de autenticación",
+        "authFallback": "Credenciales incorrectas"
+      }
     }
     ,
     "registerTourist": {
@@ -355,6 +387,17 @@
     },
     "copyright": "© {{year}} Tourly. Todos los derechos reservados."
   },
+  "costaRica": {
+    "provinces": {
+      "sanJose": "San José",
+      "alajuela": "Alajuela",
+      "cartago": "Cartago",
+      "heredia": "Heredia",
+      "guanacaste": "Guanacaste",
+      "puntarenas": "Puntarenas",
+      "limon": "Limón"
+    }
+  },
   "user": {
     "profile": "Perfil",
     "logOut": "Cerrar sesión",
@@ -367,6 +410,16 @@
     "bookingId": "ID: {{id}}",
     "noTours": "No hay tours para este día",
     "close": "Cerrar notificación"
+  },
+  "services": {
+    "resetPassword": {
+      "noAccount": "No existe una cuenta con este correo electrónico",
+      "invalidEmail": "Formato de correo electrónico inválido",
+      "tooManyRequests": "Demasiadas solicitudes. Inténtalo más tarde",
+      "networkError": "Error de conexión. Verifica tu internet",
+      "genericError": "Error al enviar el email: {{message}}",
+      "tryLater": "Inténtalo más tarde"
+    }
   },
   "validation": {
     "validating": "Validando...",
